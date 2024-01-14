@@ -1,0 +1,93 @@
+
+
+<title>Dashboard for manage user</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<link rel="stylesheet" href="/static/adminsample.css">
+  <%include("../layout/header.ejs")%>    
+   
+  <%- include("../layout/adminsidebar.ejs")%>
+    
+             <div class="text-center" style="background-color: #f2f2f2;display: flex;flex-direction: column;">  
+              <div class=" justify-content-end" style="display: flex;width: 100%;">
+                <a class="btn btn-outline-info" href="/admin/home">Go to Home</a>
+          
+                 </div> 
+          
+                  <table class="table " style="text-align: center;">
+                    <thead>
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
+                        <th scope="col">Block/UnBlock</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <%
+                      if(users.length > 0){
+                        users.forEach((user,i)=>{
+                          %>
+                          <tr>
+                            <th scope="row"><%=i+1%></th>
+                            <td><%=user.username%></td>
+                            <td><%=user.email%></td>
+                            <td><%=user.number%></td>
+                            <td>
+                              <a href="/admin/delete-user?id=<%=user._id%>">Delete</a>
+                            </td>
+                            <td>
+                              <a href="/admin/edit-user?id=<%=user._id%>">edit</a>                              
+                            </td>
+                            
+                            <td>                              
+                            <%
+                              if(user.is_Blocked==false){
+                                %>
+                                <p>Unblocked</p>
+                                <%
+                              }else{
+                                %>
+                                <p>Blocked</p>
+                                <%
+                              }
+                            %>       
+                           </td>
+                         
+                          </tr>
+                          
+                          <%
+                        })
+                      } else{
+
+                        %>
+                        <tr>
+                            <td colspan="5">User Not Found</td>
+                        </tr>
+                        <%
+
+                      }
+
+
+                       %>
+                      
+                      
+                    </tbody>
+                  </table>
+                
+                  </div>
+                 
+
+              </div>
+
+
+     
+            
+
+
+
+
+  <%include("../layout/footer.ejs")%>

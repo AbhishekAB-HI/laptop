@@ -1,0 +1,110 @@
+<title>product page</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+
+<%- include("../layout/header.ejs") %> 
+
+    <%- include("../layout/adminsidebar.ejs")%>
+       
+        <div class="text-center" style="background-color: #f2f2f2;display: flex;flex-direction: column;" >
+           
+            
+            <div class=" justify-content-end" style="display: flex;width: 100%;"  >
+                <a class="btn btn-outline-info" href="/admin/home">Go to Home</a>
+    
+              </div>
+
+              <div class=" justify-content-end" style="display: flex;width: 100%;"  >
+                <a class="btn btn-outline-info" href="/admin/addproduct">Add product</a>
+    
+              </div>
+
+
+            <table class="table">
+               
+                <thead>
+                  <tr>
+                    <th scope="col">Product No</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product price</th>
+                    <th scope="col">Product image</th>
+                    <th scope="col">Product category</th>
+                    <th scope="col">Product size</th>
+                    <th scope="col">Product quantity</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    <%
+                    if(products.length>0){
+                        products.forEach((product,i)=>{ 
+                            %>
+                            <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td ><%=product.productname%></td>
+                    <td ><%=product.productprice%></td>
+                    <td><img src="/productImages/<%=product.images[0]%>" width="100px" height="100px"
+                        alt="<%=product.images%>"></td>
+                    <td ><%=product.category%></td>
+                    <td ><%=product.productsize%></td>
+                    <td ><%=product.productquantity%></td>
+                    <td><a href="/admin/delete-product?id=<%=product._id%>">Delete</a></td>
+                    <td><a href="/admin/edit-product?id=<%=product._id%>">Edit</a></td>
+                  
+
+                            <%
+
+
+                        })
+                    }else{
+                        %>
+                        <tr>
+                            <td colspan="5">User Not Found</td>
+                        </tr>
+                        <%
+
+                    }
+
+
+
+                    %>
+
+
+
+
+                </tr>
+
+                 
+                 
+                 
+                </tbody>
+              </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+        </div>
+       
+
+
+        <%- include("../layout/footer.ejs")%>

@@ -1,0 +1,107 @@
+
+<title>Dashboard for manage user</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<!-- Header-->
+
+  <%include("../layout/header.ejs")%>    
+ 
+
+<!-- Header-->
+<%- include("../layout/adminsidebar.ejs")%>
+<div class="text-center " style="background-color: #f2f2f2;display: flex;flex-direction: column;" >
+ 
+<div class=" justify-content-end" style="display: flex;width: 100%;"  >
+    <a class="btn btn-outline-info" href="/admin/home">Go to Home</a>
+</div>
+<div class=" justify-content-end" style="display: flex;width: 100%;"  >
+  <a  class="btn btn-outline-info"  href="/admin/addcategory">Add Category</a>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Category No</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Category description</th>
+        <th scope="col">Delete Category</th>
+        <th scope="col">Edit Category</th>
+        
+        
+      </tr>
+    </thead>
+
+
+
+    <tbody>
+      <tr>
+
+        <%
+
+        if(category.length>0){
+
+            category.forEach((cat,i)=>{
+
+                %>
+                <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=cat.name%></td>
+                    <td><%=cat.description%></td>
+                    <td><a href="/admin/delete-category?id=<%=cat._id%>">Delete</a></td>
+                    <td><a href="/admin/edit-category?id=<%=cat._id%>">Edit</a></td>
+                   
+                </tr>
+                <%
+            })
+
+        }else{
+
+            %>
+            <tr>
+                <td colspan="5">User Not Found</td>
+            </tr>
+            <%
+        }
+
+        %>
+        
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                 
+
+     
+            
+
+
+
+
+  <%include("../layout/footer.ejs")%>

@@ -1,0 +1,19 @@
+
+
+.main-container{
+    background-color:aquamarine;
+    size: 100%;
+}
+.right-side{
+    background-color: red;
+    size: 30%;
+}
+.leftside{
+    background-color: blue;
+    size: 70%;
+}
+.footer{
+    background-color: black;
+    size: 100%;
+
+}
