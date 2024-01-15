@@ -15,7 +15,7 @@
  <!-- Header-->
  <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class="container px-4 px-lg-5">
-      <a class="navbar-brand text-white" href="/homelogin">Trend Hub</a>
+      <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <nav class="navbar navbar-expand-lg navbar-light bg-info">
         
@@ -26,7 +26,7 @@
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="/homelogin">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
               </li>
              
               <li class="nav-item dropdown">
@@ -190,12 +190,12 @@
                   <div class="col-md-4 col-6 mb-3">
                     
                     <label class="mb-2 d-block">Quantity :</label>
-                    <label for="">   <%=product.productquantity%></label>
+                    <label for=""><%=product.productquantity%></label>
                     <input type="hidden" name="id" value="<%=product._id%>">
                   </div>
                 </div>
-                <a href="/wishlist?id=<%= product._id%>" class="btn btn-warning shadow-0"> Buy now </a>
-                <a href="/cartpage?id=<%=product._id%>" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Add to cart </a>
+                <a href="/wishlist?id=<%= product._id%>" class="btn btn-warning shadow-0">Buy now</a>
+                <a href="/cartpage?id=<%=product._id%>" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i>Add to cart</a>
              
               </div>
              

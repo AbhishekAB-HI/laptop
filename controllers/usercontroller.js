@@ -254,7 +254,7 @@ const verifyLogin = async (req, res) => {
         } else {
           req.session.user_id = userData._id;
 
-          res.redirect("/homelogin")
+          res.redirect("/dashboard")
         }
 
 
@@ -308,7 +308,7 @@ const sendverificationLink = async (req, res) => {
     console.log(createdOtp)
     
     if (OTP === createdOtp) {
-      res.redirect("/homelogin")
+      res.redirect("/dashboard")
     } else {
       res.render("verification", { message: "Entered otp is in correct" })
     }
@@ -502,6 +502,14 @@ const gammingpart = async (req, res) => {
 
 const officepart = async (req, res) => {
   try {
+    
+    var search = '';
+    if (req.query.search) {
+      search = req.query.search
+    }
+
+
+
     var page = 1;
     if (req.query.page) {
       page = req.query.page
@@ -694,15 +702,89 @@ const tablethome = async (req, res) => {
   }
 }
 
+const highprice=async (req,res)=>{
+  try {
+
+    var page = 1;
+    if (req.query.page) {
+      page = req.query.page
+    }
+
+    const limit = 4;
+
+           const products= await product.find({
+              productprice:{$gt:65000}
+             }).limit(limit * 1)
+             .skip((page - 1) * limit)
+             .exec()
+
+             const count= await product.find({}).countDocuments()
+
+             res.render("homelogin",{product:products,
+             totalpages: Math.ceil(count / limit),
+            currentpages:page})
+
+          } catch (error) {
+           console.log(error.message)
+          }
+           }
+
+
+
+
+           const lowprice=async (req,res)=>{
+            try {
+          
+              var page = 1;
+              if (req.query.page) {
+                page = req.query.page
+              }
+          
+              const limit = 4;
+          
+                     const products= await product.find({
+                        productprice:{$lt:50000}
+                       }).limit(limit * 1)
+                       .skip((page - 1) * limit)
+                       .exec()
+          
+                       const count= await product.find({}).countDocuments()
+          
+                       res.render("homelogin",{product:products,
+                       totalpages: Math.ceil(count / limit),
+                      currentpages:page})
+          
+                    } catch (error) {
+                     console.log(error.message)
+                    }
+                     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
             const productpage=async(req,res)=>{
                 try {
                   const id=req.query.id;
-                  console.log(id)
+                  
                   const productData = await product.findById({_id:id})
                       if(productData){
                         res.render("productdeatil", {product: productData })   
                       }else{
-                        res.redirect("/homelogin")
+                        res.redirect("/dashboard")
                       }
                   
                 } catch (error) {
@@ -775,19 +857,21 @@ const tablethome = async (req, res) => {
  
               const deletecartitem =async(req,res)=>{
                 try {
-                 console.log("began to delete")
+                  console.log("start/////////////////////");
                   const userid=req.session.user_id;
-                 const id=req.query.id;
+                  const id=req.query.id;
+                  console.log(userid)
+                  
+   
+                  console.log(id,"id from product") 
 
-                  console.log(id,"id from product")
-
-                 const updatedUser = await User.findByIdAndUpdate(
-                  userid,
-                  { $pull: { 'cart.items': { product_id: id } } },
-                  { new: true } // To get the updated document
-              ).then((res)=>{
-                console.log(res,'this is deleted data')
-              })
+              //     const updatedUser = await User.findByIdAndUpdate(
+              //     userid,
+              //     { $pull: { 'cart.items': { product_id: id } } },
+              //     { new: true } // To get the updated document
+              // ).then((res)=>{
+              //   console.log(res,'this is deleted data')
+              // })
 
               // const  productdetail= await User.findOne({_id:userid}).populate("cart.items.product_id")
                   
@@ -798,7 +882,7 @@ const tablethome = async (req, res) => {
 
                 }
               }  
-
+ 
 
               const checkoutpage=async(req,res)=>{
                     try {
@@ -851,7 +935,7 @@ const tablethome = async (req, res) => {
                   
                 }
               }
- 
+
 
  
 
@@ -914,7 +998,9 @@ module.exports = {
   deletecartitem,
   checkoutpage,
   addcheckoutpage ,
-  getProduct
+  getProduct,
+  highprice,
+  lowprice
 }
 
- 
+  
