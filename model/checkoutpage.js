@@ -58,7 +58,7 @@ const checkoutSchema=new mongoose.Schema({
         type:String,
         required:true
     }, 
-    nameoncard:{
+    nameoncard:{ 
         type:String,
         required:true
     },

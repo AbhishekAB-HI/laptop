@@ -26,11 +26,15 @@
                   <div class="card-header py-3">
                     <h5 class="mb-0">Cart- items</h5>
                   </div>
+           
 
 
                   <%
 
-                  cart?.forEach((carts)=>{
+
+                 
+
+                  cart?.forEach((carts,i)=>{
                    %>
 
                   <!-- Single item -->
@@ -55,7 +59,8 @@
                         title="Remove item">
                        
 
-                        <a href="/deletecartitem?.id=<%=carts%>"><i class="fas fa-trash text-white"></i></a>
+                        <a href="/deletecartitem?id=<%=carts._id %>"><i class="fas fa-trash text-white"></i></a>
+
                       </button>
                       <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
                         title="Move to the wish list">
@@ -67,19 +72,16 @@
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                       <!-- Quantity -->
                       <div class="d-flex mb-4" style="max-width: 300px;height: 40PX; ">
-                        <button class="btn btn-primary px-3 me-2 "
-                          onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                
+                        <button id="buttondown"  class="btn btn-primary px-3 me-2 decrease-quantity">
                           <i class="fas fa-minus"></i>
                         </button>
       
                         <div class="form-outline text-md-center">
-                          <input id="form1 " min="0" name="quantity" value="1" type="number" class="form-control text-md-center" />
+                          <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control text-md-center" />
                           <label class="form-label" for="form1">Quantity </label>
                         </div>
       
-                        <button class="btn btn-primary px-3 ms-2"
-                          onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                        <button id="buttonUp" data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 ms-2 increase-quantity">
                           <i class="fas fa-plus"></i>
                         </button>
                       </div>
@@ -94,10 +96,17 @@
                     </div>
                   </div>
 
+
+
                   
       <%
-    })
-   %>
+
+    })%>
+
+
+  
+
+ 
 
 
 
@@ -182,17 +191,52 @@
 
 
       <%- include("../layout/navbarbottom.ejs")%>
-      
-      <script>
-
-        function deleteOne(id){
-
-
-
-        }
+ 
+    <script>
+    // Use the fetch API to make a GET request
+  
 
 
-      </script>
+  // document.getElementById("buttondown").addEventListener("click",function(){
+             
+  // })
+
+          const increaseButtons=Array.from(document.querySelectorAll(".increase-quantity"))
+          console.log(increaseButtons);
+
+          increaseButtons.forEach((btn)=>{
+            btn.addEventListener('click',async function(){
+              console.log(btn.closest(".d-flex").querySelector("#form1"));
+            const inputQuantity= btn.closest(".d-flex").querySelector("#form1")
+            let currentQuantity=Number.parseInt(inputQuantity.value)
+                 currentQuantity++;
+                 inputQuantity.value=currentQuantity;
+                
+                    console.log(this.dataset.product_id);
+                 const res=await fetch(`/quantityup/${this.dataset.product_id}`,{
+                  method:'POST',
+                  headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+    
+                  },
+                  body:JSON.stringify({quantity:currentQuantity})
+                 })
+
+                 console.log(res);
+                 
+
+
+
+
+            })
+
+          })
+
+
+
+
+ </script>
 
 
     

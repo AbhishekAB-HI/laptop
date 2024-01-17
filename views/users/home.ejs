@@ -19,7 +19,7 @@
       <!-- Header-->
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand text-white" href="/homelogin">Trend Hub</a>
+            <a class="navbar-brand text-white" href="/home">Trend Hub</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
               
@@ -50,11 +50,7 @@
                       <a class="nav-link disabled text-white" href="">Contact Us</a>
                     </li>
                   </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text"  name="search" placeholder="Searchhere" aria-label="Search">
-                    <input class="btn bg-light btn-outline-success my-2 my-sm-0" type="submit" value="search" aria-label="Search">
-                    
-                  </form>
+            
                 </div>
                 
               </nav>
@@ -63,7 +59,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3 text-white" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                       </svg>
-                    My Cart     
+                    <a style="text-decoration: none;" class="text-white" href="/login">My cart</a>
                 </button>
             </form>
                          
@@ -72,16 +68,51 @@
     </nav>
     <!-- Header-->
 
-    <nav class="navbar navbar-light bg-secondary ">
-        <form class="container-fluid text-center pl-5">
-            <a href="/gamminghome"style="color:text-white;"><button class="btn btn-outline-light me-2 pl-5 pr-5" type="button">Gamming</button></a>
-            <a href="/officehome"style="color:text-white;"><button class="btn btn-outline-light me-2 pl-5 pr-5" type="button">office</button></a>
-            <a href="/tablethome"style="color:text-white;"><button class="btn btn-outline-light me-2 pl-5 pr-5" type="button">Tablets</button></a>
-            <a href="/home"style="color:text-white;"><button class="btn btn-outline-light me-2 pl-5 pr-5" type="button">All types</button></a>
-         
+    <!-- nav bar for filter sort -->
+     <!-- head part nav -->
+     <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        <ul  class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Category 
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/game">Gamming</a>
+              <a class="dropdown-item" href="/officetype">office</a>
+              <a class="dropdown-item" href="/tablettype">Tablets</a>
+              <a class="dropdown-item" href="/home">All models</a>
+            </ul>
+        </div>
+       
+    
   
-        </form>
-    </nav>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          </ul>
+
+         
+
+
+
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
+            <button class="btn bg-light btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
+          </form>
+           
+           
+         
+        </div>
+      </nav>
+
+     <!-- head part nav -->
+
+
+
+
+
+
+    <!-- nav bar for filter sort -->
+
+
 
   
 
@@ -142,7 +173,7 @@
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="#">Buy Now</a>
+                                    <a class="btn btn-outline-dark mt-auto" href="/login">Buy Now</a>
                                 </div>
                             </div>
                         </div>
@@ -160,19 +191,22 @@
 
     <br>
     <br>
-
-    <div class="text-center">
-     
+    <div class="text-center ">
         <%
      for(let j=1;j<=totalpages;j++){
         %>
-        <a href="?page=<%=j%>"> <%= j %>  </a>
+
+       <button class="btn btn-info"> <a class="text-white" style="text-decoration: none;" href="?page=<%=j%>"><%= j %></a></button>
+      
         <%
+        
      }
     %>
-
-
+  
     </div>
+    
+
+
 
     <br>
     <br>

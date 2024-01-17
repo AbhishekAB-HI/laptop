@@ -198,21 +198,29 @@ const loadHome = async (req, res) => {
 
 
     const count = await product.find({
-
       $or: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" } }
       ]
     }).countDocuments()
 
-
-
+    if(count===0){
+      res.render("nodatahome")
+    }else
     res.render("home", {
       product: productData,
       totalpages: Math.ceil(count / limit),
       currentpages: page,
+    }
+  )
+
+  
 
 
-    })
+
+
+
+
+
 
 
   } catch (error) {
@@ -432,10 +440,10 @@ const HomeLogined = async (req, res) => {
     }).countDocuments()
 
     const id=req.query.id;
-   
 
-
-
+    if(count===0){
+      res.render("nodata")
+    }else
     res.render("homelogin", {
       product: productData,
       totalpages: Math.ceil(count / limit),
@@ -479,6 +487,12 @@ const gammingpart = async (req, res) => {
     const count = await product.find({
       category: { _id: "65a20deac81be0bc337be682" }
     }).countDocuments()
+       
+    if(productData==0){
+      res.render("nodata")
+
+    }else
+
 
     res.render("homelogin", {
       product: productData,
@@ -530,6 +544,13 @@ const officepart = async (req, res) => {
       category: { _id: "65a20e00c81be0bc337be685" }
     }).countDocuments()
 
+    
+    if(productData==0){
+      res.render("nodata")
+
+    }else
+
+
 
     res.render("homelogin", {
       product: productData,
@@ -564,6 +585,12 @@ const tabletpart = async (req, res) => {
     const count = await product.find({
       category: { _id: "65a20e51c81be0bc337be689" }
     }).countDocuments()
+       
+    if(productData==0){
+      res.render("nodata") 
+
+    }else
+
 
     res.render("homelogin", {
       product: productData,
@@ -611,6 +638,11 @@ const gamminghome = async (req, res) => {
       category: { _id: "65a20deac81be0bc337be682" }
     }).countDocuments()
 
+    if(productData==0){
+      res.render("nodatahome")
+
+    }else
+
 
     res.render("home", {
       product: productData,
@@ -620,7 +652,7 @@ const gamminghome = async (req, res) => {
     })
 
 
-
+  
 
 
 
@@ -653,6 +685,11 @@ const officehome = async (req, res) => {
     const count = await product.find({
       category: { _id: "65a20e00c81be0bc337be685" }
     }).countDocuments()
+
+    if(productData==0){
+      res.render("nodatahome")
+
+    }else
 
 
     res.render("home", {
@@ -688,6 +725,11 @@ const tablethome = async (req, res) => {
     const count = await product.find({
       category: { _id: "65a20e51c81be0bc337be689" }
     }).countDocuments()
+
+    if(productData==0){
+      res.render("nodatahome")
+
+    }else
 
     res.render("home", {
       product: productData,
@@ -843,36 +885,62 @@ const highprice=async (req,res)=>{
  
                   
                 } 
-              
-        const getProduct=async (req,res)=>{
 
-          const userid=req.session.user_id;
-          const  productdetail= await User.findOne({_id:userid}).populate("cart.items.product_id")
+                // const getProduct = async (req, res) => {
+                //   const userid = req.session.user_id;
+                //   const productdetail = await User.findOne({ _id: userid }).populate("cart.items.product_id");
+                //   const user=await User.findOne({_id: userid})
+                //    console.log(Object.values(user.cart))
+                
+                //     res.render("cartpage", { cart: productdetail?.cart?.items ,userCart:user});
                   
-          console.log( productdetail?.cart?.items,'this is my product details9999999999')
-          res.render("cartpage",{cart: productdetail?.cart?.items})
+                // };
 
-        }
-
+                const getProduct = async (req, res) => {
+                  try {
+                    const userid = req.session.user_id;
+                    const productdetail = await User.findOne({ _id: userid }).populate("cart.items.product_id");
+                    const user = await User.findOne({ _id: userid });
+                
+                    if (user && user.cart) {
+                      console.log(user.cart.items);
+                      res.render("cartpage", { cart: productdetail?.cart?.items, userCart: user.cart.items });
+                    } else {
+                      console.error("User or user's cart is null or undefined.");
+                      // Handle the case where user or user's cart is null or undefined
+                      res.render("cartpage", { cart: [], userCart: {} }); // Provide default values or handle as appropriate
+                    } 
+                  } catch (error) {
+                    console.error("Error in getProduct:", error);
+                    // Handle the error appropriately, e.g., send an error response
+                    res.status(500).send("Internal Server Error");
+                  }
+                };
+                
+               
+       
+ 
  
               const deletecartitem =async(req,res)=>{
                 try {
                   console.log("start/////////////////////");
                   const userid=req.session.user_id;
                   const id=req.query.id;
-                  console.log(userid)
                   
-   
+                     
+    
                   console.log(id,"id from product") 
 
-              //     const updatedUser = await User.findByIdAndUpdate(
-              //     userid,
-              //     { $pull: { 'cart.items': { product_id: id } } },
-              //     { new: true } // To get the updated document
-              // ).then((res)=>{
-              //   console.log(res,'this is deleted data')
-              // })
-
+                  const updatedUser = await User.findByIdAndUpdate(
+                  userid,
+                  { $pull:{ 'cart.items': { _id: id } } },
+                  { new: true }, // To get the updated document
+                  res.redirect("/getProduct")
+              ).then((res)=>{
+             
+                console.log(res,'this is deleted data')
+              })
+ 
               // const  productdetail= await User.findOne({_id:userid}).populate("cart.items.product_id")
                   
                   //  res.render("cartpage",{cart: productdetail.cart.items})
@@ -933,6 +1001,51 @@ const highprice=async (req,res)=>{
                 } catch (error) {
                   console.log(error.message)
                   
+                }
+              }
+ 
+              const quatityup=async (req,res)=>{
+                try {
+                   let cloneItems=[]
+                  const product_id=req.params.product_id;
+                  const quatity=req.body.quantity
+                  
+                  const user =await User.findOne({"cart.items._id":product_id});
+                                  
+
+                   const cartItems = user.cart.items;
+
+                   
+                     const itemindex=cartItems.findIndex((item)=>{
+                        
+                      return item._id.toString()===product_id
+                     })
+                   const Items= cartItems.find((item)=>{
+                     
+                      return item._id.toString()===product_id
+                     })
+
+                     
+
+                      Items.qty=quatity
+                      console.log(Items)
+
+                       cloneItems=cartItems.splice(itemindex,1,Items)
+                      
+
+                      console.log("first items",cartItems,"last items");
+
+                          await User.findByIdAndUpdate(user._id,{$set:{"cart.items":cartItems}},{new:true,runValidators:true})
+
+                       
+
+
+               
+                  
+
+                  
+                } catch (error) {
+                  console.log(error.message)
                 }
               }
 
@@ -1000,7 +1113,8 @@ module.exports = {
   addcheckoutpage ,
   getProduct,
   highprice,
-  lowprice
+  lowprice,
+  quatityup
 }
 
   

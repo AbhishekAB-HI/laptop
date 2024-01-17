@@ -24,7 +24,7 @@ user_route.set("view engine","ejs");
  user_route.get("/dashboard",userController.HomeLogined)
  user_route.get("/verification",userController.verificationLoad)
  
-       
+        
  user_route.post("/verification",userController.sendverificationLink)
  user_route.get("/verify",userController.verify)
  user_route.get("/logout",blockchecking,userController.userLogout)
@@ -38,22 +38,24 @@ user_route.set("view engine","ejs");
  user_route.get("/deletecartitem",userController.deletecartitem)
  user_route.get("/checkout",userController.checkoutpage)
  user_route.post("/checkout",userController.addcheckoutpage)
- user_route.get("/getProduct",userController.getProduct)
-   
- 
- 
-  
- 
+ user_route.get("/getProduct",userController.getProduct);
+ user_route.post("/quantityup/:product_id",userController.quatityup);
 
- user_route.get("/gamminghome",userController.gamminghome)
- user_route.get("/officehome",userController.officehome)
- user_route.get("/tablethome",userController.tablethome)
+   
+      
+     
+   
+    
+   
+ user_route.get("/game",userController.gamminghome)
+ user_route.get("/officetype",userController.officehome)
+ user_route.get("/tablettype",userController.tablethome)
  user_route.get("/highprice",userController.highprice)
  user_route.get("/lowprice",userController.lowprice)
 
  
   
-
+ 
 
  user_route.post("/login",userController.verifyLogin);
  user_route.post("/register",userController.insertuser);
@@ -69,3 +71,4 @@ user_route.set("view engine","ejs");
 
 
 
+ 

@@ -7,7 +7,7 @@
          if(req.session.user_id){
          }
          else{
-            
+             
             res.redirect('/')
          }
            

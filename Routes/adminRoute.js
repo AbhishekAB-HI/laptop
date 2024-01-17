@@ -69,10 +69,10 @@ admin_route.use("/js",express.static(path.join(__dirname,"../js")))
 //(admin template)--------------------------------------------------------------------------
 
 
-  
-  
+   
+   
 // product route-----------------------------------------------------------------------
- 
+  
  admin_route.get("/addproduct",productController.loadProduct);
  admin_route.post("/addproduct",upload.array("images",5),productController.insertProduct)
  admin_route.get("/productpage",productController.ProductPage);
