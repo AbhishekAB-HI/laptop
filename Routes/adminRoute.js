@@ -15,7 +15,7 @@
  admin_route.set("view engine","ejs");
  admin_route.set("views","./views/admin");
 
- 
+  
 //--------------------------------------------------------------------------------
 
 
@@ -69,9 +69,9 @@ admin_route.use("/js",express.static(path.join(__dirname,"../js")))
 //(admin template)--------------------------------------------------------------------------
 
 
-   
-   
-// product route-----------------------------------------------------------------------
+     
+     
+// product  route-----------------------------------------------------------------------
   
  admin_route.get("/addproduct",productController.loadProduct);
  admin_route.post("/addproduct",upload.array("images",5),productController.insertProduct)

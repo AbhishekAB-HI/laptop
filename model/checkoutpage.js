@@ -15,7 +15,7 @@ const checkoutSchema=new mongoose.Schema({
             },
             message:"product name cannot be consist of only space"
         }
-    },
+    }, 
     lastName:{
         type:String,
         required:[true,"product name is required"],
@@ -29,7 +29,7 @@ const checkoutSchema=new mongoose.Schema({
         }
 
     },
-    userName:{
+    city:{
         type:String,
         required:true
     },
@@ -41,45 +41,17 @@ const checkoutSchema=new mongoose.Schema({
     address:{
         type:String,
         required:true
-    },
-    address2:{
-        type:String,
-        required:true
-    },
-    country:{
-        type:String,
-        required:true
+    
     },
     state:{
         type:String,
         required:true
     },
-    paymentMethod:{
-        type:String,
-        required:true
-    }, 
-    nameoncard:{ 
-        type:String,
-        required:true
-    },
-    creditcardnumber:{
-        type:Number,
-        required:true
-    },
-    expiration:{
-        type:String,
-        required:true
-    },
-    cvv:{
-        type:Number,
-        required:true
-
-    }
-
+  
 
 
 
 })
 
 
-         module.exports=mongoose.model("checkout",checkoutSchema)
+         module.exports=mongoose.model("checkout",checkoutSchema) 

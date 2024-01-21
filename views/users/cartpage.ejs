@@ -26,14 +26,26 @@
                   <div class="card-header py-3">
                     <h5 class="mb-0">Cart- items</h5>
                   </div>
+                  <div class="form-outline flex-fill mb-0">
+                    <%        
+                    if(typeof message !=="undefined"){
+                        %>
+                     <h5 style="color:red;"><%= message %></h5>
+                        <%
+                      }
+                   %>
+                  </div>
            
 
 
-                  <%
+        <%
 
+                    if(cart.length>0){
 
-                 
+                    
 
+                  
+                   
                   cart?.forEach((carts,i)=>{
                    %>
 
@@ -62,22 +74,19 @@
                         <a href="/deletecartitem?id=<%=carts._id %>"><i class="fas fa-trash text-white"></i></a>
 
                       </button>
-                      <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                        title="Move to the wish list">
-                        
-                      </button>
+                     
                       <!-- Data -->
                     </div>
       
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                       <!-- Quantity -->
-                      <div class="d-flex mb-4" style="max-width: 300px;height: 40PX; ">
-                        <button id="buttondown"  class="btn btn-primary px-3 me-2 decrease-quantity">
+                      <div class="d-flex mb-4"   style="max-width: 300px;height: 40PX; ">
+                        <button id="buttondown" data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 me-2 decrease-quantity">
                           <i class="fas fa-minus"></i>
                         </button>
       
                         <div class="form-outline text-md-center">
-                          <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control text-md-center" />
+                          <input id="form1" min="1" name="quantity" value="<%=userCart[i].qty%>" type="number" class="form-control text-md-center" />
                           <label class="form-label" for="form1">Quantity </label>
                         </div>
       
@@ -89,20 +98,37 @@
                       <!-- Quantity -->
       
                       <!-- Price -->
-                      <p class="text-start text-md-center">
-                        <strong><%='\u20B9'+ carts?.product_id?.productprice%></strong>
+                      <p  class="text-start text-md-center">
+                        <strong  class="totalprice"><%='\u20B9'+userCart[i].totalPrice%></strong>
                       </p>
                       <!-- Price -->
                     </div>
                   </div>
 
-
-
                   
       <%
+    })
 
-    })%>
 
+
+  }else{
+    %>
+
+    <h5  style="color: red;"  ><strong>Your cart is empty</strong></h5>
+    
+    <%
+  }
+
+
+
+
+
+
+
+    
+    %>
+
+  
 
   
 
@@ -159,12 +185,12 @@
                   <ul class="list-group list-group-flush">
                     <li
                       class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                      Products
-                      <span></span>
+                      Total number of Products
+                      <span id="buttonqty" ><%=qty%></span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                      Shipping
-                      <span>Gratis</span>
+                      Shipping Charge
+                      <span>$10</span>
                     </li>
                     <li
                       class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -174,7 +200,7 @@
                           <p class="mb-0">(including VAT)</p>
                         </strong>
                       </div>
-                      <span><strong></strong></span>
+                      <span  id="cartsum"><strong ><%='\u20B9'+totalPrice%></strong></span>
                     </li>
                   </ul>
       
@@ -184,7 +210,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> 
         </div>
       </section>
 
@@ -212,7 +238,7 @@
                  currentQuantity++;
                  inputQuantity.value=currentQuantity;
                 
-                    console.log(this.dataset.product_id);
+                    console.log(this.dataset.product_id,this);
                  const res=await fetch(`/quantityup/${this.dataset.product_id}`,{
                   method:'POST',
                   headers:{
@@ -223,15 +249,118 @@
                   body:JSON.stringify({quantity:currentQuantity})
                  })
 
-                 console.log(res);
-                 
+                 console.log(res,"efewfwefwf");
+
+                   const cart= await fetch("/usercart");
+                   const cartdata=await cart.json();
+                   console.log(cartdata,"dwedee");
+                   document.querySelectorAll(".totalprice").forEach((el,i)=>{
+                      el.textContent=cartdata.currentuser.cart.items[i].totalPrice
+                   })
+
+                   const cartsum= await fetch("/cartsum");
+                   const cartsumdata=await cartsum.json();
+                  
+                   document.getElementById("cartsum").innerHTML= cartsumdata.valueOne+10
+
+                   const cartquantity= await fetch("/quantity");
+                   const cartquntitydata=await cartquantity.json();
+                   document.getElementById("buttonqty").innerHTML= cartquntitydata.valueOne;
+
+                  
+
+ 
+
+ 
+
+            })
+  
+          }) 
 
 
 
+
+
+
+
+          const decreaseButtons=Array.from(document.querySelectorAll(".decrease-quantity"))
+          console.log(increaseButtons);
+
+          decreaseButtons.forEach((btn)=>{
+            btn.addEventListener('click',async function(){
+              console.log(btn.closest(".d-flex").querySelector("#form1"));
+            const inputQuantity= btn.closest(".d-flex").querySelector("#form1")
+            let currentQuantity=Number.parseInt(inputQuantity.value)
+                 currentQuantity--;
+                 inputQuantity.value=currentQuantity;
+                
+                    console.log(this.dataset.product_id,"lalalalalala",this);
+                 const res=await fetch(`/quantitydown/${this.dataset.product_id}`,{
+                  method:'POST',
+                  headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+    
+                  },
+                  body:JSON.stringify({quantity:currentQuantity})
+                 })
+
+                 const cart= await fetch("/usercart");
+                 console.log(cart);
+                   const cartdata=await cart.json();
+                   console.log(cartdata,"dwedee");
+                   document.querySelectorAll(".totalprice").forEach((el,i)=>{
+                      el.textContent=cartdata.currentuser.cart.items[i].totalPrice
+                   })
+
+                   const cartsum= await fetch("/cartsum");
+                   const cartsumdata=await cartsum.json();
+                   console.log(cartsumdata,"dwedee");
+                   document.getElementById("cartsum").innerHTML= cartsumdata.valueOne+10
+
+
+                   const cartquantity= await fetch("/quantity");
+                   const cartquntitydata=await cartquantity.json();
+                   document.getElementById("buttonqty").innerHTML= cartquntitydata.valueOne;
+  
+
+
+
+
+                 console.log(res,"efewfwefwf");
 
             })
 
           })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

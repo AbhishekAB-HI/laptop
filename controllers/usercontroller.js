@@ -5,7 +5,8 @@ const nodemailer = require("nodemailer");
 const otpGenerator = require('otp-generator');
 const product = require("../model/products");
 const category=require("../model/category");
-const checkout=require("../model/checkoutpage")
+const checkout=require("../model/checkoutpage");
+const { default: mongoose } = require("mongoose");
 
 
 
@@ -391,14 +392,13 @@ const userLogout = async (req, res) => {
 
 const AboutUs = async (req, res) => {
   try {
-    const UserData = await User.findById({ _id: req.session.user_id })
-    const checkoutpage =  await checkout.find({})
-    console.log(checkoutpage)
+    const UserData = await User.findById({ _id: req.session.user_id });
+    const useraddress = await User.findById({ _id: req.session.user_id }).populate("address1")
                             
-    res.render("myprofile", { user: UserData,check:checkoutpage })
+    res.render("userprofile", { user: UserData,address:useraddress})
 
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message) 
 
   }
 }
@@ -859,28 +859,70 @@ const highprice=async (req,res)=>{
                 try {
                   const productid=req.query.id;
                   const userid=req.session.user_id;
-                  
+                  console.log(userid);
+                  console.log(productid);
 
                   const items = {product_id : productid}
-                  // console.log(items)
-                  const user=await User.updateOne(
-                    { _id:userid },
-                    { $push: { "cart.items": items }}
-                  ) 
-
-                  res.render("cartalert")
-                   // console.log(user)
-                  // productdetail = await  User.findById({_id:userid});
-                    
-              //  const  productdetail= await User.findOne({_id:userid}).populate("cart.items.product_id")
                   
-              //  console.log( productdetail.cart.items,'this is my product details ')
-              //       res.render("cartpage",{cart: productdetail.cart.items})
+                   const userone= await User.findOne({ _id: userid });
+ 
+                  // console.log(userone);
+
+                  // const productref=await  product.findById({_id:productid})
+ 
+                  //   const productobject=
+                  //   userone.cart.items.push({
+                  //     product_id:productref._id,
+                  //     qty:1,
+                  //     price:productref.productprice 
+                  //   })
+
+                  // await  userone.save()
+
+                  // res.render("cartalert")
+
+
+
+
+
+
+
+                 
+                   const exisitingid=userone.cart.items.findIndex(item=>item.product_id==productid)
+                   console.log(exisitingid,"ttttttttttttttttttt");
+                    if(exisitingid !== -1){
+                    userone.cart.items[exisitingid].qty=userone.cart.items[exisitingid].qty+1
+                   }else{
+                            const productref=await  product.findById({_id:productid})
+
+  
+ 
+ 
+                    const productobject=
+                    userone.cart.items.push({
+                      product_id:productref._id,
+                      qty:1,
+                      price:productref.productprice
+                    })
+
+                   }
+
+ 
+                 await userone.save()
+                 
+                 res.render("cartalert")
+                 
+
+
+ 
+
+
+                 
                    }
                    catch (error) {
                     console.log(error.message)
                     
-                  }
+                  } 
                     
  
                   
@@ -901,14 +943,25 @@ const highprice=async (req,res)=>{
                     const userid = req.session.user_id;
                     const productdetail = await User.findOne({ _id: userid }).populate("cart.items.product_id");
                     const user = await User.findOne({ _id: userid });
+
+                   const value=  user.cart.items.reduce((accu,curr)=>{
+                          return accu+curr.totalPrice
+                      },0)
+
+                      const quantity=  user.cart.items.reduce((accu,curr)=>{
+                        return accu+curr.qty
+                    },0)
+
+ 
+                               
                 
                     if (user && user.cart) {
                       console.log(user.cart.items);
-                      res.render("cartpage", { cart: productdetail?.cart?.items, userCart: user.cart.items });
+                     return res.render("cartpage", { cart: productdetail?.cart?.items, userCart: user.cart.items,totalPrice:value,qty:quantity });
                     } else {
                       console.error("User or user's cart is null or undefined.");
                       // Handle the case where user or user's cart is null or undefined
-                      res.render("cartpage", { cart: [], userCart: {} }); // Provide default values or handle as appropriate
+                    return  res.render("cartpage", { cart: [], userCart: {} }); // Provide default values or handle as appropriate
                     } 
                   } catch (error) {
                     console.error("Error in getProduct:", error);
@@ -950,99 +1003,397 @@ const highprice=async (req,res)=>{
 
                 }
               }  
- 
+  
 
               const checkoutpage=async(req,res)=>{
                     try {
-                      res.render("checkoutpage")
+                      const userid=req.session.user_id; 
+
+                    
+                      const productdetail = await User.findOne({ _id: userid }).populate("cart.items.product_id");
+                      const user = await User.findOne({ _id: userid });
+  
+                     const value=  user.cart.items.reduce((accu,curr)=>{
+                            return accu+curr.totalPrice
+                        },0)
+  
+                        const quantity=  user.cart.items.reduce((accu,curr)=>{
+                          return accu+curr.qty
+                      },0)
+
+
+                      const checkoutdata=await User.findById({_id:userid})
+                      console.log(checkoutdata.address,"ddqdedec");
+
+                      const permenentaddress=checkoutdata.address
+
+                      res.render("checkoutpage",{check:checkoutdata,address:permenentaddress,userCart: user.cart.items,totalPrice:value,qty:quantity })
                     } catch (error) {
                       console.log(error.message)
                     }
+              } 
+
+
+             const  addcheckoutpage=async (req,res)=>{
+
+              try {
+
+                const userid=req.session.user_id; 
+
+                const {
+                  address,
+                  paymentMethod
+                } = req.body;
+
+                 await   User.findByIdAndUpdate({_id:userid},{$push:{
+                    payment:{
+                      address: address,
+                      paymentMethod:paymentMethod
+                    } 
+                  }})
+ 
+                  res.render("paymentsuccess")
+  
+                 
+
+                
+                
+              } catch (error) {
+                console.log(error.message)
               }
 
-              const addcheckoutpage=async(req,res)=>{
-                try {
 
-                  const {firstName,
+             }
+              
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+              const addaddresspost = async (req, res) => {
+                try {
+                  const {
+                    firstName,
                     lastName,
-                    userName,
                     email,
                     address,
-                    address2,
-                    country,
                     state,
-                    paymentMethod,
-                    nameoncard,
-                    creditcardnumber,
-                    expiration,
-                    cvv}  =req.body
-
-                const checkoutdata=new  checkout({
-                    firstName:firstName,
-                    lastName:lastName,
-                    userName:userName,
-                    email:email,
-                    address:address,
-                    address2:address2,
-                    country:country,
-                    state:state,
-                    paymentMethod:paymentMethod,
-                    nameoncard:nameoncard,
-                    creditcardnumber:creditcardnumber,
-                    expiration:expiration,
-                    cvv:cvv
-                  })
-
-                   const checkOutData= await checkoutdata.save();
-                   console.log("checkout data added")
-
-
-                  
+                    city
+                  } = req.body;
+              
+                  const userid = req.session.user_id;
+                  const mongoose = require("mongoose");
+              
+                  const ObjectId = mongoose.Types.ObjectId;
+                  const userIdObject = new ObjectId(userid);
+              
+                  // Update the user document by pushing a new address to the 'address1' array
+                  await User.findByIdAndUpdate(
+                    userIdObject, // Corrected the first argument to be the filter criteria
+                    {
+                      $push: {
+                        address1: {
+                          firstName: firstName,
+                          lastName: lastName,
+                          email: email,
+                          address: address,
+                          state: state,
+                          city: city
+                        }
+                      }
+                    }
+                  );
+              
+                  console.log("Checkout data added");
+                  res.redirect("/checkout");
                 } catch (error) {
-                  console.log(error.message)
-                  
+                  console.error(error.message);
+                  res.status(500).send("Internal Server Error");
                 }
-              }
+              };
+              
+ 
+            
  
               const quatityup=async (req,res)=>{
                 try {
+ 
                    let cloneItems=[]
                   const product_id=req.params.product_id;
-                  const quatity=req.body.quantity
+                  const quatity=req.body.quantity;
+                  const userid=req.session.user_id;
+                                                 
+                   const userproduct=await User.findOne({"cart.items._id":product_id});
+                   console.log( userproduct,"satatsaxs");
+                   
+  
+                   const exisitingid=userproduct.cart.items.findIndex(item=>item._id==product_id)
+                   console.log(exisitingid,"id");
                   
+                   console.log( userproduct.cart.items[exisitingid],"product"); 
+
+                   const passproductdetails=userproduct.cart.items[exisitingid]
+                   const Totalprice= passproductdetails.totalPrice  //total price of object 1
+                   const productPrice=passproductdetails.price;    //actualprice of object 1
+                   const productQty=quatity; 
+                  //  -----------------------------------------------------
+
+               
+                        
+                    
+                   console.log(productQty,"qty");
+                   const totalprice=productPrice*productQty
+
+                   console.log(totalprice,"added");
+
+                   console.log( userproduct.cart.items[exisitingid].totalPrice,"totalproductprice"); 
+
+                              
+                    const totalvalue=userproduct.cart.items[exisitingid].totalPrice;
+
+                    
+                    await  User.findByIdAndUpdate(
+                      userid,
+                      {
+                        $set: {
+                          [`cart.items.${exisitingid}.totalPrice`]: totalprice
+                        }
+                      },
+                      { new: true }); 
+
+
+
+
+
+
+                    const TotalAmount= userproduct.totalAmount;
+                    console.log(TotalAmount,"aucecececececerc");
+                    const TotalQuantity=userproduct.totalQty;
+                    console.log(TotalQuantity,"aucecececececerc");
+                    console.log(productPrice,"price");
+
+
+
+
+                  const productdetails=await product.findOne({_id:userproduct.cart.items[exisitingid].product_id});
+ 
+                  console.log( productdetails.productquantity,"mached");
+                 
+ 
+
+                  if(productdetails.productquantity<parseInt(quatity)){
+                    console.log( productdetails,"cdcdcdcdc");
+                      return  res.render("cartalert") 
+                    } 
+                   
+                     
+  
+  
+
+                   
                   const user =await User.findOne({"cart.items._id":product_id});
-                                  
 
                    const cartItems = user.cart.items;
-
+                
                    
                      const itemindex=cartItems.findIndex((item)=>{
                         
                       return item._id.toString()===product_id
                      })
-                   const Items= cartItems.find((item)=>{
+
+                   const Items= cartItems.forEach((item)=>{
                      
-                      return item._id.toString()===product_id
+                      if(item._id.toString()===product_id){
+
+                        item.qty=quatity
+
+                      }
                      })
 
                      
 
-                      Items.qty=quatity
-                      console.log(Items)
+                      // // Items.qty=quatity
+                      console.log(Items,cartItems)
 
-                       cloneItems=cartItems.splice(itemindex,1,Items)
+                      // //  cloneItems=cartItems.splice(itemindex,1,Items)
+  
+         await User.findByIdAndUpdate(user._id,{$set:{"cart.items":cartItems}},{new:true,runValidators:true})
+                           res.status(200).json({status:"updated"})
+                } catch (error) {
+                  console.log(error.message)
+                }
+              }
+  
+  
+
+              const quatitydown=async (req,res)=>{
+                try { 
+                  
+
+                   let cloneItems=[]
+                  const product_id=req.params.product_id;
+                  console.log(product_id,"product id is");
+                  const quatity=req.body.quantity;
+                  console.log(quatity,"quantit isssssss"); 
+                  const userid=req.session.user_id;
+                                             
+                   const userproduct=await User.findOne({"cart.items._id":product_id});
+                   console.log( userproduct,"satatsaxs");
+                    
+  
+                   const exisitingid=userproduct.cart.items.findIndex(item=>item._id==product_id)
+                   console.log(exisitingid,"id");
+                  
+                   console.log( userproduct.cart.items[exisitingid],"product"); 
+
+                   const passproductdetails=userproduct.cart.items[exisitingid]
+                    const Totalprice= passproductdetails.totalPrice
+                   const productPrice=passproductdetails.price; 
+                   console.log(productPrice,"price");
+
+                   const productQty=quatity;
+                   console.log(productQty,"qty");
+                   const totalprice=productPrice*productQty
+
+                   console.log(totalprice,"added");
+
+                   console.log( userproduct.cart.items[exisitingid].totalPrice,"totalproductprice"); 
+ 
+                               
+                    const totalvalue=userproduct.cart.items[exisitingid].totalPrice;
+                          await  User.findByIdAndUpdate(
+                      userid,
+                      {
+                        $set: {
+                          [`cart.items.${exisitingid}.totalPrice`]: totalprice
+                        }
+                      },
+                      { new: true }); 
+
+
+                      await  User.findByIdAndUpdate(
+                        userid,
+                        {
+                          $set: {
+                            [`cart.items.${exisitingid}.qty`]:quatity
+                          }
+                        },
+                        { new: true }); 
+
+
+
+
+
+
+
+
+
+
+                  
+                  const productdetails=await product.findOne({_id:userproduct.cart.items[exisitingid].product_id});
+ 
+                  console.log( productdetails.productquantity,"mached");
+                 
+ 
+
+                     
+  
+  
+
+                   
+                  const user =await User.findOne({"cart.items._id":product_id});
+
+                   const cartItems = user.cart.items;
+                
+                   
+                     const itemindex=cartItems.findIndex((item)=>{
+                        
+                      return item._id.toString()===product_id
+                     })
+
+                   const Items= cartItems.forEach((item)=>{
+                     
+                      if(item._id.toString()===product_id){
+                        item.qty=quatity
+                      }
+                     })
+
+                     
+ 
+                      console.log(Items,cartItems)
+
+                      //  cloneItems=cartItems.splice(itemindex,1,Items)
+  
+                            
                       
 
-                      console.log("first items",cartItems,"last items");
+         await User.findByIdAndUpdate(user._id,{$set:{"cart.items":cartItems}},{new:true,runValidators:true})
+                              res.status(200).json({status:"updated"})
+                } catch (error) {
+                  console.log(error.message)
+                }
+              }
 
-                          await User.findByIdAndUpdate(user._id,{$set:{"cart.items":cartItems}},{new:true,runValidators:true})
 
-                       
+                      
+  
+ 
+
+
+  
+
+
+
+
+
+
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                
-                  
+              const addaddress=async(req,res)=>{
+                try {
 
+                  res.render("addAddress")
                   
                 } catch (error) {
                   console.log(error.message)
@@ -1050,6 +1401,89 @@ const highprice=async (req,res)=>{
               }
 
 
+              const user_cart=async (req,res)=>{
+                try {
+
+                  const userid=req.session.user_id;
+ 
+                const currentuser=await User.findById(userid).select("cart")
+ 
+                 res.status(200).json({currentuser})
+
+                        
+                  
+                } catch (error) { 
+                  console.log(error.message)
+                }
+              }
+
+
+               const totalprice = async (req,res)=>{
+                try {
+
+                  const userid = req.session.user_id;
+                
+                  const user = await User.findOne({ _id: userid });
+
+                 const value=  user.cart.items.reduce((accu,curr)=>{
+                        return accu+curr.totalPrice
+                    },0)
+
+
+                    
+              //  const totalquantity = async (req,res)=>{
+              //   try {
+
+              //     const userid = req.session.user_id;
+                
+              //     const user = await User.findOne({ _id: userid });
+
+              //    const value=  user.cart.items.reduce((accu,curr)=>{
+              //           return accu+curr.qty
+              //       },0)
+
+
+
+
+
+
+
+
+                      
+                 res.status(200).json({valueOne:value})
+
+                    
+                  
+                } catch (error) {
+                  console.log(error.message)
+
+
+
+                  
+                }
+               }
+
+
+          const totalquantity =async (req,res)=>{
+            try {
+              const userid = req.session.user_id;    
+              const user = await User.findOne({ _id: userid });
+              const quantity= user.cart.items.reduce((accu,curr)=>{
+                return accu+curr.qty
+            },0)
+
+            res.status(200).json({valueOne:quantity})
+
+
+
+              
+            } catch (error) {
+              console.log(error.message)
+            }
+          }
+
+               
+              
  
 
 
@@ -1111,10 +1545,16 @@ module.exports = {
   deletecartitem,
   checkoutpage,
   addcheckoutpage ,
+  addaddresspost,
   getProduct,
   highprice,
   lowprice,
-  quatityup
+  quatityup,
+  addaddress,
+  quatitydown,
+  user_cart,
+  totalprice,
+  totalquantity
 }
 
   

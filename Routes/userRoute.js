@@ -38,13 +38,22 @@ user_route.set("view engine","ejs");
  user_route.get("/deletecartitem",userController.deletecartitem)
  user_route.get("/checkout",userController.checkoutpage)
  user_route.post("/checkout",userController.addcheckoutpage)
- user_route.get("/getProduct",userController.getProduct);
+ user_route.get("/addadress",userController.addaddress)
+ user_route.post("/addadress",userController.addaddresspost)
+ 
+    
+        
+ user_route.get("/getProduct",userAuth.isLogin,userController.getProduct);
  user_route.post("/quantityup/:product_id",userController.quatityup);
-
-   
-      
+ user_route.post("/quantitydown/:product_id",userController.quatitydown);
+ user_route.get("/usercart",userController.user_cart);
+ user_route.get("/cartsum",userController.totalprice); 
+ user_route.get("/quantity",userController.totalquantity);
+ 
      
-   
+        
+     
+    
     
    
  user_route.get("/game",userController.gamminghome)

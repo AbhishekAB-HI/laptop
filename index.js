@@ -7,11 +7,11 @@ const express=require("express");
 const app=express();
 const port =process.env.PORT||7000;
   
-  
+    
 
   
  
-    
+     
 
  
 
@@ -25,7 +25,7 @@ app.use("/admin",admin_route);
 
 
 
- 
+   
 
 
 const path = require('path');
