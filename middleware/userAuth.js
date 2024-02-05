@@ -8,9 +8,9 @@
          }
          else{
              
-            res.redirect('/')
+            res.redirect('/') 
          }
-           
+            
     } catch (error) {
         console.log(error.message)  
     }
@@ -20,10 +20,10 @@
  
  const isLogout=async(req,res,next)=>{
 
-    try {
-
+    try { 
+ 
         if(req.session.user_id){
-            res.redirect("/homelogin")
+            res.redirect("/dashboard")
         }
         next();
         

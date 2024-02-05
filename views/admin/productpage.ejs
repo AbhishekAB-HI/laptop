@@ -32,7 +32,7 @@
                     <th scope="col">Product category</th>
                     <th scope="col">Product size</th>
                     <th scope="col">Product quantity</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Product list</th>
                     <th scope="col">Edit</th>
                    
                   </tr>
@@ -48,16 +48,14 @@
                     <td ><%=product.productprice%></td>
                     <td><img src="/productImages/<%=product.images[0]%>" width="100px" height="100px"
                         alt="<%=product.images%>"></td>
-                    <td ><%=product.category%></td>
+                    <td ><%=product.category.name%></td>
                     <td ><%=product.productsize%></td>
                     <td ><%=product.productquantity%></td>
-                    <td><a href="/admin/delete-product?id=<%=product._id%>">Delete</a></td>
-                    <td><a href="/admin/edit-product?id=<%=product._id%>">Edit</a></td>
+                    <td><a href="/admin/list-product?id=<%=product._id%>">status</a></td>
+                    <td><a href="/admin/edit-product?id=<%=product._id%>&&cataid=<%=product.category._id%>">Edit</a></td>
                   
 
                             <%
-
-
                         })
                     }else{
                         %>
@@ -65,7 +63,6 @@
                             <td colspan="5">User Not Found</td>
                         </tr>
                         <%
-
                     }
 
 

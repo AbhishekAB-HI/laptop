@@ -9,9 +9,62 @@
     <link rel="stylesheet" href="/static/userprofile.css"> 
 </head>
 <body>
-    <div class="container bootstrap snippets bootdey bg-light">
+       <!-- Header-->
+       <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand text-white" href="/dashboard">Trend HubQ</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <nav class="navbar navbar-expand-lg navbar-light bg-info">
+              
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                   
+                    <li class="nav-item dropdown">
+
+
+                    
+                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/aboutus">My profile</a>
+                        <a class="dropdown-item" href="/">Wish List</a>
+                        <a class="dropdown-item" href="/">contact</a>
+                        <a class="dropdown-item" href="/">wallet</a>
+                        <a class="dropdown-item" href="/logout">logout</a>
+                        
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link disabled text-white" href="">Contact Us</a>
+                    </li>
+                  </ul>
+                
+                </div>
+                
+              </nav>
+              <form class="d-flex">
+                <button class="btn btn-outline-dark text-white" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3 text-white" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                      </svg>
+                      <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a> 
+                </button>
+            </form>
+                         
+            </div> 
+        </div>
+    </nav>
+    <!-- Header-->
+    <div class="container bootstrap snippets bootdey ">
         <div class="row">
-          <div class="profile-nav col-md-3">
+          <div class="profile-nav  col-md-3 mt-5 ">
               <div class="panel">
                   <div class="user-heading round">
                       <a href="#">
@@ -19,26 +72,42 @@
                       </a>
                       <h1> <%=user.username%></h1>
                       <p><%=user.email%></p>
+                      
                   </div>
         
                   <ul class="nav nav-pills nav-stacked">
+                     
+                      <li><a href="/editprofile"> <i class="fa fa-edit"></i> Edit profile</a></li>
                       
-                      <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
+                    
+                       
                   </ul>
+                  <ul class="nav nav-pills nav-stacked">
+                     
+               
+                    
+                    <li><a href="/addadress"><i class="fa fa-edit"></i> Add address</a></li>
+                     
+                </ul>
+                <ul class="nav nav-pills nav-stacked">
+                  <li><a href="/changepassword"><i class="fa fa-edit"></i>Chage password</a></li>       
+              </ul>
+            </ul>
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="/orderdeatil"><i class="fa fa-edit"></i>Order detail page</a></li>       
+          </ul>
               </div>
           </div>
-          <div class="profile-info col-md-9">
-              <div class="panel">
-              
+          <div class="profile-info col-md-9 mt-5">
                
-              </div>
               <div class="panel">
                   <div class="bio-graph-heading">
                     <h4 class="text-white">Welcome,<%=user.username%></h4>
                   </div>
                   <div class="panel-body bio-graph-info">
                       <h1>User details</h1>
-                      <div class="row">
+                      <div class="row ">
+                        
                           <div class="bio-row">
                               <p><span>Name</span><%=user.username%></p>
                           </div>
@@ -52,12 +121,16 @@
                           <div class="bio-row">
                               <p><span>address </span><%=user.address%></p>
                           </div>
+                   
+                          
                           <div class="bio-row">
-                            <p><span><a href="/addadress">Add address</a></span></p>
+                            
+                            <br>
                             <h1>Address Info</h1>
+                           
                         </div>
 
-                        <table class="table">
+                        <table class="table bg-light">
                             <thead>
                               <tr>
                                 <th scope="col">No</th>
@@ -72,9 +145,16 @@
                             <tbody>
                                 
        <%
+
+
+       
+
+
+
        address.address1.forEach((item,i)=>{
            %>
              
+        
          
           
 
@@ -108,51 +188,74 @@
                           <h1>Show Orderlist</h1>
 
 
-                          <table class="table">
+                          <table class="table bg-light">
                             <thead>
                               <tr>
-                                <th scope="col">No</th>
+                              
+                                <th scope="col">ProductsImages</th>
                                 <th scope="col">Products</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Sub-Total</th>
                                 <th scope="col">CancelOrder</th>
-                               
+                                <th scope="col">Orderdetailpage</th>
                               </tr>
                             </thead>
                             <tbody>
                                 
        <%
-       address.address1.forEach((item,i)=>{
+
+       if(userCart.length>0){
+
+     
+       userCart.forEach((item,i)=>{
            %>
-             
-         
+
+           <%item.products.forEach((value)=>{%>
+            
+       <tr>
+
+        <td> <img src="/productImages/<%=value.product_id?.images%>" width="50px" height="50px" alt="Blue Jeans Jacket" /></td>
+        <td><%=value.product_id.productname%></td>
+        <td><%=value.price%></td>
+        <td><%=value.qty%></td>
+        <td><%=value.totalPrice%></td>
+         <input type="hidden" value="<%=item._id%>" >
+        <%if(value.status!=="canceled"){%>
+       
           
+          <td><a href="/deleteorderproduct?id=<%=value._id %>&&orderid=<%=item._id%>">Cancel</a></td>
+          <%}else{
+            %>
+            <td><p style="color: red;" >canceled</p></td>
+            <%
+          }%>
+     
+  
+        
+        <td><a href="/detailview?orderid=<%=item._id%>&&productid=<%=value._id %>">Viewpage</a></td>
+      </tr>
 
  
-       <tr>
-      <th scope="row"><%=i+1%></th>
-      <td><%=item.firstName%></td>
-      <td><%=item.lastName%></td>
-      <td><%=item.city%></td>
-      <td><%=item.email%></td>
-      <td><%=item.address%></td>
-      <td><%=item.state%></td>
-  
-    </tr>
-    
-    
-
+            <%})%>
+             
 
           
            <%
        })
 
+       }else{
+        %>
+        <td><h3 style="color: red;">No orders</h3></td>
+        
+        <%
+       }
+    
        
        %>
       
     
-      %>
+    
       
                             </tbody>
                           </table>
@@ -188,6 +291,8 @@
                   </div>
               </div>
 
+      
+
 
 
 
@@ -195,6 +300,10 @@
           </div>
         </div>
         </div>
+                
+    <!-- Footer-->
+    <%- include("../layout/navbarbottom.ejs")%>
+   
     
 </body>
 </html>

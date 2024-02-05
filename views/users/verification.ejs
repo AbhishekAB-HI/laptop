@@ -52,8 +52,8 @@
                   <input class="submitbt" type="submit" value="Submit"/>
                 </div>
 
-                <p class="text-center text-muted mt-5 mb-0"><a href="/register"
-                    class="fw-bold text-body"><u>Go Back</u></a></p>
+              
+
 
             
               </form>
@@ -87,10 +87,10 @@ setTimeout("preback()",0);
                 }, 30000);
 
 
-                function startTimer(duration, display) {
+                function startTimer(duration, display) { 
         let timer = duration;
         const interval = setInterval(function () {
-            const minutes = Math.floor(timer / 60);
+            const minutes = Math.floor(timer / 60); 
             const seconds = timer % 60;
 
             display.textContent = `Resend OTP in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
@@ -99,7 +99,7 @@ setTimeout("preback()",0);
                 clearInterval(interval);
                 display.textContent = 'Resend OTP';
             }
-        }, 1000);
+        }, 1000); 
     }
                 
     window.onload = function () {

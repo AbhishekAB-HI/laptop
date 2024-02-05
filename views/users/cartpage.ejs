@@ -15,7 +15,7 @@
   
 
       <h1></h1>
-    <section class="h-100 gradient-custom">
+    <section class="h-100 gradient-custom ">
         <div class="container py-2">
           <div class="row d-flex justify-content-center my-0 ">
             <div class="col-md-8 ">
@@ -42,10 +42,6 @@
 
                     if(cart.length>0){
 
-                    
-
-                  
-                   
                   cart?.forEach((carts,i)=>{
                    %>
 
@@ -81,25 +77,27 @@
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                       <!-- Quantity -->
                       <div class="d-flex mb-4"   style="max-width: 300px;height: 40PX; ">
-                        <button id="buttondown" data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 me-2 decrease-quantity">
+                        <button id="buttondown"    data-_id="<%=userCart[i].product_id%>"  data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 me-2 decrease-quantity">
                           <i class="fas fa-minus"></i>
                         </button>
       
                         <div class="form-outline text-md-center">
-                          <input id="form1" min="1" name="quantity" value="<%=userCart[i].qty%>" type="number" class="form-control text-md-center" />
+                          <input disabled id="form1" min="0"  name="quantity" value="<%=userCart[i].qty%>" type="number" class="form-control text-md-center" />
                           <label class="form-label" for="form1">Quantity </label>
                         </div>
       
-                        <button id="buttonUp" data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 ms-2 increase-quantity">
+                        <button id="buttonUp"   min="1" data-_id="<%=userCart[i].product_id%>" data-product_id="<%=userCart[i]._id%>"  class="btn btn-primary px-3 ms-2 increase-quantity">
                           <i class="fas fa-plus"></i>
                         </button>
                       </div>
+
                       <BR></BR>
                       <!-- Quantity -->
       
                       <!-- Price -->
                       <p  class="text-start text-md-center">
-                        <strong  class="totalprice"><%='\u20B9'+userCart[i].totalPrice%></strong>
+                        <strong  class="totalprice">₹<%=`${Number.parseInt(userCart[i].totalPrice)||userCart[i].price}`%></strong>
+                        <!-- <strong  class="totalprice"> <%=userCart[i].price%> </strong> -->
                       </p>
                       <!-- Price -->
                     </div>
@@ -190,7 +188,7 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                       Shipping Charge
-                      <span>$10</span>
+                      <span>0</span>
                     </li>
                     <li
                       class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
@@ -200,7 +198,9 @@
                           <p class="mb-0">(including VAT)</p>
                         </strong>
                       </div>
-                      <span  id="cartsum"><strong ><%='\u20B9'+totalPrice%></strong></span>
+   
+
+                      <span  id="cartsum"><strong ><span>₹</span><%=`${ totalPrice || total }`%></strong></span>
                     </li>
                   </ul>
       
@@ -220,82 +220,127 @@
  
     <script>
     // Use the fetch API to make a GET request
-  
-
-
-  // document.getElementById("buttondown").addEventListener("click",function(){
-             
-  // })
-
-          const increaseButtons=Array.from(document.querySelectorAll(".increase-quantity"))
-          console.log(increaseButtons);
-
+          const increaseButtons=Array.from(document.querySelectorAll(".increase-quantity"))       
           increaseButtons.forEach((btn)=>{
             btn.addEventListener('click',async function(){
               console.log(btn.closest(".d-flex").querySelector("#form1"));
-            const inputQuantity= btn.closest(".d-flex").querySelector("#form1")
+            const inputQuantity= btn.closest(".d-flex").querySelector("#form1");
             let currentQuantity=Number.parseInt(inputQuantity.value)
-                 currentQuantity++;
-                 inputQuantity.value=currentQuantity;
-                
-                    console.log(this.dataset.product_id,this);
-                 const res=await fetch(`/quantityup/${this.dataset.product_id}`,{
+            console.log( currentQuantity,"lolo");
+                //  currentQuantity++;
+                let prev=currentQuantity
+            console.log(currentQuantity,'this is current quantity')
+            if(prev != 0){
+              currentQuantity++;
+            }else{
+              console.log(prev,currentQuantity,'this is my current and prev quAntity')
+              return 
+            }
+                 
+                //  inputQuantity.value=currentQuantity;
+                console.log("started");
+                    const innervalue =document.querySelector("#form1").innerHTML;
+                  const res = await fetch(`/quantityup/${this.dataset.product_id}/${this.dataset._id}`,{
                   method:'POST',
                   headers:{
                     'Accept':'application/json',
                     'Content-Type':'application/json'
     
                   },
-                  body:JSON.stringify({quantity:currentQuantity})
+                  body:JSON.stringify({quantity:currentQuantity})  
                  })
-
-                 console.log(res,"efewfwefwf");
+                  console.log(res,"responce up");
+                  
+                   const responce = await res.json();
+                              
+                    if(responce.status=="outofstock"){            
+                    const buttonup =document.getElementById("buttonUp");
+                    // buttonup.setAttribute("disabled",true)
+                    // return alert("out of stock")
+                    return showAlert()
+                 }else{
+                      if(currentQuantity!=0){
+                  // prevQ =currentQuantity
+                  inputQuantity.value=currentQuantity;
+                 }
+                    }
 
                    const cart= await fetch("/usercart");
                    const cartdata=await cart.json();
                    console.log(cartdata,"dwedee");
-                   document.querySelectorAll(".totalprice").forEach((el,i)=>{
-                      el.textContent=cartdata.currentuser.cart.items[i].totalPrice
+                   document.querySelectorAll(".totalprice").forEach((el,i)=>{   
+                      el.textContent= `₹${cartdata.currentuser.cart.items[i].totalPrice}`
                    })
+                   
 
-                   const cartsum= await fetch("/cartsum");
-                   const cartsumdata=await cartsum.json();
-                  
-                   document.getElementById("cartsum").innerHTML= cartsumdata.valueOne+10
+                   const cartsum= await fetch("/cartsum"); 
+                   const cartsumdata=await cartsum.json(); 
+                   console.log(cartsumdata,"total");                
+                   document.getElementById("cartsum").innerHTML= `₹${cartsumdata.valueOne}`
+                   document.getElementById("cartsum").style.fontWeight = "bold";
 
                    const cartquantity= await fetch("/quantity");
                    const cartquntitydata=await cartquantity.json();
                    document.getElementById("buttonqty").innerHTML= cartquntitydata.valueOne;
 
-                  
+               
 
- 
-
- 
 
             })
   
           }) 
 
+//     // Import SweetAlert
+// import Swal from 'sweetalert2';
 
+// Example usage of SweetAlert
+function showAlert() {
+  Swal.fire({
+  icon: "error",
+  // title: "Oops...",
+  text: "Out of stock",
+ 
+});
+}
+
+// Trigger the alert
+
+function showalert() {
+  Swal.fire({
+  icon: "error",
+  // title: "Oops...",
+  text: "Minimum quantity One",
+ 
+});
+}
 
 
 
 
 
           const decreaseButtons=Array.from(document.querySelectorAll(".decrease-quantity"))
-          console.log(increaseButtons);
 
           decreaseButtons.forEach((btn)=>{
             btn.addEventListener('click',async function(){
               console.log(btn.closest(".d-flex").querySelector("#form1"));
             const inputQuantity= btn.closest(".d-flex").querySelector("#form1")
             let currentQuantity=Number.parseInt(inputQuantity.value)
-                 currentQuantity--;
-                 inputQuantity.value=currentQuantity;
-                
-                    console.log(this.dataset.product_id,"lalalalalala",this);
-                 const res=await fetch(`/quantitydown/${this.dataset.product_id}`,{
+            let prev=currentQuantity
+            console.log(currentQuantity,'this is current quantity')
+            if(prev != 0){
+              currentQuantity--;
+            }else{
+              console.log(prev,currentQuantity,'thihs is my current and prev quAntity')
+              return 
+            }
+                 const buttonup =document.getElementById("buttonUp");
+                //  buttonup.removeAttribute("disabled");
+
+                 console.log(this.dataset.product_id,"llllllooolllll");
+                 
+          // if(currentQuantity <! 0){
+            console.log(currentQuantity,"hhhhhhhhhhhhhhh")
+                 const res=await fetch(`/quantitydown/${this.dataset.product_id}/${this.dataset._id}`,{
                   method:'POST',
                   headers:{
                     'Accept':'application/json',
@@ -304,68 +349,48 @@
                   },
                   body:JSON.stringify({quantity:currentQuantity})
                  })
+                 const responce = await res.json();              
+                    if(responce.status=="Quantityone"){            
+                    const buttonup =document.getElementById("buttonUp");
+                    // buttonup.setAttribute("disabled",true)
+                    return  showalert()
+                    }else{
+                      // let currentQuantity=Number.parseInt(inputQuantity.value)
+                 if(currentQuantity!=0){
+                  prevQ =currentQuantity
+                  inputQuantity.value=currentQuantity;
+                 }
+                    }
+                  
+
+                 console.log(res,"response down");
 
                  const cart= await fetch("/usercart");
                  console.log(cart);
                    const cartdata=await cart.json();
                    console.log(cartdata,"dwedee");
                    document.querySelectorAll(".totalprice").forEach((el,i)=>{
-                      el.textContent=cartdata.currentuser.cart.items[i].totalPrice
+                      el.textContent=`₹${cartdata.currentuser.cart.items[i].totalPrice}`
                    })
 
                    const cartsum= await fetch("/cartsum");
                    const cartsumdata=await cartsum.json();
                    console.log(cartsumdata,"dwedee");
-                   document.getElementById("cartsum").innerHTML= cartsumdata.valueOne+10
+                   document.getElementById("cartsum").innerHTML= `₹${cartsumdata.valueOne}`
 
 
                    const cartquantity= await fetch("/quantity");
                    const cartquntitydata=await cartquantity.json();
                    document.getElementById("buttonqty").innerHTML= cartquntitydata.valueOne;
-  
-
-
-
-
-                 console.log(res,"efewfwefwf");
-
+               
             })
 
           })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     

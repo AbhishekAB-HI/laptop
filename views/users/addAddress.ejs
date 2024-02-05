@@ -18,7 +18,7 @@
             <p class="white-text">You are 30 seconds away from compleating your order!</p>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-white btn-rounded back-button"><a href="/checkout" class="text-white" style="text-decoration: none;"  >Go back</a></button>
+            <button type="submit" class="btn btn-white btn-rounded back-button"><a href="/aboutus" class="text-info" style="text-decoration: none;"  >Go back</a></button>
           </div>
       
       
@@ -29,19 +29,31 @@
               <div class="text-center mb-3 pb-2 mt-3">
                 <h4 style="color: #495057 ;">Delivery Details</h4>
               </div>
+              <div class="form-outline flex-fill mb-0">
+                <%        
+                if(typeof message !=="undefined"){
+                    %>
+                 <h5 style="color:red;"><%= message %></h5>
+                    <%
+                  }
+               %>
+              </div>
+
+
+
       
               <form class="mb-0"  method="post" action="/addadress" >
       
                 <div class="row mb-4">
                   <div class="col">
                     <div class="form-outline">
-                      <input type="text" name="firstName"  id="form9Example1" class="form-control input-custom" />
+                      <input type="text" name="firstName"  id="form9Example1" class="form-control input-custom" required />
                       <label class="form-label" for="form9Example1">First name</label>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-outline">
-                      <input type="text" id="form9Example2" name="lastName" class="form-control input-custom" />
+                      <input type="text" id="form9Example2" name="lastName" class="form-control input-custom" required />
                       <label class="form-label" for="form9Example2">Last name</label>
                     </div>
                   </div>
@@ -49,13 +61,13 @@
                 <div class="row mb-4">
                   <div class="col">
                     <div class="form-outline">
-                      <input type="text" id="form9Example3" name="city" class="form-control input-custom" />
+                      <input type="text" id="form9Example3" name="city" class="form-control input-custom" required />
                       <label class="form-label" for="form9Example3">City</label>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-outline">
-                      <input type="text" name="state" id="form9Example4" class="form-control input-custom" />
+                      <input type="text" name="state" id="form9Example4" class="form-control input-custom"  required/>
                       <label class="form-label" for="form9Example4">State</label>
                     </div>
                   </div>
@@ -63,13 +75,13 @@
                 <div class="row mb-4">
                   <div class="col">
                     <div class="form-outline">
-                      <input type="text" name="address" id="form9Example6" class="form-control input-custom" />
+                      <input type="text" name="address" id="form9Example6" class="form-control input-custom" required />
                       <label class="form-label" for="form9Example6">Address</label>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-outline">
-                      <input type="email" name="email" id="typeEmail" class="form-control input-custom" />
+                      <input type="email" name="email" id="typeEmail" class="form-control input-custom" required />
                       <label class="form-label" for="typeEmail">Email</label>
                     </div>
                   </div>

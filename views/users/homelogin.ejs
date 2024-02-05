@@ -18,10 +18,10 @@
 <body>
   
       <!-- Header-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info  ">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          
             <nav class="navbar navbar-expand-lg navbar-light bg-info">
               
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,9 +43,7 @@
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/aboutus">My profile</a>
-                        <a class="dropdown-item" href="/">Wish List</a>
-                        <a class="dropdown-item" href="/">contact</a>
-                        <a class="dropdown-item" href="/">wallet</a>
+                      
                         <a class="dropdown-item" href="/logout">logout</a>
                         
                     </li>
@@ -70,9 +68,12 @@
         </div>
     </nav>
     <!-- Header-->
+
+
+
     <!-- head part nav -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-        <ul  class="nav-item dropdown">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary ">
+        <ul  class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Category 
             </a>
@@ -86,11 +87,11 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <form class="form-inline my-2 my-lg-0 ml-5">
             <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
             <button class="btn bg-light btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
           </form>
-            <ul  class="nav-item dropdown">
+            <ul  class="nav-item dropdown mr-5">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Sort By
                 </a>
@@ -105,6 +106,8 @@
       </nav>
 
      <!-- head part nav -->
+
+     
 
 
 
@@ -172,33 +175,31 @@
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
+         
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <% product.forEach((product, index) => { %>
-                     <a href="/productdetail?id=<%= product._id%>"><div class="col ml-5 mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="/productImages/<%= product.images %>" alt="Product Image" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <input type="hidden"  value="<%=product._id%>">
-                                    <h5 class="fw-bolder"><%= product.productname %></h5>
-                                    <!-- Product price-->
-                                    
-                                    <h5 class="fw-bolder"><%='\u20B9'+ product.productprice %></h5>
-                                    <h5 class="fw-bolder">qty:-<%= product.productquantity %></h5>
+              <% product.forEach((product, index) => { %> 
+                     <a href="/productdetail?id=<%=product._id%>"><div class="col ml-5 mb-5">
+                        
+     <div class="product-card">
+      <div class="badge">Hot</div>
+      <div class="product-tumb">
+        <img src="/productImages/<%= product.images %>" alt="">
+      </div>
+      <div class="product-details">
+        <span class="product-catagory">Laptops</span>
+        <h4><a href=""></a><%= product.productname %></h4>
+       
+        <div class="product-bottom-details">
+          <div class="product-price"><%='\u20B9'+ product.productprice%></div>
+          <div class="product-links">
+          
+          </div>
+        </div>
 
-                                    <!-- Update this with actual price information -->
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="/wishlist?id=<%= product._id%>">Buy Now</a>
-                                </div>
-                            </div>
-                        </div>
+      </div>
+        <div class="center"><button class="purchasebutton">Buy Now</button></div>
+    </div>
+
                     </div></a>
                 <% }); %>
 
@@ -227,7 +228,8 @@
         <%
      for(let j=1;j<=totalpages;j++){
         %>
-        <a href="?page=<%=j%>"> <%= j %>  </a>
+        
+        <a class="text-black" style="text-decoration: none;" href="?page=<%=j%>"><button class="btn btn-light"> <%= j %></button></a>
         <%
      }
     %>

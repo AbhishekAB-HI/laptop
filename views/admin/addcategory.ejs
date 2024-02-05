@@ -10,6 +10,22 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
         <div class="card" style="border-radius: 15px;">
           <div class="card-body p-5">
             <h2 class="text-uppercase text-center mb-5">Category details</h2>
+            <div class="d-flex justify-content-center">
+              <%
+
+              if(typeof message !=="undefined"){
+                  %>
+               <h5 style="color:red;"><%= message %></h5>
+
+   
+
+                  <%
+                }
+              
+
+        %>
+            </div>
+            
 
             <form method="post"  >
 
@@ -51,22 +67,7 @@ style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/
                 <a href="/admin/categoryproduct">Back</a>
               </div>
               
-              <div class="d-flex justify-content-center">
-                <%
-
-                if(typeof message !=="undefined"){
-                    %>
-                 <h5 style="color:red;"><%= message %></h5>
-  
-     
-  
-                    <%
-                  }
-                
-  
-          %>
-              </div>
-              
+       
 
               
 

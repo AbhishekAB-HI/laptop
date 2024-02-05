@@ -108,13 +108,13 @@
       <h4>Your current address :</h4>
       <br>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="address" id="exampleRadios1" value="<%=address._id%>" checked>
+        <input class="form-check-input" type="radio" name="address" id="exampleRadios1" value="<%=address%>" checked>
         <label class="form-check-label" for="exampleRadios1">
           <h6><%=address%></h6>
         </label>
       </div>
       <br>
-       <h4 class="mb-4"><a href="/addadress">Add address</a></h4>
+       <h4 class="mb-4"><a href="/checkadress">Add address</a></h4>
 
        <table  class="table" >
         <thead>
@@ -165,7 +165,7 @@
       <td><%=item.email%></td>
       <td><%=item.address%></td>
       <td><%=item.state%></td>
-      <td><input type="radio" name="address"  value="<%=item._id%>"></td>
+      <td><input type="radio" name="address"  value="<%=item.address%>"></td>
     </tr>
     
     

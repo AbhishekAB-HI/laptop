@@ -6,30 +6,45 @@ const userSchema = new mongoose.Schema({
         required: [true, "product name is required"],
         minlength: [3, "Enter minimum 3 charectors"],
         maxlength: [20, "Enter maximum 20 charectors"],
-        validate: {
+        validate: [{
             validator: function (value) {
                 return value.trim().length > 0
             },
-            message: "product name cannot be consist of only space"
-        }
+            message: "name cannot be consist of only space"
+        },
+        {
+            validator: function (value) {
+                // Use a regular expression to block the "@" symbol
+                return !/[!@#$%^&*(),.?":{}|<>]/.test(value);
+            },
+            message: 'Field cannot contain only symbol'
+        }]
     },
-    email: { 
+    email: {
         type: String,
         required: true,
         lowercase: true,
- 
-    },
-    password: { 
-        type: String,
-        required: true,
-        minlength: [6, "Password should be atleast 6 charectors"],
 
-  
+    },
+    password: {
+        type: String,
+        minlength: [6, "Password should be atleast 6 charectors"],
+        required: true,
+        validate: {
+            validator: function (value) {
+                console.log(value, "lolololol");
+                // Password should be at least 8 characters long and contain at least one special character
+                return value.length >= 8;
+            },
+            message: "This is not a valid password. It should be at least 8 characters long and contain at least one special character",
+        },
+
+
     },
     number: {
         type: Number,
-        required: true,
         minlength: [10, "Number must be 10 digit"],
+        required: true,
 
     },
 
@@ -50,110 +65,160 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'checkout'
     },
-    
+
     otp: {
         type: Number,
-        required:false,
-    },  
-  
+        required: false,
+    },
+
     cart: {
         items: [{
             product_id: {
-                type:mongoose.Schema.Types.ObjectId, 
+                type: mongoose.Schema.Types.ObjectId,
                 ref: 'product'
             },
             qty: {
                 type: Number,
                 default: 1
             },
-            price: { 
+            price: {
                 type: Number,
-                default: 1 
+                default: 1
             },
-            totalPrice:{
+            totalPrice: {
                 type: Number,
-                default: 0 
+                default: 0
+            },
+            status: {
+                type: String,
+                enum: ["pending", "shipped", "canceled", "returned", "delivered"],
+                default: "pending"
             },
 
         }
         ],
-         
+
     },
-    totalAmount:{
+    totalAmount: {
         type: Number,
-        default: 0 
+        default: 0
     },
-    totalQty:{
+    totalQty: {
         type: Number,
-        default: 0 
+        default: 0
     },
-    address:{
-        type:String,
-        default:"address",
+    address: {
+        type: String,
+        default: "address",
     },
 
-    address1:[{ 
-        firstName:{
-            type:String,
-            required:[true,"product name is required"],
-            minlength:[3,"Enter minimum 3 charectors"],
-            maxlength:[20,"Enter maximum 20 charectors"],
-            validate:{
-                validator:function(value){
-                    return value.trim().length>0
+    address1: [{
+        firstName: {
+            type: String,
+            required: [true, "product name is required"],
+            minlength: [3, "Enter minimum 3 charectors"],
+            maxlength: [20, "Enter maximum 20 charectors"],
+            validate: [{
+                validator: function (value) {
+                    return value.trim().length > 0
                 },
-                message:"product name cannot be consist of only space"
-            }
-        }, 
-        lastName:{
-            type:String,
-            required:[true,"product name is required"],
-            minlength:[3,"Enter minimum 3 charectors"],
-            maxlength:[20,"Enter maximum 20 charectors"],
-            validate:{
-                validator:function(value){
-                    return value.trim().length>0
+                message: "product name cannot be consist of only space"
+            }, {
+                validator: function (value) {
+                    // Use a regular expression to block the "@" symbol
+                    return !/[!@#$%^&*(),.?":{}|<>]/.test(value);
                 },
-                message:"product name cannot be consist of only space"
-            }
-    
+                message: 'Field cannot contain only symbol'
+            }]
         },
-        city:{
-            type:String,
-            required:true
+        lastName: {
+            type: String,
+            required: [true, "product name is required"],
+            minlength: [3, "Enter minimum 3 charectors"],
+            maxlength: [20, "Enter maximum 20 charectors"],
+            validate: [{
+                validator: function (value) {
+                    return value.trim().length > 0
+                },
+                message: "product name cannot be consist of only space"
+            }, {
+                validator: function (value) {
+                    // Use a regular expression to block the "@" symbol
+                    return !/[!@#$%^&*(),.?":{}|<>]/.test(value);
+                },
+                message: 'Field cannot contain only symbol'
+            }]
+
         },
-        email:{
-            type:String,
-            required:true,
-            lowercase:true,
+        city: {
+            type: String,
+            required: true
         },
-        address:{
-            type:String,
-            required:true
-        
+        email: {
+            type: String,
+            required: true,
+            lowercase: true,
         },
-        state:{
-            type:String,
-            required:true
+        address: {
+            type: String,
+            required: true
+
+        },
+        state: {
+            type: String,
+            required: true
         },
 
     }],
-    payment:[{
-        address:{
-            type:String,
-            required:true
+    payment: [{
+        address: {
+            type: String,
+            required: true
         },
-        paymentMethod:{ 
-            type:String,
-            required:true
-        }
+        paymentMethod: {
+            type: String,
+            required: true 
+        },
+        status: {
+            type: String,
+            enum: ["pending", "shipped", "canceled", "returned", "delivered"],
+            default: "pending"
+        },
+
+
+    }],
+
+    orderlist: [{
+        product_id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'product'
+        },
+        qty: {
+            type: Number,
+            default: 1
+        },
+        price: {
+            type: Number,
+            default: 1
+        },
+        totalPrice: {
+            type: Number,
+            default: 0
+        },
+        status: {
+            type: String,
+            enum: ["pending", "shipped", "canceled", "returned", "delivered"],
+            default: "pending"
+        },
+
 
     }]
 
-}) 
+
+
+})
 
 
 
 
 module.exports = mongoose.model("users", userSchema)
- 
