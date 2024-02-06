@@ -16,7 +16,6 @@ app.use("/admin", admin_route);
  
 const path = require('path');
 app.use("/static", express.static(path.join(__dirname, "public")))
-
 app.use(express.static(__dirname + '/public'));
 
 app.listen(port, () => { 

@@ -7,8 +7,11 @@ const product = require("../model/products");
 const category = require("../model/category");
 const checkout = require("../model/checkoutpage");
 const { default: mongoose } = require("mongoose");
+const order = require("../model/orders");
+const orders = require("../model/orders");
+const products = require("../model/products");
 
-const order = require("../model/orders")
+
 const createOtp = () => {
   const otp = otpGenerator.generate(6, { lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false, number: true });
   return otp;
@@ -21,7 +24,6 @@ const securepassword = async (password) => {
 }
 
 
-
 const sendVerfyMail = async (username, email, req) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -30,7 +32,6 @@ const sendVerfyMail = async (username, email, req) => {
         user: process.env.SMTP_USERNAME,
         pass: process.env.SMTP_PASSWORD, 
       }
-
     })
     const otp = createOtp()
     req.session.createdOtp = otp
@@ -42,18 +43,14 @@ const sendVerfyMail = async (username, email, req) => {
 
     }
     transporter.sendMail(mailoption, function (error, info) {
-
       if (error) {
         console.log(error)
       } else {
         console.log("Email has been send:-", info.response)
       }
-
     })
   } catch (error) {
     console.log(error.message)
-
-
   }
 }
 
@@ -74,10 +71,7 @@ const insertuser = async (req, res) => {
         return res.render("signup", { message: "Invalid password. It should be at least 8 characters long and contain at least one special character" })
       }
       var pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
       const emailCheck = pattern.test(emailid);
-      console.log(emailCheck, "check");
-
       if (!emailCheck) {
       return res.render("signup", { message: "Invalid email format" });
      }
@@ -93,11 +87,8 @@ const insertuser = async (req, res) => {
       })
       if (user) {
         const conformpassword = req.body.conformpassword
-        console.log(user.password, "ooooo", conformpassword);
-
         const passwordMatch = await bcrypt.compare(conformpassword, user.password);
         if (passwordMatch) {
-
           const Userdata = await user.save();
           req.session.user_id = Userdata._id;
           sendVerfyMail(req.body.username, req.body.email, req);
@@ -105,7 +96,6 @@ const insertuser = async (req, res) => {
         } else {
           res.render("signup", { message: "Entered password is incorrect" })
         }
-
       } else {
         res.render("signup", { message: "Please fill all the forms" })
       }
@@ -130,13 +120,11 @@ const insertuser = async (req, res) => {
 const verify = async (req, res) => {
 
   try {
-
     const { user_id } = req.session
     const userData = await User.findById(user_id)
     console.log(userData)
     sendVerfyMail(userData.username, userData.email, req);
     res.redirect("/verification")
-
   } catch (error) {
     console.log(error.message)
 
@@ -147,9 +135,7 @@ const verify = async (req, res) => {
 
 const loadRegister = async (req, res) => {
   try {
-
     res.render("signup")
-
   } catch (error) {
     console.log(error.message)
   }
@@ -296,14 +282,8 @@ const userLogout = async (req, res) => {
     if (req.query.page) {
       page = req.query.page
     }
-
-
-
     const limit = 4;
-
-
     const productData = await product.find({
-
       $or: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" } }
       ]
@@ -311,32 +291,19 @@ const userLogout = async (req, res) => {
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec() 
-
-
     const count = await product.find({
-
       $or: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" } }
       ]
     }).countDocuments()
-
     req.session.destroy()
-
     res.render("home", {
       product: productData,
       totalpages: Math.ceil(count / limit),
       currentpages: page,
-
-
     })
-
-
-
-
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
 
@@ -345,43 +312,28 @@ const AboutUs = async (req, res) => {
   try {
     const UserData = await User.findById({ _id: req.session.user_id });
     const useraddress = await User.findById({ _id: req.session.user_id }).populate("address1")
-
-    const usercart = await User.findById({ _id: req.session.user_id })
-
-    const userorder = await order.find({ user: req.session.user_id }).sort({  createdAt:-1}).populate("products.product_id")
-
-    console.log(userorder, "wedce")
-
-
-
+   const userorder = await order
+  .find({ user: req.session.user_id })
+  .populate("products.product_id")
+  .sort({ createdAt: -1 });      
     res.render("userprofile", { user: UserData, address: useraddress, userCart: userorder })
-
-  } catch (error) {
+  } catch (error) { 
     console.log(error.message)
-
   }
 }
 
 const HomeLogined = async (req, res) => {
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
-
-
     const limit = 4;
-
-
     const productData = await product.find({
-
       $and: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" } },
         { is_list: false }
@@ -390,17 +342,12 @@ const HomeLogined = async (req, res) => {
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
-
     const count = await product.find({
-
       $or: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" } }
       ]
     }).countDocuments()
-
     const id = req.query.id;
-
     if (count === 0) {
       res.render("nodata")
     } else
@@ -410,10 +357,7 @@ const HomeLogined = async (req, res) => {
         currentpages: page,
       })
   } catch (error) {
-
     console.log(error.message)
-
-
   }
 }
 
@@ -423,20 +367,16 @@ const HomeLogined = async (req, res) => {
 const gammingpart = async (req, res) => {
 
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
 
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await product.find({
       category: { _id: "65b686ef458b73c4060770b1" }
     })
@@ -450,18 +390,12 @@ const gammingpart = async (req, res) => {
 
     if (productData == 0) {
       res.render("nodata")
-
     } else
-
-
       res.render("homelogin", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
-
   } catch (error) {
 
   }
@@ -471,50 +405,33 @@ const gammingpart = async (req, res) => {
 
 const officepart = async (req, res) => {
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
-
-
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
-
     const productData = await product.find({
       category: { _id: "65b68708458b73c4060770b5" }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
-
     const count = await product.find({
       category: { _id: "65b68708458b73c4060770b5" }
     }).countDocuments()
-
-
     if (productData == 0) {
       res.render("nodata")
-
     } else
-
-
-
       res.render("homelogin", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
 
       })
-
-
   } catch (error) {
 
   }
@@ -522,39 +439,28 @@ const officepart = async (req, res) => {
 
 const tabletpart = async (req, res) => {
   try {
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await product.find({
       category: { _id: "65b68718458b73c4060770b9" }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await product.find({
       category: { _id: "65b68718458b73c4060770b9" }
     }).countDocuments()
-
     if (productData == 0) {
       res.render("nodata")
-
     } else
-
-
       res.render("homelogin", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
-
   } catch (error) {
 
   }
@@ -566,44 +472,30 @@ const tabletpart = async (req, res) => {
 
 const gamminghome = async (req, res) => {
   try {
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
-
     const productData = await product.find({
       category: { _id: "65b686ef458b73c4060770b1" }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await product.find({
       category: { _id: "65b686ef458b73c4060770b1" }
     }).countDocuments()
-
     if (productData == 0) {
       res.render("nodatahome")
-
     } else
-
-
       res.render("home", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
-
   } catch (error) {
-
     console.log(error.message);
-
   }
 }
 
@@ -615,36 +507,24 @@ const officehome = async (req, res) => {
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
-
     const productData = await product.find({
       category: { _id: "65b68708458b73c4060770b5" }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
-
     const count = await product.find({
       category: { _id: "65b68708458b73c4060770b5" }
     }).countDocuments()
-
     if (productData == 0) {
       res.render("nodatahome")
-
     } else
-
-
       res.render("home", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
-
   } catch (error) {
 
   }
@@ -652,61 +532,45 @@ const officehome = async (req, res) => {
 
 const tablethome = async (req, res) => {
   try {
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await product.find({
       category: { _id: "65b68718458b73c4060770b9" }
     })
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await product.find({
       category: { _id: "65b68718458b73c4060770b9" }
     }).countDocuments()
-
     if (productData == 0) {
       res.render("nodatahome")
-
     } else
-
       res.render("home", {
         product: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
-
   } catch (error) {
 
   }
 }
-
 const highprice = async (req, res) => {
   try {
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const products = await product.find({
       productprice: { $gt: 65000 }
     }).limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await product.find({}).countDocuments()
-
     res.render("homelogin", {
       product: products,
       totalpages: Math.ceil(count / limit),
@@ -730,7 +594,6 @@ const lowprice = async (req, res) => {
     }
 
     const limit = 4;
-
     const products = await product.find({
       productprice: { $lt: 50000 }
     }).limit(limit * 1)
@@ -796,24 +659,17 @@ const cartpage = async (req, res) => {
     const items = { product_id: productid }
     const userone = await User.findOne({ _id: userid });
     const exisitingid = userone.cart.items.findIndex(item => item.product_id == productid);
-
-
     if (exisitingid !== -1) {
       userone.cart.items[exisitingid].qty = userone.cart.items[exisitingid].qty + 1
     } else {
       const productref = await product.findById([{ _id: productid }]);
-
-      console.log(productref, "lololooll");
-
       const productobject = {
         product_id: productref._id,
         qty: 1,
         price: productref.productprice,
         totalPrice:productref.productprice
-
       }
       userone.cart.items.push(productobject) 
-
     }
     await userone.save()
 
@@ -824,9 +680,6 @@ const cartpage = async (req, res) => {
     console.log(error.message)
 
   }
-
-
-
 }
 
 const getProduct = async (req, res) => {
@@ -837,19 +690,13 @@ const getProduct = async (req, res) => {
     const value = user?.cart?.items?.reduce((accu, curr) => {
       return accu + curr.totalPrice
     }, 0)
-     console.log( value,"ooooooo");
-
+  
       const sumvalue= user?.cart?.items.findIndex(item=> item.price)
-   
-
            const checkone=  user?.cart?.items[sumvalue]?.price;
            console.log(checkone,"some");
-
-
     const quantity = user?.cart?.items.reduce((accu, curr) => { 
       return accu + curr.qty
     }, 0)
- 
     if (user && user.cart) {
       console.log(user.cart.items);
       return res.render("cartpage", { cart: productdetail?.cart?.items, userCart: user.cart.items, totalPrice: value, qty: quantity, total: checkone});
@@ -871,25 +718,16 @@ const getProduct = async (req, res) => {
 
 const deletecartitem = async (req, res) => {
   try {
-    console.log("start/////////////////////");
     const userid = req.session.user_id;
     const id = req.query.id;
-
-
-
-    console.log(id, "id from product")
-
     const updatedUser = await User.findByIdAndUpdate(
       userid,
       { $pull: { 'cart.items': { _id: id } } },
       { new: true }, // To get the updated document
       res.redirect("/getProduct")
     ).then((res) => {
-
       console.log(res, 'this is deleted data')
     })
-
-
   } catch (error) {
     console.log(error.message)
 
@@ -900,10 +738,10 @@ const deletecartitem = async (req, res) => {
 const checkoutpage = async (req, res) => {
   try {
     const userid = req.session.user_id;
-
     const productdetail = await User.findOne({ _id: userid }).populate("cart.items.product_id");
     const user = await User.findOne({ _id: userid });
-
+    const cartdata=user.cart.items
+  
     const value = user.cart.items.reduce((accu, curr) => {
       return accu + curr.totalPrice
     }, 0)
@@ -912,12 +750,8 @@ const checkoutpage = async (req, res) => {
       return accu + curr.qty
     }, 0)
 
-
     const checkoutdata = await User.findById({ _id: userid })
-    console.log(checkoutdata.address, "ddqdedec");
-
     const permenentaddress = checkoutdata.address
-
     res.render("checkoutpage", { check: checkoutdata, address: permenentaddress, userCart: user.cart.items, totalPrice: value, qty: quantity })
   } catch (error) {
     console.log(error.message)
@@ -928,16 +762,13 @@ const checkoutpage = async (req, res) => {
 const addcheckoutpage = async (req, res) => {
 
   try {
-
     const userid = req.session.user_id;
-
     const {
       address,
       paymentMethod
-    } = req.body;
+    } = req.body;   
 
     const cartitem = await User.findById({ _id: userid })
-
     await User.findByIdAndUpdate({ _id: userid }, {
       $push: {
         payment: {
@@ -949,23 +780,30 @@ const addcheckoutpage = async (req, res) => {
     }, { new: true })
 
     const userdetail = await User.findByIdAndUpdate({ _id: userid }).select("cart")
-    const cartitems = userdetail.cart.items;
-
+    const cartitems = userdetail.cart.items;   
     const neworder = new order({
       user: userid,
     })
+
+    for (let item of cartitems) {
+      await products.findByIdAndUpdate({
+        _id:item.product_id
+      },{$inc:{productquantity:-item.qty}})
+    }
+
+
     for (let item of cartitems) {
       const product = {
         product_id: item.product_id,
         qty: item.qty,
         price: item.price,
         totalPrice: item.totalPrice,
-        status: item.status
+        status: item.status,
       }
-
       neworder.products.push(product)
     }
-    await neworder.save()
+    await neworder.save();
+   const data=   await User.findByIdAndUpdate({_id:userid},{$set:{"cart.items":[]}})
 
     res.render("paymentsuccess")
 
@@ -1104,18 +942,12 @@ const updatecheckaddress = async (req, res) => {
 const quatityup = async (req, res) => {
   try {
 
-    console.log("reach"); 
     let cloneItems = [];
     const product_id = req.params.product_id;
     const productdata = req.params._id;
-    
      const valueup=parseInt(req.body.quantity);
-
-      console.log(valueup,"valiueeee");
      const productvalue=req.body.quantity;
-   
      const myproduct =await product.findById({_id:productdata})
-     
     if ( productvalue > myproduct.productquantity ){ 
       return res.status(200).json({ status: "outofstock" })
      }
@@ -1126,18 +958,11 @@ const quatityup = async (req, res) => {
     const exisitingid = userproduct.cart.items.findIndex(item => item._id == product_id)
     
     const passproductdetails = userproduct.cart.items[exisitingid];
-    console.log(passproductdetails,"detail got");
     const Totalprice = passproductdetails.totalPrice  //total price of object 1
     const productPrice = passproductdetails.price;    //actualprice of object 1
     const productQty =  passproductdetails.qty+1;
     //  -----------------------------------------------------
-
-     console.log( productPrice,"productprice");
-     console.log( productQty ,"productquantity");
-
     const totalprice = productPrice * productQty
-
-    
     const totalvalue = userproduct.cart.items[exisitingid].totalPrice;
     await User.findByIdAndUpdate(
       userid,
@@ -1147,37 +972,19 @@ const quatityup = async (req, res) => {
         }
       },
       { new: true });
- 
     const TotalAmount = userproduct.totalAmount;
-   
     const TotalQuantity = userproduct.totalQty;
-   
-
     const productdetails = await product.findOne({ _id: userproduct.cart.items[exisitingid].product_id });
-
-
-
-  
-
     const user = await User.findOne({ "cart.items._id": product_id });
-
     const cartItems = user.cart.items;
-
-
     const itemindex = cartItems.findIndex((item) => {
-
       return item._id.toString() === product_id
     })
-
     const Items = cartItems.forEach((item) => {
-
       if (item._id.toString() === product_id) {
-
         item.qty = valueup 
-
       }
     })
-
     await User.findByIdAndUpdate(user._id, { $set: { "cart.items": cartItems } },{ new: true, runValidators: true })
     res.status(200).json({ status: "updated",totalprice})
   } catch (error) {
@@ -1189,47 +996,23 @@ const quatityup = async (req, res) => {
 
 const quatitydown = async (req, res) => {
   try {
-
     const productdata = req.params._id;
     const minvalue= req.body.quantity;
     const currentqty =await product.findByIdAndUpdate({_id:productdata});
-console.log(req.body.quantity,"sttaaa",currentqty.productquantity,'thiaa ia produvt cont')
-  //  if(minvalue!=0){
-  //   const productminus = await product.findByIdAndUpdate({_id:productdata}, {$inc: {productquantity: 1}});
-  //  }else{
-  //   res.status(200).json({ status: "Quantityone" })
-  //  }
-
    if(minvalue<1){
     return res.status(200).json({ status: "Quantityone" })
    }
-   
-    
-
     let cloneItems = []
     const product_id = req.params.product_id;
-    console.log(product_id, "product id is");
     const quatity = req.body.quantity;
-    console.log(quatity, "quantit isssssss");
     const userid = req.session.user_id;
     const userproduct = await User.findOne({ "cart.items._id": product_id });
     const exisitingid = userproduct.cart.items.findIndex(item => item._id == product_id)
-    console.log(userproduct.cart.items[exisitingid], "product");
-
     const passproductdetails = userproduct.cart.items[exisitingid]
     const Totalprice = passproductdetails.totalPrice
     const productPrice = passproductdetails.price;
-    console.log(productPrice, "price");
-
     const productQty = quatity;
-    console.log(productQty, "qty");
     const totalprice = productPrice * productQty
-
-    console.log(totalprice, "added");
-
-    console.log(userproduct.cart.items[exisitingid].totalPrice, "totalproductprice");
-
-
     const totalvalue = userproduct.cart.items[exisitingid].totalPrice;
     await User.findByIdAndUpdate(
       userid,
@@ -1239,7 +1022,6 @@ console.log(req.body.quantity,"sttaaa",currentqty.productquantity,'thiaa ia prod
         }
       },
       { new: true }); 
-
     await User.findByIdAndUpdate(
       userid,
       {
@@ -1248,32 +1030,17 @@ console.log(req.body.quantity,"sttaaa",currentqty.productquantity,'thiaa ia prod
         }
       },
       { new: true });
-
-
     const productdetails = await product.findOne({ _id: userproduct.cart.items[exisitingid].product_id });
-
-    console.log(productdetails.productquantity, "mached");
-
-
     const user = await User.findOne({ "cart.items._id": product_id });
-
     const cartItems = user.cart.items;
-
-
     const itemindex = cartItems.findIndex((item) => {
-
       return item._id.toString() === product_id
     })
-
     const Items = cartItems.forEach((item) => {
-
       if (item._id.toString() === product_id) {
         item.qty = quatity
       }
     })
-
-    console.log(Items, cartItems)
-
     await User.findByIdAndUpdate(user._id, { $set: { "cart.items": cartItems } }, { new: true, runValidators: true })
     res.status(200).json({ status: "updated" })
   } catch (error) {
@@ -1284,15 +1051,9 @@ console.log(req.body.quantity,"sttaaa",currentqty.productquantity,'thiaa ia prod
 
 const user_cart = async (req, res) => {
   try {
-
     const userid = req.session.user_id;
-
     const currentuser = await User.findById(userid).select("cart")
-
     res.status(200).json({ currentuser })
-
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1301,18 +1062,14 @@ const user_cart = async (req, res) => {
 
 const totalprice = async (req, res) => {
   try {
-
     const userid = req.session.user_id;
     const user = await User.findOne({ _id: userid });
     const value = user.cart.items.reduce((accu, curr) => {
       return accu + curr.totalPrice
     }, 0)
-    console.log('jjjjjjjjjjjjm this sith minus valueeeeeee',value)
     res.status(200).json({ valueOne: value })
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
 
@@ -1324,12 +1081,7 @@ const totalquantity = async (req, res) => {
     const quantity = user.cart.items.reduce((accu, curr) => {
       return accu + curr.qty
     }, 0)
-
     res.status(200).json({ valueOne: quantity })
-
-
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1341,15 +1093,22 @@ const deleteOrderList = async (req, res) => {
     const userid = req.session.user_id;
     const deleteid = req.query.id;
     const orderid = req.query.orderid;
+    const productdataid= req.query.deleteproductid
 
     const myorder = await order.findById({ _id: orderid }).populate("products.$.product_id");
-    console.log(myorder, "lllllllllllll");
     const cancelproduct = myorder.products.find(product => product._id.toString() === deleteid)
-    console.log(cancelproduct, "sssssssss");
-    cancelproduct.status = "canceled"
+    cancelproduct.status = "canceled";
+    const productid = myorder.products.find(product => product.product_id);
+    const idproduct=productid.product_id;
 
-    try {
+    try { 
       await myorder.save();
+      const productdata =  myorder.products
+      for(let item of  productdata ){ 
+        if(item.product_id==productdataid){
+        await products.findByIdAndUpdate({_id:item.product_id},{$inc:{productquantity:item.qty}})
+        }
+      }
       console.log('User saved successfully');
     } catch (error) {
       console.error('Error saving user:', error);
@@ -1367,15 +1126,8 @@ const deleteOrderList = async (req, res) => {
 const editUserProfile = async (req, res) => {
   try {
     const userid = req.session.user_id;
-
     const userdetails = await User.findById({ _id: userid });
-
-    console.log(userdetails, "wxeedeweed");
-
     res.render("editSignup", { user: userdetails })
-
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1384,58 +1136,38 @@ const editUserProfile = async (req, res) => {
 
 const UpdateUserProfile = async (req, res) => {
   try {
-
+    const images = req.files.map(file => file.filename)
     const { username, email, number } = req.body
-
     const userid = req.session.user_id;
-
     var pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     var emailcheck= pattern.test(email);
-
     if(!emailcheck){
       const userdetails = await User.findById({ _id: userid });
       return  res.render("editSignup",{message:"Invalid email format", user: userdetails})
     }
- 
-
- 
-         
-
-    const updateprofile = await User.findByIdAndUpdate({ _id: userid }, { $set: { username: username, email: email, number: number } }, { new: true, runValidators: true });
+    const updateprofile = await User.findByIdAndUpdate({ _id: userid }, { $set: { username: username, email: email, number: number,images:images} }, { new: true, runValidators: true });
     res.redirect("/aboutus")
-
-
-
   } catch (error) {
     console.log(error.message)
-
     if (error.errors) {
       const userid = req.session.user_id;
-
       const userdetails = await User.findById({ _id: userid });
-
       const message = Object.values(error.errors).map(err => err.message);
-
       return res.render('editSignup', { message, user: userdetails }); // Pass errors to the view
     }
-
   }
 }
 
 
 const sentPassword = async (usermail, emailnew) => {
   try {
-
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.SMTP_USERNAME,
         pass: process.env.SMTP_PASSWORD,
       }
-
     })
-
     const mailoption = {
       from: process.env.SMTP_USERNAME,
       to: emailnew,
@@ -1444,75 +1176,47 @@ const sentPassword = async (usermail, emailnew) => {
 
     }
     transporter.sendMail(mailoption, function (error, info) {
-
       if (error) {
         console.log(error)
       } else {
         console.log("Email has been send:-", info.response)
       }
-
     })
   } catch (error) {
     console.log(error.message)
-
-
   }
 }
 
 
 const forgotPassword = async (req, res) => {
   try {
-
     res.render("forgotpassword")
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
 
 const updateforgotpassword = async (req, res) => {
   try {
-
-
     const useremail = req.body.email;
     const userone = await User.findOne({ email: useremail });
-
     const pass = req.body.password;
-
     const password = userone.password
-    console.log(password);
-
     const passmatch = await bcrypt.compare(pass, password);
-
-    console.log(passmatch, "checked");
-
     if (passmatch) {
-
       const newpassword = req.body.newpassword;
-
       var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-
-      console.log(!newpassword.length > 6 || !newpassword.length <= 8 || regularExpression.test(newpassword), regularExpression.test(newpassword), newpassword.length, "lllllll");
-
       const isValid = (newpassword.length > 6 && newpassword.length === 8) || regularExpression.test(newpassword)
       if (!isValid) {
         return res.render("forgotpassword", { message: "Invalid password. It should be at least 8 characters long and contain at least one special character" })
       }
-
       const spassword = await securepassword(newpassword)
-
       userone.password = spassword
-
       await userone.save()
-      console.log("end");
       res.render("forgotpassword", { message: "Your password is changed please login again" })
-
     } else {
       res.render("forgotpassword", { message: "Please check your old password" })
     }
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1521,38 +1225,25 @@ const updateforgotpassword = async (req, res) => {
 
 const updateverifypassword = async (req, res) => {
   try {
-
     const emailid = req.body.email;
-
     const usermail = await User.findOne({ email: emailid });
     if (usermail) {
-
       const Username = usermail.username
       const emailnew = usermail.email
-
       sentPassword(Username, emailnew, usermail)
-
       return res.render("passwordsuccess")
     } else {
       res.render("passwordok", { message: "This email id doesnot exist" })
     }
-
-
   } catch (error) {
     console.log(error.message)
   }
 }
 
 
-
-
-
-
 const verifypassword = async (req, res) => {
   try {
-
     res.render("passwordok")
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1560,60 +1251,34 @@ const verifypassword = async (req, res) => {
 
 const changepassword = async (req, res) => {
   try {
-
     res.render("edit-password")
-
-
-
   } catch (error) {
     console.log(error.message)
   }
 }
 
-
-
 const updatechangepassword = async (req, res) => {
   try {
 
     const userid = req.session.user_id;
-
     const userone = await User.findById({ _id: userid });
-
     const pass = req.body.password;
-
     const password = userone.password
-    console.log(password);
-
     const passmatch = await bcrypt.compare(pass, password);
-
-    console.log(passmatch, "checked");
-
     if (passmatch) {
-
       const newpassword = req.body.newpassword;
-
       var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-
-      console.log(!newpassword.length > 6 || !newpassword.length <= 8 || regularExpression.test(newpassword), regularExpression.test(newpassword), newpassword.length, "lllllll");
-
       const isValid = (newpassword.length > 6 && newpassword.length === 8) || regularExpression.test(newpassword)
       if (!isValid) {
         return res.render("edit-password", { message: "Invalid password. It should be at least 8 characters long and contain at least one special character" })
       }
-
       const spassword = await securepassword(newpassword)
-
       userone.password = spassword
-
       await userone.save()
-
       res.redirect("/aboutus")
-
     } else {
       res.render("edit-password", { message: "Please check your old password" })
     }
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -1621,42 +1286,17 @@ const updatechangepassword = async (req, res) => {
 
                    const   detailpage =async (req,res)=>{
                     try {
-                 
                       const orderid= req.query.orderid;
-                      const productid=req.query.productid;
-                      console.log(orderid,"orderid");
-                      console.log(productid,"productid");    
+                      const productid=req.query.productid;  
                      const orderdeatil= await  order.findById({_id:orderid}).populate("products.product_id");      
                      const currentindex =orderdeatil.products.findIndex(item=>item._id.toString()==productid )
                       console.log(currentindex ,"llll");
                       const value =orderdeatil.products[currentindex];
-
-                      console.log(value,"valoe" );
-                  
-                    res.render("orderdetail",{order:value})
-                       
+                    res.render("orderdetail",{order:value})    
                     } catch (error) {
                       console.log(error.message) 
                     }
                    }
- 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = {
   loadRegister,

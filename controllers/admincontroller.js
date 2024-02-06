@@ -1,12 +1,9 @@
 
-
 const User = require("../model/user")
 const category = require("../model/category")
 const order = require("../model/orders")
 const bcrypt = require("bcrypt");
 const products = require("../model/products");
-
-
 
 const loadAdminLogin = async (req, res) => {
   try {
@@ -16,7 +13,6 @@ const loadAdminLogin = async (req, res) => {
   }
 }
 
- 
 const verifyLogin = async (req, res) => {
   try {
     const email = req.body.email;
@@ -42,15 +38,10 @@ const verifyLogin = async (req, res) => {
   }
 }
 
-
 const LoadDashboard = async (req, res) => {
   try {
     const UserData = await User.findById({ _id: req.session.user_id })
-    // res.render("admindashboard");
     res.render("adminHome")
-   
-
-
   } catch (error) {
     console.log(error.message)
   }
@@ -131,8 +122,18 @@ const deleteCategory = async (req, res) => {
 
 const Orderdetails = async (req, res) => {
   try {
-    const orderdetail = await order.find({}).sort({ createdAt: -1 }).populate('products.product_id');
-    res.render("orderDetails", { userCart: orderdetail })
+
+      var page=1;
+      if(req.query.page){
+        var page=req.query.page
+      }
+      const limit = 2;
+    const orderdetail = await order.find({}).sort({ createdAt: -1 }).populate('products.product_id')  .limit(limit * 1)
+    .skip((page - 1) * limit)
+    .exec()
+    const count = await order.find({}).sort({ createdAt: -1 }).populate('products.product_id').countDocuments()
+    res.render("orderDetails", { userCart: orderdetail ,totalpages: Math.ceil(count / limit),
+    currentpages: page}) 
   } catch (error) {
     console.log(error.message)
   }
@@ -246,8 +247,7 @@ const shippedconfirmed = async (req, res) => {
                       try {
       
                          const deleteimageid =req.query.id;      
-                         const deleteproduct = await products.findByIdAndUpdate({_id:deleteimageid},{$pop:{images:-1}},{new:true})
-                                 
+                         const deleteproduct = await products.findByIdAndUpdate({_id:deleteimageid},{$pop:{images:-1}},{new:true})           
                          const productData = await products.findById({_id:deleteimageid }).populate("category")
                            res.render("productsidepageedit", { product: productData })
                       } catch (error) {
@@ -259,20 +259,15 @@ const shippedconfirmed = async (req, res) => {
 const  gameSearch = async (req, res) => {
 
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
-
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await products.find({
       category: { _id: "65b686ef458b73c4060770b1" }
     }).populate("category")
@@ -282,19 +277,14 @@ const  gameSearch = async (req, res) => {
 
     const count = await products.find({
       category: { _id: "65b686ef458b73c4060770b1" }
-    }).countDocuments()
-
-  
+    }).countDocuments() 
       res.render("productlistpage", {
         products: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
 
@@ -303,42 +293,31 @@ const  gameSearch = async (req, res) => {
 const  officeSearch = async (req, res) => {
 
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
-
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await products.find({
       category: { _id: "65b68708458b73c4060770b5" }
     }).populate("category")
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await products.find({
       category: { _id: "65b68708458b73c4060770b5" }
     }).countDocuments()
-
-  
       res.render("productlistpage", {
         products: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
 
@@ -350,74 +329,33 @@ const  officeSearch = async (req, res) => {
 const  tabletSearch= async (req, res) => {
 
   try {
-
     var search = '';
     if (req.query.search) {
       search = req.query.search
     }
-
-
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-
     const limit = 4;
-
     const productData = await products.find({
       category: { _id: "65b68718458b73c4060770b9" }
     }).populate("category")
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-
     const count = await products.find({
       category: { _id: "65b68718458b73c4060770b9" }
     }).countDocuments()
-
-  
       res.render("productlistpage", {
         products: productData,
         totalpages: Math.ceil(count / limit),
         currentpages: page,
-
       })
-
   } catch (error) {
     console.log(error.message)
-
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                              //  const  tabletSearch= async (req,res)=>{
-                              //   try {
-                                     
-                              //    const productdata= await products.find({category:{_id:"65b68718458b73c4060770b9"}}).populate("category");
-                              //    res.render("productlistpage",{products:productdata})
-                                  
-                              //   } catch (error) {
-                              //     console.log(error.message)
-                              //   }
-                              //  }
-
-
-
-
-          
-
-
 
 module.exports = {
   loadAdminLogin,
@@ -440,5 +378,4 @@ module.exports = {
   gameSearch,
   officeSearch,
   tabletSearch,
- 
 }

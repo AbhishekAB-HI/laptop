@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
             message: 'Field cannot contain only symbol'
         }]
     },
+    images: {   
+        type: Array,
+        required: true
+    },
     email: {
         type: String,
         required: true,

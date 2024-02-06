@@ -195,7 +195,24 @@
                   </div>
                 </div>
                 <a href="/wishlist?id=<%= product._id%>" class="btn btn-warning shadow-0">Buy now</a>
-                <a id="btncart"  href="/cartpage?id=<%=product._id%>" class="btn btn-primary shadow-0"> <i  class="me-1 fa fa-shopping-basket"></i>Add to cart</a>
+
+
+                <%
+                if(product.productquantity==0){
+                  %>
+                  <button type="button" disabled class="btn btn-primary"><a aria-disabled="true" style="color: #fff;text-decoration: none;"  > Add to cart</a></button>
+
+                  <%
+                }else{
+
+                  %>
+                  <button type="button" class="btn btn-primary"><a style="color: #fff;text-decoration: none;"   href="/cartpage?id=<%=product._id%>">Add to cart</a></button>
+                  <%
+                }
+                %>
+             
+
+
              
               </div> 
              

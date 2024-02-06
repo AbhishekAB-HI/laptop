@@ -200,13 +200,35 @@
                       </div>
    
 
-                      <span  id="cartsum"><strong ><span>₹</span><%=`${ totalPrice || total }`%></strong></span>
+                      <span  id="cartsum"><strong ><span>₹</span><%=`${ totalPrice || total ||0 }`%></strong></span>
                     </li>
                   </ul>
+
+                  <%
+                  if(cart.length==0){
+                    %>
+                    <button disabled type="button" id="check" class="btn btn-primary btn-lg btn-block">
+                      <a class="text-white" style="text-decoration: none;">Go to checkout</a>
+                      </button>
+
+                    <%
+                  }else{
+                  %>
+                  <button type="button" id="check" class="btn btn-primary btn-lg btn-block">
+                    <a class="text-white" style="text-decoration: none;" href="/checkout">Go to checkout</a>
+                    </button>
+                  
+          
+                  <%
+
+
+                  }
+
+                  %>
+
+
       
-                  <button type="button" class="btn btn-primary btn-lg btn-block">
-                  <a class="text-white" style="text-decoration: none;" href="/checkout">Go to checkout</a>
-                  </button>
+                  
                 </div>
               </div>
             </div>
