@@ -26,6 +26,7 @@
                                 <th scope="col">Sub-Total</th>
                                 <th scope="col">CancelOrder</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Date</th>
                                 <th scope="col">change Status</th>
                                 
                               </tr>
@@ -53,13 +54,14 @@
         <%if(value.status!=="canceled"){%>
        
           
-          <td><a href="/admin/orderstatus?id=<%=value._id %>&&orderid=<%=item._id%>">Cancel</a></td>
+          <td><a href="/admin/orderstatus?id=<%=value._id %>&&orderid=<%=item._id%>"><strong>cancel</strong></a></td>
           <%}else{
             %>
-            <td><p style="color: red;" >canceled</p></td>
+            <td><p style="color: red;" ><strong>canceled</strong></p></td>
             <%
           }%>
-         <td  style="color: green;"><h6><%=value.status%></h6></td>
+         <td  style="color: green;"><h6><strong><%=value.status%></strong></h6></td>
+         <td  style="color: green;"><h6><%=value.createdAt%></h6></td>
   
         
         <!-- Example single danger button -->

@@ -7,13 +7,15 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 7000;
 
+app.use('/path/to', express.static('public'));
+
 // user route require
 const userRoute = require("./Routes/userRoute")
 app.use("/", userRoute) 
 // admin route require
 const admin_route = require("./Routes/adminRoute")
 app.use("/admin", admin_route);
- 
+  
 const path = require('path');
 app.use("/static", express.static(path.join(__dirname, "public")))
 app.use(express.static(__dirname + '/public'));

@@ -21,13 +21,14 @@
     <div class="screen-overlay"></div>
     <aside class="navbar-aside" id="offcanvas_aside">
         <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">              
-                <h3 style="color: #17a2b8;" >TrendHub</h3>
+            <a href="/admin/home" class="brand-wrap">
+                <h3 style="color: #17a2b8;">TrendHub</h3>
             </a>
-          
-            
+
+
             <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i>
+                </button>
             </div>
         </div>
         <nav>
@@ -37,7 +38,7 @@
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-               
+
                 <li class="menu-item has-submenu active   ">
                     <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
                         <span class="text">Products Page</span>
@@ -45,25 +46,26 @@
                     <div class="submenu ">
                         <a href="/admin/productpage" class="active">Products </a>
                         <a href="/admin/addproduct" class="active">Add product </a>
+                        <a href="/admin/addcatagory" class="active">Add Catagory </a>
                     </div>
                 </li>
                 <li class="menu-item ">
                     <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
                         <span class="text">Orders</span>
                     </a>
-                  
+
                 </li>
                 <li class="menu-item ">
                     <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-store"></i>
                         <span class="text">User Management</span>
                     </a>
-                   
+
                 </li>
                 <li class="menu-item ">
                     <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-add_box"></i>
                         <span class="text">Logout</span>
                     </a>
-                    
+
                 </li>
                 <!-- <li class="menu-item has-submenu">
                     <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
@@ -101,11 +103,11 @@
                 </li> -->
             </ul>
             <hr>
-        
+
             <br>
             <br>
         </nav>
-       
+
 
 
 
@@ -114,11 +116,12 @@
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
-             
+
             </div>
             <div class="col-nav">
-                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-                
+                <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                        class="material-icons md-apps"></i> </button>
+
             </div>
         </header>
         <section class="content-main">
@@ -126,7 +129,7 @@
                 <div class="col-9">
                     <div class="content-header">
                         <h2 class="content-title">Edit Product</h2>
-                       
+
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -135,21 +138,20 @@
                             <h4>Basic</h4>
                         </div>
                         <div class="card-body">
-                <form method="post" action="/admin/edit-product"   enctype="multipart/form-data"  >
-                    <div class="form-outline">
-                        <%
-                        if(typeof message !=="undefined"){
-                            %>
-                         <h5 style="color:red;"><%= message %></h5>
-                            <%
-                          }
-                       %>
-                      </div>
+                            <form method="post" action="/admin/edit-product" enctype="multipart/form-data">
+                                <div class="form-outline">
+                                    <% if(typeof message !=="undefined" ){ %>
+                                        <h5 style="color:red;">
+                                            <%= message %>
+                                        </h5>
+                                        <% } %>
+                                </div>
                                 <div class="mb-4">
                                     <label for="product_name" class="form-label">Product Name</label>
-                                    <input type="text" name="productname" value="<%=product.productname%>"   placeholder="Type here"  class="form-control" id="product_name" required>
+                                    <input type="text" name="productname" value="<%=product.productname%>"
+                                        placeholder="Type here" class="form-control" id="product_name" required>
                                 </div>
-                              
+
                                 <!-- <div class="mb-4">
                                     <label class="form-label">Full description</label>
                                     <textarea placeholder="Type here" class="form-control" rows="4"></textarea>
@@ -159,20 +161,23 @@
                                         <div class="mb-4">
                                             <label class="form-label">Product price</label>
                                             <div class="row gx-2">
-                                                <input placeholder="$" value="<%=product.productprice%>"  name="productprice" min="0"  type="text"   class="form-control" required>
+                                                <input placeholder="$" value="<%=product.productprice%>"
+                                                    name="productprice" min="0" type="text" class="form-control"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="mb-4">
                                             <label class="form-label">Product size</label>
-                                            <input  type="text"  value="<%=product.productsize%>"   name="productsize" min="0"  class="form-control" required>
+                                            <input type="text" value="<%=product.productsize%>" name="productsize"
+                                                min="0" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <input type="hidden" name="id" value="<%=product._id%>">
-                                <input type="hidden" name="cataid" value="<%=product.category._id%>">
-                                       
+                                        <input type="hidden" name="cataid" value="<%=product.category._id%>">
+
                                         <!-- <label class="form-label">Categories</label>
                                         <select class="form-select">
                                             <option name="category" value="65b686ef458b73c4060770b1">Gamming</option>
@@ -183,31 +188,32 @@
                                 </div>
                                 <label for="">Current category </label><br><br>
                                 <input type="text" disabled value="<%=product.category.name%>"><br><br>
-                                
+
                                 <div class="text">
-                                <label for="">Edit category </label><br><br>  
+                                    <label for="">Edit category </label><br><br>
                                     <label for="">Gamming</label>
                                     <input type="radio" name="category" value="65b686ef458b73c4060770b1">
                                     <label for="">Office</label>
-                                    <input type="radio" name="category"  value="65b68708458b73c4060770b5">
+                                    <input type="radio" name="category" value="65b68708458b73c4060770b5">
                                     <label for="">Tablets</label>
-                                    <input type="radio" name="category"  value="65b68718458b73c4060770b9">
-                                  </div>
-                                  <br>
+                                    <input type="radio" name="category" value="65b68718458b73c4060770b9">
+                                </div>
+                                <br>
 
-                     
+
                                 <div class="mb-4">
                                     <label class="form-label">Product quantity</label>
-                                    <input type="text" value="<%=product.productquantity%>"   min="0" name="productquantity"  class="form-control" id="product_name"  required>
+                                    <input type="text" value="<%=product.productquantity%>" min="0"
+                                        name="productquantity" class="form-control" id="product_name" required>
                                 </div>
                                 <!-- <label class="form-check mb-4">
                                     <input class="form-check-input" type="checkbox" value="">
                                     <span class="form-check-label"> Make a template </span>
                                 </label> -->
-                           
+
                         </div>
                     </div> <!-- card end// -->
-               
+
                 </div>
                 <div class="col-lg-3">
                     <div class="card mb-4">
@@ -216,30 +222,82 @@
                         </div>
                         <div class="card-body">
                             <div class="input-upload">
-                                <img src="/productImages/<%=product.images%>" alt="">
-                                <a href="/admin/deleteEditimage?id=<%=product._id%>">Deleteimage</a> 
-                                <input type="file" multiple name="images"  required />
+
+                                <% for(let i=0;i<product.images.length;i++){%>
+                                    <div class="text">
+
+
+
+                                        <img id="Resizedimage" src="/productImages/<%=product.images[i]%>" width="50px"
+                                            height="50px">
+
+
+                                        <a
+                                            href="/admin/deleteEditimage?id=<%=product._id%>&imageindex=<%=i%>">Delete</a>
+
+                                    </div>
+                                    
+
+
+                                    <%} %>
+
+
+                                        <div id="imagePreview"></div>
+
+                                      <%if(product.images==0){%>
+                                                   
+                                        <input type="file" id="upload_file" value="<%=product.images%>" multiple name="images"
+                                            onchange="validateFileCount(event)" required />
+                                       
+                                        <%}else{%>
+ 
+                                            <input type="file" id="upload_file"  value="<%=product.images%>"  disabled name="images"
+                                            onchange="validateFileCount(event)" required />
+
+                                        <%}%>
+
+
+                                        <br>
+                                        <br>
+
+
+
+
+
+
+
+
+
+                                        <br>
+                                        <br>
+                                        <!-- <label for="width">Width:</label>
+                                <input type="range" name="width" min="1" max="1200" step="10" value="100" oninput="resizeimage()">
+                                <span id="width-value" >100</span>px <br>
+                                <label for="height">Height:</label>
+                                <input type="range" name="height"  min="1" max="1200" step="10"  value="100" oninput="resizeimage()" >
+                                <span id="height-value" >100</span>px <br> -->
+
                             </div>
                         </div>
-                    <!-- </div> card end// -->
+                        <!-- </div> card end// -->
 
-                    <div class="mt-4 pt-2">
-                        <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                      </div>
-
-
-                </form>
+                        <div class="mt-4 pt-2">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                        </div>
 
 
-                  
+                        </form>
+
+
+
+                    </div>
                 </div>
-            </div>
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
                     <script>
-                    document.write(new Date().getFullYear())
+                        document.write(new Date().getFullYear())
                     </script> ©, Evara - HTML Ecommerce Template .
                 </div>
                 <div class="col-sm-6">
@@ -250,6 +308,142 @@
             </div>
         </footer>
     </main>
+
+    <!-- 
+    <script>
+
+       const widthinput= document.querySelectorAll('[name="width"]')
+       const heightinput= document.querySelectorAll('[name="height"]')
+       const widthvalue =document.getElementById("width-value")
+       const heightvalue =document.getElementById("height-value")
+       const resizeimage =document.getElementById("Resizedimage")
+
+       function resizeimage(){
+        widthvalue.textContent =widthinput.value
+        heightvalue.textContent=heightinput.value
+
+        if(resizeimage.src ){
+            URL.revokeObjectURL(resizeimage.src)
+        }
+         
+         const formdata=new FormData();
+
+         formdata.append("width",widthinput.value)
+         formdata.append("height",heightinput.value)
+         formdata.append("image",document.querySelector('[name="image"]'))
+          
+       }
+
+           
+
+    </script> -->
+
+    <script>
+
+        function validateFileCount(event) {
+            const inputFile = document.querySelector('input[name="images"]');
+            const selectedFiles = inputFile.files;
+            console.log('hhhhh', selectedFiles);
+
+            const maxFiles = 4; // Adjust this according to your requirements
+
+            if (selectedFiles.length > maxFiles) {
+
+                console.log("maxalert");
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Max File exceeded",
+                    text: "please select maximum",
+
+                });
+
+                // Clear the file input to allow the user to make a new selection
+                inputFile.value = null;
+            } else
+
+
+                var selectedimageFile = event.target.files
+            console.log(selectedimageFile, "first");
+            for (var i = 0; i < selectedimageFile.length; i++) {
+                const image = URL.createObjectURL(selectedimageFile[i]);
+                var imagediv = document.getElementById("imagePreview");
+                const newimg = document.createElement("img");
+
+                newimg.src = image;
+                imagediv.appendChild(newimg);
+
+                // Create a delete button for each image
+                const deleteButton = document.createElement("button")
+                deleteButton.textContent = "Delete";
+                deleteButton.style.backgroundColor = "black";  // Red background color
+                deleteButton.style.color = "#ffffff";           // White text color
+                 deleteButton.style.padding = "5px 10px";        // Padding
+                 deleteButton.style.margin = "5px";   
+
+                deleteButton.addEventListener("click", function () {
+                    // Remove both the image and the delete button
+                    imagediv.removeChild(newimg);
+                    imagediv.removeChild(deleteButton);
+                    // Optionally, you can also free up resources associated with the image
+                    URL.revokeObjectURL(image);
+                });
+
+                // Append the delete button along with the image
+                imagediv.appendChild(deleteButton);
+            }
+
+
+
+
+
+
+
+
+            //             var array = []
+            //             for(let index in selectedFiles){
+            //                 array.push(selectedFiles[index])
+
+            //             }
+            // console.log(array)
+            // Use jQuery AJAX for simplicity
+            // var postData = {
+            //         title: 'New Post',
+            //         body: selectedFiles,
+            //         userId: 1
+            //     };
+
+            // Use jQuery AJAX for simplicity
+            //   $.ajax({
+            //         type: "POST",
+            //         url: "admin/imagepreview",
+            //         data: selectedFiles,
+            //         processData: false,
+            //         contentType: false,
+            //         success:function(data){
+            //             if(data=='yes')
+            //             {
+            //                 alert('Success! Record inserted successfully');
+            //             }
+            //             else if(data=='no')
+            //             {
+            //                 alert('Error! Record not inserted successfully')
+            //             }
+            //             else
+            //             {
+            //                 alert('Error! Try again');
+            //             }
+            //         }
+            //     });
+
+
+
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/select2.min.js"></script>
@@ -257,6 +451,12 @@
     <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
     <!-- Main Script -->
     <script src="assets/js/main.js" type="text/javascript"></script>
+
 </body>
 
 </html>
+<!-- 
+Swal.fire({
+    icon: "error",
+    title: "Max File exceeded",
+    text: "please select maximum", -->

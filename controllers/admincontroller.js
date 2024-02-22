@@ -4,6 +4,8 @@ const category = require("../model/category")
 const order = require("../model/orders")
 const bcrypt = require("bcrypt");
 const products = require("../model/products");
+const coupon = require("../model/coupon");
+const orders = require("../model/orders");
 
 const loadAdminLogin = async (req, res) => {
   try {
@@ -24,7 +26,7 @@ const verifyLogin = async (req, res) => {
         if (UserData.is_admin === 0) {
           res.render("adminLogin", { message: "Email and password is in correct" })
         } else {
-          req.session.user_id = UserData._id;
+          req.session.admin_id = UserData._id;
           res.redirect("/admin/home")
         }
       } else {
@@ -40,7 +42,7 @@ const verifyLogin = async (req, res) => {
 
 const LoadDashboard = async (req, res) => {
   try {
-    const UserData = await User.findById({ _id: req.session.user_id })
+    const UserData = await User.findById({ _id: req.session.admin_id })
     res.render("adminHome")
   } catch (error) {
     console.log(error.message)
@@ -123,28 +125,30 @@ const deleteCategory = async (req, res) => {
 const Orderdetails = async (req, res) => {
   try {
 
-      var page=1;
-      if(req.query.page){
-        var page=req.query.page
-      }
-      const limit = 2;
-    const orderdetail = await order.find({}).sort({ createdAt: -1 }).populate('products.product_id')  .limit(limit * 1)
-    .skip((page - 1) * limit)
-    .exec()
+    var page = 1;
+    if (req.query.page) {
+      var page = req.query.page
+    }
+    const limit = 5;
+    const orderdetail = await order.find({}).sort({ _id: -1 }).populate('products.product_id').limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
     const count = await order.find({}).sort({ createdAt: -1 }).populate('products.product_id').countDocuments()
-    res.render("orderDetails", { userCart: orderdetail ,totalpages: Math.ceil(count / limit),
-    currentpages: page}) 
+    res.render("orderDetails", {
+      userCart: orderdetail, totalpages: Math.ceil(count / limit),
+      currentpages: page
+    })
   } catch (error) {
     console.log(error.message)
   }
 }
 
-  
 
- 
+
+
 const Orderstatus = async (req, res) => {
   try {
-    const productid = req.query.id; 
+    const productid = req.query.id;
     console.log(productid, "ewcwc");
     const orderid = req.query.orderid;
     console.log(orderid, "iiimm");
@@ -199,10 +203,36 @@ const deliveryconfirmed = async (req, res) => {
 const returnedconfirmed = async (req, res) => {
   try {
     const orderid = req.query.id;
+    console.log(orderid,"orderid");
+    const userid = req.session.user_id;
     const productid = req.query.orderid;
     const orderd = await order.findById({ _id: productid }).populate("products.product_id")
     const value = orderd.products.find(index => index._id.toString() == orderid)
-    value.status = "returned";
+    console.log(value,"geted");
+    const  returnsuccess=  value.status = "returnApproved";
+    const orderId = await order.findById({ _id: productid });
+    console.log(orderId,"orderid");
+    const totalPriceSum = orderId.products.reduce((accu, curr) => {
+      return accu + curr.totalPrice;
+    }, 0);
+    console.log(totalPriceSum,"total");
+  const uservalues =  await User.findByIdAndUpdate(
+      { _id: userid },
+      {
+        $push: {
+          walletHistory: {
+            amount: totalPriceSum,
+            direction: "in" // Provide the appropriate direction value
+          }
+        }
+      }
+    )
+    console.log(uservalues,"popopo");
+    const walletAmount = await User.findById({ _id: userid }).select("walletHistory");
+    const totalPrice = walletAmount.walletHistory.reduce((accu, curr) => {
+      return accu + curr.amount
+    }, 0)
+    const walletPrice = await User.findByIdAndUpdate({ _id: userid }, { $set: { wallet: totalPrice } })
     await orderd.save()
     res.redirect("/admin/orderlist")
   } catch (error) {
@@ -242,120 +272,238 @@ const shippedconfirmed = async (req, res) => {
   }
 }
 
-        
-                    const  deleteImage =async(req,res)=>{
-                      try {
+
+const deleteImage = async (req, res) => {
+  try {
+    const imageindex = req.query.imageindex;
+    const deleteimageid = req.query.id;
+    const deleteimage = await products.findById({ _id: deleteimageid })
+    const dataid = deleteimage.images.find((value, index) => index == imageindex)
+    await products.updateOne(
+      { _id: deleteimageid },
+      { $pull: { images: dataid } })
+
+    const productData = await products.findById({ _id: deleteimageid }).populate("category")
+    res.render("productsidepageedit", { product: productData })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+const gameSearch = async (req, res) => {
+
+  try {
+    var search = '';
+    if (req.query.search) {
+      search = req.query.search
+    }
+    var page = 1;
+    if (req.query.page) {
+      page = req.query.page
+    }
+    const limit = 4;
+    const productData = await products.find({
+      category: { _id: "65b686ef458b73c4060770b1" }
+    }).populate("category")
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+
+    const count = await products.find({
+      category: { _id: "65b686ef458b73c4060770b1" }
+    }).countDocuments()
+    res.render("productlistpage", {
+      products: productData,
+      totalpages: Math.ceil(count / limit),
+      currentpages: page,
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+
+const officeSearch = async (req, res) => {
+
+  try {
+    var search = '';
+    if (req.query.search) {
+      search = req.query.search
+    }
+    var page = 1;
+    if (req.query.page) {
+      page = req.query.page
+    }
+    const limit = 4;
+    const productData = await products.find({
+      category: { _id: "65b68708458b73c4060770b5" }
+    }).populate("category")
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+    const count = await products.find({
+      category: { _id: "65b68708458b73c4060770b5" }
+    }).countDocuments()
+    res.render("productlistpage", {
+      products: productData,
+      totalpages: Math.ceil(count / limit),
+      currentpages: page,
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+
+
+
+
+const tabletSearch = async (req, res) => {
+
+  try {
+    var search = '';
+    if (req.query.search) {
+      search = req.query.search
+    }
+    var page = 1;
+    if (req.query.page) {
+      page = req.query.page
+    }
+    const limit = 4;
+    const productData = await products.find({
+      category: { _id: "65b68718458b73c4060770b9" }
+    }).populate("category")
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+    const count = await products.find({
+      category: { _id: "65b68718458b73c4060770b9" }
+    }).countDocuments()
+    res.render("productlistpage", {
+      products: productData,
+      totalpages: Math.ceil(count / limit),
+      currentpages: page,
+    })
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+const Addcoupon = async (req, res) => {
+  try {
+
+    res.render("addCoupon")
+
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+const UpdateAddcoupon = async (req, res) => {
+  try {
+
+    const couponcode = new coupon({
+      couponcode: req.body.couponcode,
+      percentage: req.body.percentage,
+      usagelimit: req.body.usagelimit,
+      minamount: req.body.minamount,
+      maxamount: req.body.maxamount
+    })
+
+    await couponcode.save();
+
+    res.redirect("/admin/listCoupon")
+
+
+  } catch (error) {
+    if (error.errors) {
+      const message = Object.values(error.errors).map(err => err.message);
+      return res.render('addCoupon', { message }); // Pass errors to the view
+    }
+    console.log(error.message)
+  }
+}
+
+const ListCoupon = async (req, res) => {
+  try {
+
+    const couponcode = await coupon.find()
+
+    res.render("couponListpage", { couponcode: couponcode })
+
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+const deleteCoupon = async (req, res) => {
+  try {
+    const deletecouponid = req.query.id;
+    await coupon.findByIdAndDelete({ _id: deletecouponid })
+    res.redirect("/admin/listCoupon")
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+  const Salesreport =async (req,res)=>{
+    try {
+
+      res.render("salesPage")
       
-                         const deleteimageid =req.query.id;      
-                         const deleteproduct = await products.findByIdAndUpdate({_id:deleteimageid},{$pop:{images:-1}},{new:true})           
-                         const productData = await products.findById({_id:deleteimageid }).populate("category")
-                           res.render("productsidepageedit", { product: productData })
-                      } catch (error) {
-                        console.log(error.message)
-                      }
-                    }
-
-                    
-const  gameSearch = async (req, res) => {
-
-  try {
-    var search = '';
-    if (req.query.search) {
-      search = req.query.search
+    } catch (error) {
+      console.log(error.message)
     }
-    var page = 1;
-    if (req.query.page) {
-      page = req.query.page
-    }
-    const limit = 4;
-    const productData = await products.find({
-      category: { _id: "65b686ef458b73c4060770b1" }
-    }).populate("category")
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec()
-
-    const count = await products.find({
-      category: { _id: "65b686ef458b73c4060770b1" }
-    }).countDocuments() 
-      res.render("productlistpage", {
-        products: productData,
-        totalpages: Math.ceil(count / limit),
-        currentpages: page,
-      })
-  } catch (error) {
-    console.log(error.message)
   }
-}
 
 
+    const adminMonthReport = async(req,res)=>{
 
-const  officeSearch = async (req, res) => {
+      console.log("iiiiiiiiiiiiiiiiiiiiiiiii");
+ 
+      try {
+        const months = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+         const ord = await orders.find().select("products")
+         console.log(ord,"opopopopopopop");
 
-  try {
-    var search = '';
-    if (req.query.search) {
-      search = req.query.search
+
+         const values=ord.filter((datas)=>datas.products.filter((dd)=> dd.status == 'delivered'))
+         console.log(values,"deliverdddddddddddddd");
+      
+        // console.log(salesRep);
+        // const newSalesreport = salesRep.map((el) => {
+        //   let newEl = { ...el };
+        //   newEl._id.month = months[newEl._id.month - 1];
+        //   return newEl;
+        // });
+        // console.log(newSalesreport)
+        // console.log(newSalesreport);
+        // res.render("/admin/monthReport", { admin:true,
+        //   salesReport: newSalesreport,
+        // });
+      } catch(error){
+        res.render("admin/adminError",{admin:true})
+      }
     }
-    var page = 1;
-    if (req.query.page) {
-      page = req.query.page
-    }
-    const limit = 4;
-    const productData = await products.find({
-      category: { _id: "65b68708458b73c4060770b5" }
-    }).populate("category")
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec()
-    const count = await products.find({
-      category: { _id: "65b68708458b73c4060770b5" }
-    }).countDocuments()
-      res.render("productlistpage", {
-        products: productData,
-        totalpages: Math.ceil(count / limit),
-        currentpages: page,
-      })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
+  
 
-
-
-
-
-
-const  tabletSearch= async (req, res) => {
-
-  try {
-    var search = '';
-    if (req.query.search) {
-      search = req.query.search
-    }
-    var page = 1;
-    if (req.query.page) {
-      page = req.query.page
-    }
-    const limit = 4;
-    const productData = await products.find({
-      category: { _id: "65b68718458b73c4060770b9" }
-    }).populate("category")
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec()
-    const count = await products.find({
-      category: { _id: "65b68718458b73c4060770b9" }
-    }).countDocuments()
-      res.render("productlistpage", {
-        products: productData,
-        totalpages: Math.ceil(count / limit),
-        currentpages: page,
-      })
-  } catch (error) {
-    console.log(error.message)
-  }
-}
 
 module.exports = {
   loadAdminLogin,
@@ -378,4 +526,10 @@ module.exports = {
   gameSearch,
   officeSearch,
   tabletSearch,
+  Addcoupon,
+  UpdateAddcoupon,
+  ListCoupon,
+  deleteCoupon,
+  Salesreport,
+  adminMonthReport
 }

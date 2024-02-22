@@ -8,14 +8,14 @@
          }
          else{
              
-            res.redirect('/') 
+            res.redirect('/login') 
          }
             
     } catch (error) {
         console.log(error.message)  
     }
     next()
- }
+ } 
 
  
  const isLogout=async(req,res,next)=>{
@@ -33,7 +33,7 @@
  }
 
 
-  
+   
  
 
    module.exports={

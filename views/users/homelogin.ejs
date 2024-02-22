@@ -10,50 +10,42 @@
    <!-- Bootstrap CSS -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
    <link rel="stylesheet" href="/static/productpage.css">
-
-   
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 </head>
 <body>
   
-      <!-- Header-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info  ">
+      <!-- Header top trendhub-->
+    <nav   class="navbar navbar-expand-lg navbar-light  fixed-top bg-info">
         <div class="container px-4 px-lg-5">
             <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-          
-            <nav class="navbar navbar-expand-lg navbar-light bg-info">
-              
+            <nav class="navbar navbar-expand-lg navbar-light "> 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
-              
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                       <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
                     </li>
-                   
                     <li class="nav-item dropdown">
-
-
-                    
                       <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Account
                       </a>
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/aboutus">My profile</a>
-                      
-                        <a class="dropdown-item" href="/logout">logout</a>
-                        
+                        <a class="dropdown-item" href="/logout">logout</a> 
                     </li>
                     <li class="nav-item">
                       <a class="nav-link disabled text-white" href="">Contact Us</a>
+                      
+                    </li>
+                    <li class="nav-item">
+                    
+                      <a class="nav-link  text-white" href="/wishlist">Whishlist</a>
                     </li>
                   </ul>
-                
-                </div>
-                
+                </div>  
               </nav>
               <form class="d-flex">
                 <button class="btn btn-outline-dark text-white" type="submit">
@@ -62,60 +54,61 @@
                       </svg>
                       <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a> 
                 </button>
-            </form>
-                         
+            </form>           
             </div> 
         </div>
     </nav>
-    <!-- Header-->
+     <!-- middle part -->
+   <header class="bg-light py-1 imageselect mt-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-black">
 
+          <!-- <img class=" pt-5"  src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wc3xlbnwwfHwwfHx8MA%3D%3D" alt=""> -->
+            <h1 style="color: white;" class="display-4 fw-bolder"><strong>Trend Hub</strong></h1>
+            <p style="color: white;" class="lead fw-normal text-white-50 mb-0">With the new laptop collections</p> 
+        </div>
+    </div>
+</header>
+  
+<!-- middle part -->
 
+    <!-- filter part nav -->
+                  
+  <nav  class="navbar navbar-expand-lg navbar-light bg-info  pb-5 ">
+    <ul  class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Category 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a id="gameId" class="dropdown-item" href="/gamming">Gamming</a>
+          <a class="dropdown-item" href="/office">office</a>
+          <a class="dropdown-item" href="/tablet">Tablets</a>
+          <a class="dropdown-item" href="/dashboard">All models</a>
+        </ul>
 
-    <!-- head part nav -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-secondary ">
-        <ul  class="nav-item dropdown ">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      </ul>
+      <form class="form-inline my-2 my-lg-0 ml-5">
+        <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
+        <button class="btn bg-light btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
+      </form>
+        <ul  class="nav-item dropdown mr-5">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Category 
+              Sort By
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/gamming">Gamming</a>
-              <a class="dropdown-item" href="/office">office</a>
-              <a class="dropdown-item" href="/tablet">Tablets</a>
-              <a class="dropdown-item" href="/dashboard">All models</a>
+              <a class="dropdown-item" href="/highprice">High to lowprice</a>
+              <a class="dropdown-item" href="/lowprice">Low to highprice</a> 
+              <a class="dropdown-item" href="/dashboard">All type</a> 
             </ul>
+    </div>
+  </nav>
+
+<!-- filter part nav -->
+ 
+
   
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          </ul>
-          <form class="form-inline my-2 my-lg-0 ml-5">
-            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
-            <button class="btn bg-light btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
-          </form>
-            <ul  class="nav-item dropdown mr-5">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort By
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/highprice">High to lowprice</a>
-                  <a class="dropdown-item" href="/lowprice">Low to highprice</a> 
-                  <a class="dropdown-item" href="/dashboard">All type</a> 
-                </ul>
-           
-         
-        </div>
-      </nav>
-
-     <!-- head part nav -->
-
-     
-
-
-
-
-
-
-
-
 
 
 
@@ -124,55 +117,36 @@
 
     
 
-
-  
-    
-
-
-
-
-
-
-
-
-    <header class="bg-light py-1">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-black">
-                <h1 class="display-4 fw-bolder">Trend Hub</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With the new laptop collections</p>
-                 
-            </div>
-        </div>
-    </header>
    
-
-    <div class="text-center" >
-        <h3 class="display-4 fw-bolder pt-5">Products</h3>   
+ 
+  
+    <div class="productcard text-center" >
+         
     </div>
 
-    
+  <!-- middle part -->
+
+
+
+  
+<div class="text-center bg-light">
+  <%        
+  if(typeof message !=="undefined"){
+      %>
+      <h3 style="color: #17a2b8;;" class="display-4 fw-bolder pt-5 pb-5"><%= message %></h3>   
+
+      <%
+    }
+ %>
+</div>
+
+   
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    <!-- Section-->
+  <!-- Section products-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
          
@@ -183,14 +157,21 @@
      <div class="product-card">
       <div class="badge">Hot</div>
       <div class="product-tumb">
-        <img src="/productImages/<%= product.images %>" alt="">
+        <img src="/productImages/<%= product.images[1] %>" alt="">
       </div>
       <div class="product-details">
         <span class="product-catagory">Laptops</span>
+        <button class="Wishbutton">
+          <a href="/addwish?id=<%= product._id%>"><i class="fa fa-heart"></i></a>
+       </button>
         <h4><a href=""></a><%= product.productname %></h4>
+        <span class="product-catagory">Catagory</span>
+        <h4><a href=""></a><%= product.category.name%></h4>
        
         <div class="product-bottom-details">
           <div class="product-price"><%='\u20B9'+ product.productprice%></div>
+         
+          
           <div class="product-links">
           
           </div>
@@ -198,33 +179,23 @@
 
       </div>
         <div class="center"><button class="purchasebutton">Buy Now</button></div>
+        
     </div>
 
                     </div></a>
-                <% }); %>
-
-           
-
-
-
-
-                
-
-                              
-                       
+                <% }); %>     
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
+    <!-- Section products-->
     <br>
     <br>
 
-    
+    <!-- pagination -->
     <div class="text-center">
-     
         <%
      for(let j=1;j<=totalpages;j++){
         %>
@@ -233,34 +204,14 @@
         <%
      }
     %>
-
-
     </div>
 
-   
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
+    <!-- pagination -->
+ 
 
     <!-- Footer-->
     <%- include("../layout/navbarbottom.ejs")%>
-   
-
+  
      <!-- Footer-->
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -277,8 +228,8 @@
     </script>
 </body>
 
-   
 
+     
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

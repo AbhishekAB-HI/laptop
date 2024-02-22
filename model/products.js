@@ -43,7 +43,8 @@ const productSchema = new mongoose.Schema({
     },
     images: {   
         type: Array,
-        required: true
+        required: true,
+      
     },
     is_user: {
         type: Number,

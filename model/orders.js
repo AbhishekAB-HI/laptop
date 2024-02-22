@@ -25,8 +25,16 @@ const orderShema = new mongoose.Schema({
         },
         status: {
             type: String,
-            enum: ["pending", "confirmed", "shipped", "out for deliver", "canceled", "returned", "delivered"],
+            enum: ["pending", "confirmed", "shipped" ,"returnrequest","out for deliver", "canceled", "returnApproved", "delivered"],
             default: "pending"
+        },
+        address: {
+            type: String,
+            required: true
+        },
+        paymentMethod: {
+            type: String,
+            required: true 
         },
      
 
@@ -55,12 +63,17 @@ const orderShema = new mongoose.Schema({
         },
         status: {
             type: String,
-            enum: ["pending", "shipped", "canceled", "returned", "delivered"],
+            enum: ["pending", "shipped", "canceled","returnrequest","returnApproved", "delivered"],
             default: "pending"
         },
 
 
-    }]
+    }],
+
+    rayzorpayId:{
+        type:String,
+        required:false
+    }
 
 
 

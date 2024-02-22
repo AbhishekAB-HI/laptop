@@ -25,7 +25,7 @@ body{margin-top:20px;}
 }
 
 .user-info-wrapper .user-cover .tooltip .tooltip-inner {
-    width: 230px;
+    width: 100px;
     max-width: 100%;
     padding: 10px 15px
 }
@@ -229,7 +229,7 @@ a.list-group-item, .list-group-item-action {
 .order-table .product-item {
     display: table;
     width: 100%;
-    min-width: 150px;
+    min-width: 100px;
     margin-top: 5px;
     margin-bottom: 3px
 }

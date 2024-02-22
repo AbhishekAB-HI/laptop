@@ -74,6 +74,19 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: false,
     },
+    wallet:{
+        type:Number,
+        default:0,
+    },
+    walletHistory:[{
+        amount:{
+            type:Number,
+            default:0
+        },
+        direction:{
+            type:String
+        }
+    }],
 
     cart: {
         items: [{
@@ -177,11 +190,11 @@ const userSchema = new mongoose.Schema({
     payment: [{
         address: {
             type: String,
-            required: true
+            required: false
         },
         paymentMethod: {
             type: String,
-            required: true 
+            required: false 
         },
         status: {
             type: String,
@@ -214,15 +227,13 @@ const userSchema = new mongoose.Schema({
             enum: ["pending", "shipped", "canceled", "returned", "delivered"],
             default: "pending"
         },
-
-
     }]
-
-
-
 })
 
 
+module.exports = mongoose.model("users", userSchema);
 
 
-module.exports = mongoose.model("users", userSchema)
+
+
+

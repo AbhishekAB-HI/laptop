@@ -23,11 +23,8 @@
                   <div class="text-center">
                     <label class="form-label"  >BLOCK USER </label>
                   <input type="radio" name="Blocked" value="true"<%if(user.is_Blocked==true){%>checked <%}   %>   required/>
-
                   </div>
-                  
-                
-              
+ 
                   <div class="text-center">
                   <label class="form-label">UNBLOCK USER</label>
                   <input type="radio" name="Blocked" value="false" <%if(user.is_Blocked==false){%>checked <%}  %>  required />
@@ -40,10 +37,13 @@
               
                 <div class="d-flex justify-content-center">
                   <input class="submitbt" type="submit" value="Updateuser"/>
-
-        
                 </div>
                 <input type="hidden" name="id" value="<%=user._id%>"  >
+                <br>
+
+                <div class="d-flex justify-content-center">
+                 <a href="/admin/dashboard">Back</a>
+                </div>
 
                 
 

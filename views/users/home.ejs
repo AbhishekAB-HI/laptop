@@ -114,23 +114,6 @@
 
 
 
-  
-
-
-
-
-
-
-  
-    
-
-
-
-
-
-
-
-
     <header class="bg-light py-1">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-black">
@@ -144,21 +127,28 @@
 
     <div class="text-center" >
         <h3 class="display-4 fw-bolder pt-5">Products</h3>
-       
-
     </div>
+    <div class="text-center" >
+      <%        
+            if(typeof message !=="undefined"){
+                %>
+                <h4 style="background-color:#f8f9fa" class="display-4 fw-bolder pt-5 pb-5"><%= message %></h4>
+                <%
+              }
+           %>  
+      </div>
  
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <% product.forEach((product, index) => { %>
+                <% product.forEach((product,i) => { %>
                     <div class="col ml-5 mb-5">
                                           
      <div class="product-card">
       <div class="badge">Hot</div>
       <div class="product-tumb">
-        <img src="/productImages/<%= product.images %>" alt="">
+        <img src="/productImages/<%= product.images[1] %>" alt="">
       </div>
       <div class="product-details">
         <span class="product-catagory">Laptops</span>

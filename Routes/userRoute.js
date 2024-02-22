@@ -5,6 +5,7 @@ const user_route=express();
 const userController=require("../controllers/usercontroller")
 const session=require("express-session");
 const config=require("../config/config");
+
 const userAuth=require("../middleware/userAuth")
 user_route.use(session({secret:config.sessionSecreat}))
 const blockchecking=require("../middleware/blockUser")
@@ -35,52 +36,71 @@ const upload = multer({ storage: storage })
 
  user_route.get("/register",userAuth.isLogout,userController.loadRegister);
  user_route.get("/login",userAuth.isLogout,userController.loadLogin)
+
  user_route.get("/",userAuth.isLogout,userController.loadLogin)
  user_route.get("/home",userAuth.isLogout,userController.loadHome);
  user_route.get("/dashboard",userAuth.isLogin,userController.HomeLogined)
  user_route.get("/verification",userController.verificationLoad)
- 
-        
+    
  user_route.post("/verification",userController.sendverificationLink)
  user_route.get("/verify",userController.verify)
- user_route.get("/logout",blockchecking,userController.userLogout)
- user_route.get("/aboutus",blockchecking,userController.AboutUs)
- user_route.get("/detailview",userController.detailpage);
- user_route.get("/gamming",blockchecking,userController.gammingpart)
- user_route.get("/office",blockchecking,userController.officepart)
- user_route.get("/tablet",blockchecking,userController.tabletpart) 
- user_route.get("/productdetail",blockchecking,userController.productpage)
- user_route.get("/wishlist",blockchecking,userController.wishlistpage)
- user_route.get("/cartpage",userController.cartpage) 
- user_route.get("/deletecartitem",userController.deletecartitem)
- user_route.get("/checkout",userController.checkoutpage)
- user_route.post("/checkout",userController.addcheckoutpage)
- user_route.get("/addadress",userController.addaddress) 
- user_route.post("/addadress",userController.addaddresspost)
- user_route.get("/checkadress",userController.checkaddress) 
- user_route.post("/checkadress",userController.updatecheckaddress)             
+ user_route.get("/logout",userAuth.isLogin,blockchecking,userController.userLogout)
+ user_route.get("/aboutus",userAuth.isLogin,blockchecking,userController.AboutUs)
+ user_route.get("/detailview",userAuth.isLogin,userController.detailpage);
+ user_route.get("/gamming",userAuth.isLogin,blockchecking,userController.gammingpart)
+ user_route.get("/office",userAuth.isLogin,blockchecking,userController.officepart)
+ user_route.get("/tablet",userAuth.isLogin,blockchecking,userController.tabletpart) 
+ user_route.get("/productdetail",userAuth.isLogin,blockchecking,userController.productpage)
+  
+ user_route.post("/cartpage",userAuth.isLogin,userController.cartpage) 
+//  user_route.post("/cartpage",userController.updatecartpage) 
+user_route.post("/wishcart",userAuth.isLogin,userController.wishcartpage) 
+
+
+
+ 
+ user_route.get("/deletecartitem",userAuth.isLogin,userController.deletecartitem)  
+ user_route.get("/checkout",userAuth.isLogin,userController.checkoutpage)
+ user_route.post("/checkout",userAuth.isLogin,userController.addcheckoutpage)
+ user_route.get("/addadress",userAuth.isLogin,userController.addaddress) 
+ user_route.get("/editAddress",userAuth.isLogin,userController.editAddress) 
+ user_route.post("/editAddress",userAuth.isLogin,userController.updateeditAddress) 
+
+
+ user_route.post("/addadress",userAuth.isLogin,userController.addaddresspost)
+ user_route.get("/checkadress",userAuth.isLogin,userController.checkaddress) 
+ user_route.post("/checkadress",userAuth.isLogin,userController.updatecheckaddress)             
  user_route.get("/getProduct",userAuth.isLogin,userController.getProduct);
- user_route.post("/quantityup/:product_id/:_id",userController.quatityup); 
- user_route.post("/quantitydown/:product_id/:_id",userController.quatitydown);
- user_route.get("/usercart",userController.user_cart);
- user_route.get("/cartsum",userController.totalprice);  
- user_route.get("/quantity",userController.totalquantity);  
- user_route.get("/deleteorderproduct",userController.deleteOrderList);  
- user_route.get("/editprofile",userController.editUserProfile);    
- user_route.post("/editprofile",upload.array("images",5),userController.UpdateUserProfile);            
- user_route.get("/forgotpassword",userController.forgotPassword); 
- user_route.post("/forgotpassword",userController. updateforgotpassword);    
- user_route.get("/verifypassword",userController.verifypassword);      
- user_route.post("/verifypassword",userController.updateverifypassword);   
- user_route.get("/changepassword",userController.changepassword);       
- user_route.post("/changepassword",userController.updatechangepassword);  
+ user_route.post("/quantityup/:product_id/:_id",userAuth.isLogin,userController.quatityup); 
+ user_route.post("/quantitydown/:product_id/:_id",userAuth.isLogin,userController.quatitydown);
+ user_route.get("/usercart",userAuth.isLogin,userController.user_cart);  
+ user_route.get("/cartsum",userAuth.isLogin,userController.totalprice);  
+ user_route.get("/quantity",userAuth.isLogin,userController.totalquantity);  
+ user_route.get("/deleteorderproduct",userAuth.isLogin,userController.deleteOrderList);
+ user_route.post("/returnorderproduct",userAuth.isLogin,userController.returnedOrderList);
+  
+ user_route.get("/editprofile",userAuth.isLogin,userController.editUserProfile);    
+ user_route.post("/editprofile",userAuth.isLogin,upload.array("images",5),userController.UpdateUserProfile);            
+ user_route.get("/forgotpassword",userAuth.isLogin,userController.forgotPassword); 
+ user_route.post("/forgotpassword",userAuth.isLogin,userController. updateforgotpassword);    
+ user_route.get("/verifypassword",userAuth.isLogin,userController.verifypassword);      
+ user_route.post("/verifypassword",userAuth.isLogin,userController.updateverifypassword);   
+ user_route.get("/changepassword",userAuth.isLogin,userController.changepassword);       
+ user_route.post("/changepassword",userAuth.isLogin,userController.updatechangepassword); 
+ user_route.get("/deleteaddress",userAuth.isLogin,userController.deleteaddress); 
+
+ user_route.post("/onlinepayment",userController.rayzopayIntitial); 
+ user_route.get("/rayzopay",userController.rayzopayCompletion); 
+ user_route.post("/walletcheck",userController.Walletcheck);
+ user_route.post("/cashowndelivery",userController.cashowndelivery); 
 
 
- user_route.get("/game",userController.gamminghome)
- user_route.get("/officetype",userController.officehome)
- user_route.get("/tablettype",userController.tablethome)
- user_route.get("/highprice",userController.highprice)
- user_route.get("/lowprice",userController.lowprice)
+
+ user_route.get("/game",userAuth.isLogin,userController.gamminghome)
+ user_route.get("/officetype",userAuth.isLogin,userController.officehome)
+ user_route.get("/tablettype",userAuth.isLogin,userController.tablethome)
+ user_route.get("/highprice",userAuth.isLogin,userController.highprice)
+ user_route.get("/lowprice",userAuth.isLogin,userController.lowprice)
 
  
   
@@ -88,6 +108,31 @@ const upload = multer({ storage: storage })
 
  user_route.post("/login",userController.verifyLogin);
  user_route.post("/register",userController.insertuser);
+
+//  coupon ----------------------------------
+
+user_route.get("/couponcheck",userController.couponget);
+user_route.post("/passingCopon",userController.discountCoupon);
+user_route.get("/showCoupons",userController.showAllCoupons);
+
+// wishlist-------------------------------------------
+
+user_route.get("/wishlist",userAuth.isLogin,blockchecking,userController.wishlistpage) 
+user_route.get("/addTocart",userController.addToCart);
+user_route.get("/addwish",userController.addWish);
+user_route.get("/deleteWish",userController.deleteWish);
+user_route.get("/wallets",userController.Wallets);
+
+
+
+
+
+
+
+
+
+
+
 
 
 

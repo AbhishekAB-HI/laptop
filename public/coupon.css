@@ -1,0 +1,82 @@
+/* body{
+
+    background-color:#ff52529c;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+body {
+    background-image: url("https://images.ctfassets.net/5tx4oa3foqys/7AjKj1hJ8buDjRzQ8jZgLW/31ee451371ee485a8eff555e9504dab8/PGGE-Coupons-BG-Desktop_2x.jpg?w=1440&fm=webp&q=80");
+    background-size: cover;  /* Ensure the image covers the entire background */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat;  /* Do not repeat the background image */
+    height: 100vh;  /* Set the height of the body to fill the viewport */
+    margin: 0;  /* Remove default body margin */
+}
+
+
+.card{
+   
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    border:none;
+    height: 350px;
+    border-radius: 15px;
+    padding: 30px;
+    background-color: #D50000;
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+
+.percent{
+
+    font-size: 30px;
+    color: #fff;
+}
+
+.discount{
+
+    font-size: 27px;
+    color: #fff;
+}
+
+
+.line{
+
+    color: #fff;
+}
+
+
+
+.form-check-input:checked {
+    background-color: #F44336;
+    border-color: #F44336;
+}
+
+
+.form-check-input:focus {
+    border-color: #d50000;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.75em;
+    margin-bottom: -5px;
+}
+.couponbutton{
+    background-color: black;
+    border-radius: 5px;
+}
+.couponbutton:hover {
+    /* Hover effect styling */
+    color: rgb(238, 233, 233);
+    background-color: #08c5d6;
+    /* Add other styles as needed */
+}

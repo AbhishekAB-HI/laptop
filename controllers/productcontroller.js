@@ -11,8 +11,76 @@ const loadProduct = async (req, res) => {
   }
 }
 
+
+
+
+
+// const insertProduct = async (req, res) => {
+//   const filename= [];
+//   console.log(req.files,"llllll");
+//   for(let item of req.files){
+//     const pathdata=Date.now()+"-"+item.originalname
+//      const imagePath= path.join(
+//       __dirname,"../public/productImages",
+//       `${Date.now()}-${item.filename}`
+//      );
+//      await sharp(item.path).resize(800,1200,{fit:"fill"}).toFile(imagePath);
+//      filename.push(pathdata)
+//   }
+
+           const   Addcatagory  =async(req,res)=>{
+            try {
+
+                res.render("AddNewCata")
+              
+            } catch (error) {
+              console.log(error.message) 
+            }
+           }
+
+
+
+
+
+
+
+
+
+
+
+const sharp= require("sharp")
+const path= require("path");
+const { log } = require("console");
+
+const fs = require('fs').promises;
+
 const insertProduct = async (req, res) => {
-  const images = req.files.map(file => file.filename)
+  const filenames = [];
+
+  for (let item of req.files) {
+    const pathdata = Date.now() + '-' + item.originalname;
+    const imagePath = path.join(
+      __dirname,
+      '../public/productImages',
+      `${pathdata}`
+    );
+
+    // Read the file buffer using fs.promises.readFile
+    const fileBuffer = await fs.readFile(item.path);
+
+    await sharp(fileBuffer)
+      .resize(1200, 1000, { fit: 'fill' })
+      .toFile(imagePath);
+
+    filenames.push(pathdata);
+  }
+
+  // Rest of your code...
+
+
+  
+ 
+  // const images =await  req.files.map(file => file.filename)
   try {
     const product = new products({
       productname: req.body.productname,
@@ -20,11 +88,12 @@ const insertProduct = async (req, res) => {
       category: req.body.category,
       productsize: req.body.productsize,
       productquantity: req.body.productquantity,
-      images: images
+      images: filenames
     })
     const productData = await product.save();
     if (productData) {
-      res.render("productsidepage", { message: "Your product is successfuly added" })
+      res.redirect("/admin/productpage")
+      // res.render("productsidepage", { message: "Your product is successfuly added" })
     } else {
       res.render("productsidepage", { message: "Your product is not added" })
     }
@@ -85,10 +154,39 @@ const editProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   try {
-    const images = req.files.map(file => file.filename)
-    console.log(images,"images");
+    const filenames = [];
+    const files= req.files
+    console.log(files,'filess...');
+
+  const existingData=await  products.findById( req.body.id)
+
+  const img = [
+    files?.[0]?.filename || existingData.images[0],
+    files?.[1]?.filename || existingData.images[1],
+    files?.[2]?.filename || existingData.images[2],
+  ].filter(img => img !== undefined);
+
+  for (let item of req.files) {
+    const pathdata = Date.now() + '-' + item.originalname;
+    const imagePath = path.join(
+      __dirname,
+      '../public/productImages',
+      `${pathdata}`
+    );
+
+    // Read the file buffer using fs.promises.readFile
+    const fileBuffer = await fs.readFile(item.path);
+
+    await sharp(fileBuffer)
+      .resize(1200, 1000, { fit: 'fill' })
+      .toFile(imagePath);
+
+    filenames.push(pathdata);
+  }
+   // const images = req.files.map(file => file.filename)
+    // console.log(images,"images");
     const productData = await products.findByIdAndUpdate({ _id: req.body.id },
-      { $set: { productname: req.body.productname, productprice: req.body.productprice, productsize: req.body.productsize, category: req.body.category, productquantity: req.body.productquantity ,images:images } },
+      { $set: { productname: req.body.productname, productprice: req.body.productprice, productsize: req.body.productsize, category: req.body.category, productquantity: req.body.productquantity ,images: img  } },
       { new: true, runValidators: true }).populate("category");
       console.log( productData ,"lllllll");
     res.redirect("/admin/productpage")
@@ -124,6 +222,15 @@ const updatelistProduct = async (req, res) => {
   }
 }
 
+const   imagePreviewing  =async (req,res)=>{
+  try {
+    console.log("rechedhere",);
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
 
 module.exports = {
   loadProduct,
@@ -132,7 +239,9 @@ module.exports = {
   editProduct,
   updateProduct,
   listProduct,
-  updatelistProduct
+  updatelistProduct,
+  Addcatagory,
+  imagePreviewing
 }
 
 

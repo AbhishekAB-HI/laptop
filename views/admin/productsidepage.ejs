@@ -19,98 +19,8 @@
 
 <body>
     <div class="screen-overlay"></div>
-    <aside class="navbar-aside" id="offcanvas_aside">
-        <div class="aside-top">
-            <a href="/admin/home" class="brand-wrap">              
-                <h3 style="color: #17a2b8;" >TrendHub</h3>
-            </a>
-          
-            
-            <div>
-                <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
-            </div>
-        </div>
-        <nav>
-            <ul class="menu-aside">
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
-                    </a>
-                </li>
-               
-                <li class="menu-item has-submenu active   ">
-                    <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
-                        <span class="text">Products Page</span>
-                    </a>
-                    <div class="submenu ">
-                        <a href="/admin/productpage" class="active">Products </a>
-                        <a href="/admin/addproduct" class="active">Add product </a>
-                    </div>
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
-                        <span class="text">Orders</span>
-                    </a>
-                  
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-store"></i>
-                        <span class="text">User Management</span>
-                    </a>
-                   
-                </li>
-                <li class="menu-item ">
-                    <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-add_box"></i>
-                        <span class="text">Logout</span>
-                    </a>
-                    
-                </li>
-                <!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
-                        <span class="text">Transactions</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-transactions-1.html">Transaction 1</a>
-                        <a href="page-transactions-2.html">Transaction 2</a>
-                        <a href="page-transactions-details.html">Transaction Details</a>
-                    </div>
-                </li> -->
-                <!-- <li class="menu-item has-submenu">
-                    <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
-                        <span class="text">Account</span>
-                    </a>
-                    <div class="submenu">
-                        <a href="page-account-login.html">User login</a>
-                        <a href="page-account-register.html">User registration</a>
-                        <a href="page-error-404.html">Error 404</a>
-                    </div>
-                </li> -->
-                <!-- <li class="menu-item">
-                    <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
-                        <span class="text">Reviews</span>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
-                        <span class="text">Brands</span> </a>
-                </li>
-                <li class="menu-item">
-                    <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
-                        <span class="text">Statistics</span>
-                    </a>
-                </li> -->
-            </ul>
-            <hr>
-        
-            <br>
-            <br>
-        </nav>
-       
-
-
-
-
-    </aside>
+   
+    <%- include("../layout/Adminbar.ejs")%>
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -196,6 +106,10 @@
                                     <label class="form-label">Product quantity</label>
                                     <input type="text" placeholder="" min="0" name="productquantity"  class="form-control" id="product_name"  required>
                                 </div>
+                                <input type="file" multiple name="images" id="file-upload" required />
+                                <br>
+                                <br>
+                                <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
                                 <!-- <label class="form-check mb-4">
                                     <input class="form-check-input" type="checkbox" value="">
                                     <span class="form-check-label"> Make a template </span>
@@ -205,29 +119,26 @@
                     </div> <!-- card end// -->
                
                 </div>
-                <div class="col-lg-3">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h4>Media</h4>
-                        </div>
-                        <div class="card-body">
+               
+                        <!-- <div class="card-body">
                             <div class="input-upload">
-                                <img src="assets/imgs/theme/upload.svg" alt="">
-                                <input type="file" multiple name="images"  required />
+                                <img src="assets/imgs/theme/upload.svg" id="file-preview"  alt="">
+                                <input type="file" multiple name="images" id="file-upload" required />
                             </div>
-                        </div>
+                        </div> -->
                     </div> <!-- card end// -->
-
+<!-- 
                     <div class="mt-4 pt-2">
+                       
                         <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
-                      </div>
+                      </div> -->
 
 
                 </form>
 
 
                   
-                </div>
+                
             </div>
         </section> <!-- content-main end// -->
         <footer class="main-footer font-xs">
@@ -245,6 +156,48 @@
             </div>
         </footer>
     </main>
+
+    <script>
+     
+    const input=  document.getElementById("file-upload");
+
+      input.addEventListener('change', previewPhoto);
+
+      const previewPhoto = () => {
+    const file = input.files;
+    console.log(file,"string........");
+    if (file) {
+        const fileReader = new FileReader();
+        const preview = document.getElementById('file-preview');
+        fileReader.onload = event => {
+            preview.setAttribute('src', event.target.result);
+        }
+        fileReader.readAsDataURL(file[0]);
+    }
+
+    const input = document.getElementById('file-input');
+const previewPhoto = () => {
+    const file = input.files;
+    if (file) {
+        const fileReader = new FileReader();
+        const preview = document.getElementById('file-preview');
+fileReader.onload = function (event) {
+            preview.setAttribute('src', event.target.result);
+        }
+        fileReader.readAsDataURL(file[0]);
+    }
+}
+input.addEventListener("change", previewPhoto);
+}
+
+
+    </script>
+
+
+
+
+
+
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/select2.min.js"></script>

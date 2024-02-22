@@ -1,39 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product deatil</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-   
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product deatil</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/productdetailpage.css"> 
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
 </head>
+
 <body>
-    <header>
- <!-- Header-->
- <nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <div class="container px-4 px-lg-5">
-      <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <header>
+    <!-- Header-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+      <div class="container px-4 px-lg-5">
+        <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-        
+
           <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only"></span></a>
               </li>
-             
+
               <li class="nav-item dropdown">
 
 
-              
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -42,498 +52,745 @@
                   <a class="dropdown-item" href="/">contact</a>
                   <a class="dropdown-item" href="/">wallet</a>
                   <a class="dropdown-item" href="/logout">logout</a>
-                  
+
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled text-white" href="">Contact Us</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Searchhere" aria-label="Search">
-              <input class="btn bg-light btn-outline-success my-2 my-sm-0" type="submit" value="search" aria-label="Search">
-              
+              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Searchhere"
+                aria-label="Search">
+              <input class="btn bg-light btn-outline-success my-2 my-sm-0" type="submit" value="search"
+                aria-label="Search">
+
             </form>
           </div>
-          
+
         </nav>
         <form class="d-flex">
           <button class="btn btn-outline-dark text-white" type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3 text-white" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                </svg>
-              <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a>    
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-cart3 text-white" viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+            </svg>
+            <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a>
           </button>
-      </form>
-                   
-      </div> 
-  </div>
-</nav>
-<!-- Header-->
+        </form>
+
+      </div>
+      </div>
+    </nav>
+    <!-- Header-->
 
 
 
+  </header>
 
+  <!-- content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row gx-5">
 
+        <aside class="col-lg-6">
+          <div class="border rounded-4 mb-3 d-flex justify-content-center">
 
-
-
-
-
-      
-
-
-
-
-        
-    
-      </header>
-      
-      <!-- content -->
-      <section class="py-5">
-        <div class="container">
-          <div class="row gx-5">
-            <aside class="col-lg-6">
-              <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/detail1/big.webp">
-                  <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="/productImages/<%= product.images %>" />
-                </a>
-              </div>
+              <img class="xzoom" id="xzoom-default"  src="/productImages/<%=product.images[1]%>"   xoriginal="/productImages/<%=product.images[1]%>" width="80%" />
             
-              <!-- thumbs-wrap.// -->
-              <!-- gallery-wrap .end// -->
-            </aside>
+          </div>
+          <div class="d-flex justify-content-center mb-3">
+            <div class="xzoom-thumbs">
 
+              <a href="/productImages/<%= product.images[1]%>"><img class="xzoom-gallery"   width="80" src="/productImages/<%= product.images[1]%>"   title="The description goes here"></a>
+  
+              <a href="/productImages/<%= product.images[0]%>"><img class="xzoom-gallery"  width="80" src="/productImages/<%= product.images[0]%>"   title="The description goes here"></a>
+           
+           
+              <a href="/productImages/<%= product.images[2]%>"><img class="xzoom-gallery" width="80" src="/productImages/<%= product.images[2]%>"   title="The description goes here"></a>
           
-
-
-
-           
-
-             
-                    
-
-
-         
-       
-
- 
-            
-                
-            
-            <main class="col-lg-6">
-
-            
-              <div class="ps-lg-3">
-               
-              
-
-              
-              
-                <h4 class="title text-dark">
-                   <%=product.productname%>
-                
-
-                </h4>
-                 
-                <h4 class="title text-dark">
-               
-                 <%= '\u20B9'+ product.productprice%>
-
-               </h4>
-
-                
-
-               
-
-                <div class="d-flex flex-row my-3">
-                  <div class="text-warning mb-1 me-2">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                    <span class="ms-1">
-                      4.5
-                    </span>
-                  </div>
-                  <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
-                  <span class="text-success ms-2">In stock</span>
-                </div>
-      
-                <div class="mb-3">
-                  <span class="h5">
-                  </span>
-                  
-                </div>
-      
-                <div class="row">
-                  <dt class="col-3">Type:</dt>
-                  <dd class="col-9"></dd>
-      
-                  <dt class="col-3">Color</dt>
-                  <dd class="col-9">Silver</dd>
-      
-                
-                </div>
-      
-                <hr />
-      
-                <div class="row mb-4">
-                  <div class="col-md-4 col-6">
-                    <label class="mb-2">Size :</label>
-                    
-                      <label for=""><%=product.productsize%></label>
-
-                  </div>
-
-                  <!-- col.// -->
-                  <div class="col-md-4 col-6 mb-3">
-                    
-                    <label class="mb-2 d-block">Quantity :</label>
-                    <label for=""><%=product.productquantity%></label>
-                    <input type="hidden" name="id" value="<%=product._id%>">
-                  </div>
-                </div>
-                <a href="/wishlist?id=<%= product._id%>" class="btn btn-warning shadow-0">Buy now</a>
-
-
-                <%
-                if(product.productquantity==0){
-                  %>
-                  <button type="button" disabled class="btn btn-primary"><a aria-disabled="true" style="color: #fff;text-decoration: none;"  > Add to cart</a></button>
-
-                  <%
-                }else{
-
-                  %>
-                  <button type="button" class="btn btn-primary"><a style="color: #fff;text-decoration: none;"   href="/cartpage?id=<%=product._id%>">Add to cart</a></button>
-                  <%
-                }
-                %>
-             
-
-
-             
-              </div> 
-             
-              
-            </main>
-
-       
-
-            
-
-           
-
-        
-
-        
           </div>
-         
-        </div>
-      </section>
-      <!-- content -->
-      
-      <section class="bg-light border-top py-4">
-        <div class="container">
-          <div class="row gx-4">
-            <div class="col-lg-8 mb-4">
-              <div class="border rounded-2 px-3 py-2 bg-white">
-                <!-- Pills navs -->
-                <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                  <li class="nav-item d-flex" role="presentation">
-                    <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
-                  </li>
-                  <li class="nav-item d-flex" role="presentation">
-                    <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2" role="tab" aria-controls="ex1-pills-2" aria-selected="false">Warranty info</a>
-                  </li>
-                  <li class="nav-item d-flex" role="presentation">
-                    <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3" aria-selected="false">Shipping info</a>
-                  </li>
-                  <li class="nav-item d-flex" role="presentation">
-                    <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4" role="tab" aria-controls="ex1-pills-4" aria-selected="false">Seller profile</a>
-                  </li>
-                </ul>
-                <!-- Pills navs -->
-      
-                <!-- Pills content -->
-                <div class="tab-content" id="ex1-content">
-                  <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                    <p>
-                      With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                      enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                      pariatur.
-                    </p>
-                    <div class="row mb-2">
-                      <div class="col-12 col-md-6">
-                        <ul class="list-unstyled mb-0">
-                          <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
-                          <li><i class="fas fa-check text-success me-2"></i>Lorem ipsum dolor sit amet, consectetur</li>
-                          <li><i class="fas fa-check text-success me-2"></i>Duis aute irure dolor in reprehenderit</li>
-                          <li><i class="fas fa-check text-success me-2"></i>Optical heart sensor</li>
-                        </ul>
-                      </div>
-                      <div class="col-12 col-md-6 mb-0">
-                        <ul class="list-unstyled">
-                          <li><i class="fas fa-check text-success me-2"></i>Easy fast and ver good</li>
-                          <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
-                          <li><i class="fas fa-check text-success me-2"></i>Modern style and design</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <table class="table border mt-3 mb-2">
-                      <tr>
-                        <th class="py-2">Display:</th>
-                        <td class="py-2">13.3-inch LED-backlit display with IPS</td>
-                      </tr>
-                      <tr>
-                        <th class="py-2">Processor capacity:</th>
-                        <td class="py-2">2.3GHz dual-core Intel Core i5</td>
-                      </tr>
-                      <tr>
-                        <th class="py-2">Camera quality:</th>
-                        <td class="py-2">720p FaceTime HD camera</td>
-                      </tr>
-                      <tr>
-                        <th class="py-2">Memory</th>
-                        <td class="py-2">8 GB RAM or 16 GB RAM</td>
-                      </tr>
-                      <tr>
-                        <th class="py-2">Graphics</th>
-                        <td class="py-2">Intel Iris Plus Graphics 640</td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div class="tab-pane fade mb-2" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                    Tab content or sample information now <br />
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  </div>
-                  <div class="tab-pane fade mb-2" id="ex1-pills-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                    Another tab content or sample information now <br />
-                    Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.
-                  </div>
-                  <div class="tab-pane fade mb-2" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-                    Some other tab content or sample information now <br />
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim id est laborum.
-                  </div>
-                </div>
-                <!-- Pills content -->
+            
+          
+          </div>
+       
+          <!-- thumbs-wrap.// -->
+          <!-- gallery-wrap .end// -->
+        </aside>
+
+
+
+
+
+
+        <main class="col-lg-6">
+
+
+          <div class="ps-lg-3">
+
+
+
+
+
+            <h4 class="title text-dark">
+              <%=product.productname%>
+
+
+            </h4>
+
+            <h4 class="title text-dark">
+
+              <%= '\u20B9' + product.productprice%>
+
+            </h4>
+
+
+
+
+
+            <div class="d-flex flex-row my-3">
+              <div class="text-warning mb-1 me-2">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="ms-1">
+                  4.5
+                </span>
+              </div>
+              <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders </span>
+              <span class="text-success ms-2">&nbsp In stock</span>
+            </div>
+
+            <div class="mb-3">
+              <span class="h5">
+              </span>
+
+            </div>
+
+            <div class="row">
+              <dt class="col-3">Type:</dt>
+              <dd class="col-9"></dd>
+
+              <dt class="col-3">Color</dt>
+              <dd class="col-9">Silver</dd>
+
+
+            </div>
+
+            <hr />
+
+            <div class="row mb-4">
+              <div class="col-md-4 col-6">
+                <label class="mb-2">Size :</label>
+
+                <label for="">
+                  <%=product.productsize%>
+                </label>
+
+              </div>
+
+              <!-- col.// -->
+              <div class="col-md-4 col-6 mb-3">
+
+                <label class="mb-2 d-block">Quantity :</label>
+                <label for="">
+                  <%=product.productquantity%>
+                </label>
+                <input type="hidden" name="id" value="<%=product._id%>">
               </div>
             </div>
-            <div class="col-lg-4">
-              <div class="px-0 border rounded-2 shadow-0">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Similar items</h5>
-                    <div class="d-flex mb-3">
-                      <a href="#" class="me-3">
-                        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                      </a>
-                      <div class="info">
-                        <a href="#" class="nav-link mb-1">
-                          Rucksack Backpack Large <br />
-                          Line Mounts
-                        </a>
-                        <strong class="text-dark"> $38.90</strong>
-                      </div>
-                    </div>
-      
-                    <div class="d-flex mb-3">
-                      <a href="#" class="me-3">
-                        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                      </a>
-                      <div class="info">
-                        <a href="#" class="nav-link mb-1">
-                          Summer New Men's Denim <br />
-                          Jeans Shorts
-                        </a>
-                        <strong class="text-dark"> $29.50</strong>
-                      </div>
-                    </div>
-      
-                    <div class="d-flex mb-3">
-                      <a href="#" class="me-3">
-                        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                      </a>
-                      <div class="info">
-                        <a href="#" class="nav-link mb-1"> T-shirts with multiple colors, for men and lady </a>
-                        <strong class="text-dark"> $120.00</strong>
-                      </div>
-                    </div>
-      
-                    <div class="d-flex">
-                      <a href="#" class="me-3">
-                        <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                      </a>
-                      <div class="info">
-                        <a href="#" class="nav-link mb-1"> Blazer Suit Dress Jacket for Men, Blue color </a>
-                        <strong class="text-dark"> $339.90</strong>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a href="" class="btn btn-warning shadow-0">Buy now</a>
+
+
+            <% if(product.productquantity==0){ %>
+              <button type="button" disabled class="btn btn-primary"><a aria-disabled="true"
+                  style="color: #fff;text-decoration: none;"> Add to cart</a></button>
+
+              <% }else{ %>
+                <!-- <button type="button" id="addToCart" class="btn btn-primary"><a style="color: #fff;text-decoration: none;"
+                    href="/cartpage?id=<%=product._id%>">Add to cart</a></button> -->
+                <button type="button" id="addToCart" class="btn btn-primary">Add to cart</button>
+
+                <% } %>
+
+
+
+
           </div>
-        </div>
-      </section>
+
+
+        </main>
 
 
 
-      <!-- Footer -->
-      <footer class="text-center text-lg-start text-muted bg-info mt-3">
-        <!-- Section: Links  -->
-        <section class="">
-          <div class="container text-center text-md-start pt-4 pb-4">
-            <!-- Grid row -->
-            <div class="row mt-3">
-              <!-- Grid column -->
-              <div class="col-12 col-lg-3 col-sm-12 mb-2">
-                <!-- Content -->
-                <a href="#" target="_blank" class="text-white h2">
-                  TREND HUB
-                </a>
-                <p class="mt-1 text-white">
-                  © 2023 Copyright
+
+
+
+
+
+
+
+      </div>
+
+    </div>
+  </section>
+  <!-- content -->
+
+  <section class="bg-light border-top py-4">
+    <div class="container">
+      <div class="row gx-4">
+        <div class="col-lg-8 mb-4">
+          <div class="border rounded-2 px-3 py-2 bg-white">
+            <!-- Pills navs -->
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+              <li class="nav-item d-flex" role="presentation">
+                <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1"
+                  data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1"
+                  aria-selected="true">Specification</a>
+              </li>
+              <li class="nav-item d-flex" role="presentation">
+                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-2"
+                  data-mdb-toggle="pill" href="#ex1-pills-2" role="tab" aria-controls="ex1-pills-2"
+                  aria-selected="false">Warranty info</a>
+              </li>
+              <li class="nav-item d-flex" role="presentation">
+                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-3"
+                  data-mdb-toggle="pill" href="#ex1-pills-3" role="tab" aria-controls="ex1-pills-3"
+                  aria-selected="false">Shipping info</a>
+              </li>
+              <li class="nav-item d-flex" role="presentation">
+                <a class="nav-link d-flex align-items-center justify-content-center w-100" id="ex1-tab-4"
+                  data-mdb-toggle="pill" href="#ex1-pills-4" role="tab" aria-controls="ex1-pills-4"
+                  aria-selected="false">Seller profile</a>
+              </li>
+            </ul>
+            <!-- Pills navs -->
+
+            <!-- Pills content -->
+            <div class="tab-content" id="ex1-content">
+              <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <p>
+                  With supporting text below as a natural lead-in to additional content. Lorem ipsum dolor sit amet,
+                  consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                  nulla
+                  pariatur.
                 </p>
+                <div class="row mb-2">
+                  <div class="col-12 col-md-6">
+                    <ul class="list-unstyled mb-0">
+                      <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
+                      <li><i class="fas fa-check text-success me-2"></i>Lorem ipsum dolor sit amet, consectetur</li>
+                      <li><i class="fas fa-check text-success me-2"></i>Duis aute irure dolor in reprehenderit</li>
+                      <li><i class="fas fa-check text-success me-2"></i>Optical heart sensor</li>
+                    </ul>
+                  </div>
+                  <div class="col-12 col-md-6 mb-0">
+                    <ul class="list-unstyled">
+                      <li><i class="fas fa-check text-success me-2"></i>Easy fast and ver good</li>
+                      <li><i class="fas fa-check text-success me-2"></i>Some great feature name here</li>
+                      <li><i class="fas fa-check text-success me-2"></i>Modern style and design</li>
+                    </ul>
+                  </div>
+                </div>
+                <table class="table border mt-3 mb-2">
+                  <tr>
+                    <th class="py-2">Display:</th>
+                    <td class="py-2">13.3-inch LED-backlit display with IPS</td>
+                  </tr>
+                  <tr>
+                    <th class="py-2">Processor capacity:</th>
+                    <td class="py-2">2.3GHz dual-core Intel Core i5</td>
+                  </tr>
+                  <tr>
+                    <th class="py-2">Camera quality:</th>
+                    <td class="py-2">720p FaceTime HD camera</td>
+                  </tr>
+                  <tr>
+                    <th class="py-2">Memory</th>
+                    <td class="py-2">8 GB RAM or 16 GB RAM</td>
+                  </tr>
+                  <tr>
+                    <th class="py-2">Graphics</th>
+                    <td class="py-2">Intel Iris Plus Graphics 640</td>
+                  </tr>
+                </table>
               </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Store
-                </h6>
-                <ul class="list-unstyled mb-4">
-                  <li><a class="text-white-50" href="/aboutus">About us</a></li>
-                  <li><a class="text-white-50" href="#">Categories</a></li>
-                  <li><a class="text-white-50" href="#">Blogs</a></li>
-                </ul>
+              <div class="tab-pane fade mb-2" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                Tab content or sample information now <br />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
               </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Information
-                </h6>
-                <ul class="list-unstyled mb-4">
-                  <li><a class="text-white-50" href="#">Help center</a></li>
-                  <li><a class="text-white-50" href="#">Money refund</a></li>
-                  <li><a class="text-white-50" href="#">Shipping info</a></li>
-            
-                </ul>
+              <div class="tab-pane fade mb-2" id="ex1-pills-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                Another tab content or sample information now <br />
+                Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt
+                mollit anim id est laborum.
               </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Support
-                </h6>
-                <ul class="list-unstyled mb-4">
-                 
-                  <li><a class="text-white-50" href="#">My orders</a></li>
-                </ul>
+              <div class="tab-pane fade mb-2" id="ex1-pills-4" role="tabpanel" aria-labelledby="ex1-tab-4">
+                Some other tab content or sample information now <br />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt mollit anim id est laborum.
               </div>
-              <!-- Grid column -->
-      
-              <!-- social meadias column -->
-
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-center text-white fw-bold mb-4">
-                  Keep in touch
-                </h6>
-                
-                <ul class="list-unstyled mb-4  text-center">
-                    <a href=""><i class="fab fa-facebook-f fa-2x ml-4" style="color: #3b5998;"></i></a>
-                    <!-- Instagram -->
-                    <a href=""><i class="fab fa-instagram fa-2x ml-4" style="color: #ac2bac;"></i></a>
-                   <!-- Linkedin -->
-                   <a href=""><i class="fab fa-linkedin-in fa-2x ml-4" style="color: #0082ca;"></i></a>
-            
-                </ul>
-              </div>
-
-
-
-          
-              <!-- social medias column -->
             </div>
-            <!-- Grid row -->
+            <!-- Pills content -->
           </div>
-        </section>
-        <!-- Section: Links  -->
-      
-        <div class="">
-          <div class="container">
-            <div class="d-flex justify-content-between py-4 border-top">
-              <!--- payment --->
-              <div>
-               
-                <i class="fab fa-lg fa-cc-visa text-white"></i>
-                <i class="fab fa-lg fa-cc-amex text-white"></i>
-                <i class="fab fa-lg fa-cc-mastercard text-white"></i>
-                <i class="fab fa-lg fa-cc-paypal text-white"></i>
+        </div>
+        <div class="col-lg-4">
+          <div class="px-0 border rounded-2 shadow-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Similar items</h5>
+                <div class="d-flex mb-3">
+                  <a href="#" class="me-3">
+                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp"
+                      style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                  </a>
+                  <div class="info">
+                    <a href="#" class="nav-link mb-1">
+                      Rucksack Backpack Large <br />
+                      Line Mounts
+                    </a>
+                    <strong class="text-dark"> $38.90</strong>
+                  </div>
+                </div>
+
+                <div class="d-flex mb-3">
+                  <a href="#" class="me-3">
+                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp"
+                      style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                  </a>
+                  <div class="info">
+                    <a href="#" class="nav-link mb-1">
+                      Summer New Men's Denim <br />
+                      Jeans Shorts
+                    </a>
+                    <strong class="text-dark"> $29.50</strong>
+                  </div>
+                </div>
+
+                <div class="d-flex mb-3">
+                  <a href="#" class="me-3">
+                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
+                      style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                  </a>
+                  <div class="info">
+                    <a href="#" class="nav-link mb-1"> T-shirts with multiple colors, for men and lady </a>
+                    <strong class="text-dark"> $120.00</strong>
+                  </div>
+                </div>
+
+                <div class="d-flex">
+                  <a href="#" class="me-3">
+                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp"
+                      style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                  </a>
+                  <div class="info">
+                    <a href="#" class="nav-link mb-1"> Blazer Suit Dress Jacket for Men, Blue color </a>
+                    <strong class="text-dark"> $339.90</strong>
+                  </div>
+                </div>
               </div>
-              <!--- payment --->
-      
-              <!--- language selector --->
-              <div class="dropdown dropup">
-                <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-united-kingdom flag m-0 me-1"></i>English </a>
-      
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
-                  </li>
-                </ul>
-              </div>
-              <!--- language selector --->
             </div>
           </div>
         </div>
-      </footer>
-      <!-- Footer -->
+      </div>
+    </div>
+  </section>
 
 
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start text-muted bg-info mt-3">
+    <!-- Section: Links  -->
+    <section class="">
+      <div class="container text-center text-md-start pt-4 pb-4">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <!-- Grid column -->
+          <div class="col-12 col-lg-3 col-sm-12 mb-2">
+            <!-- Content -->
+            <a href="#" target="_blank" class="text-white h2">
+              TREND HUB
+            </a>
+            <p class="mt-1 text-white">
+              © 2023 Copyright
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-6 col-sm-4 col-lg-2">
+            <!-- Links -->
+            <h6 class="text-uppercase text-white fw-bold mb-2">
+              Store
+            </h6>
+            <ul class="list-unstyled mb-4">
+              <li><a class="text-white-50" href="/aboutus">About us</a></li>
+              <li><a class="text-white-50" href="#">Categories</a></li>
+              <li><a class="text-white-50" href="#">Blogs</a></li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-6 col-sm-4 col-lg-2">
+            <!-- Links -->
+            <h6 class="text-uppercase text-white fw-bold mb-2">
+              Information
+            </h6>
+            <ul class="list-unstyled mb-4">
+              <li><a class="text-white-50" href="#">Help center</a></li>
+              <li><a class="text-white-50" href="#">Money refund</a></li>
+              <li><a class="text-white-50" href="#">Shipping info</a></li>
+
+            </ul>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-6 col-sm-4 col-lg-2">
+            <!-- Links -->
+            <h6 class="text-uppercase text-white fw-bold mb-2">
+              Support
+            </h6>
+            <ul class="list-unstyled mb-4">
+
+              <li><a class="text-white-50" href="#">My orders</a></li>
+            </ul>
+          </div>
+          <!-- Grid column -->
+
+          <!-- social meadias column -->
+
+          <div class="col-6 col-sm-4 col-lg-2">
+            <!-- Links -->
+            <h6 class="text-uppercase text-center text-white fw-bold mb-4">
+              Keep in touch
+            </h6>
+
+            <ul class="list-unstyled mb-4  text-center">
+              <a href=""><i class="fab fa-facebook-f fa-2x ml-4" style="color: #3b5998;"></i></a>
+              <!-- Instagram -->
+              <a href=""><i class="fab fa-instagram fa-2x ml-4" style="color: #ac2bac;"></i></a>
+              <!-- Linkedin -->
+              <a href=""><i class="fab fa-linkedin-in fa-2x ml-4" style="color: #0082ca;"></i></a>
+
+            </ul>
+          </div>
+
+
+
+
+          <!-- social medias column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <div class="">
+      <div class="container">
+        <div class="d-flex justify-content-between py-4 border-top">
+          <!--- payment --->
+          <div>
+
+            <i class="fab fa-lg fa-cc-visa text-white"></i>
+            <i class="fab fa-lg fa-cc-amex text-white"></i>
+            <i class="fab fa-lg fa-cc-mastercard text-white"></i>
+            <i class="fab fa-lg fa-cc-paypal text-white"></i>
+          </div>
+          <!--- payment --->
+
+          <!--- language selector --->
+          <div class="dropdown dropup">
+            <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown"
+              aria-expanded="false"> <i class="flag-united-kingdom flag m-0 me-1"></i>English </a>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i
+                    class="fa fa-check text-success ms-2"></i></a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+              </li>
+            </ul>
+          </div>
+          <!--- language selector --->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer -->
+
+
+
+  <script>
+    document.getElementById('addToCart').addEventListener('click', function () {
+      var productId = '<%= product._id %>';
+      console.log(productId, "srtyugad");
+      var data = {
+        productId: productId
+      };
+      const res = fetch('/cartpage', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            return showAlertpage()
+          }else if(data.error){
+          Swal.fire({
+            icon:'error',
+            title:'max quantity'
+          })
+          }
+        })
+
+
+        .catch(error => {
+          console.error('Fetch error:', error);
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+    function showAlertpage() {
+      Swal.fire({
+        icon: "success",
+        text: "Your product is added to the cart",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Go to Cart',
+        cancelButtonText: 'Go Back',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If "Go to Cart" is clicked, redirect to /cart
+          window.location.href = '/getProduct';
+        } else {
+          // If "Go Back" is clicked, handle as needed
+          console.log('User clicked Go Back');
+        }
+      });
+    }
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+
+
+
+
+
+<script src='https://code.jquery.com/jquery-2.1.1.js'></script>
+<script src='https://unpkg.com/xzoom/dist/xzoom.min.js'></script>
+<script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js'></script>
+<script>
+  (function ($) {
+    $(document).ready(function() {
+        $('.xzoom, .xzoom-gallery').xzoom({zoomWidth: 300,zoomheight:300, title: true, tint: '#333', Xoffset: 15});
+        $('.xzoom2, .xzoom-gallery2').xzoom({position: '#xzoom2-id', tint: '#ffa200'});
+        $('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
+        $('.xzoom4, .xzoom-gallery4').xzoom({tint: '#006699', Xoffset: 15});
+        $('.xzoom5, .xzoom-gallery5').xzoom({tint: '#006699', Xoffset: 15});
+
+        //Integration with hammer.js
+        var isTouchSupported = 'ontouchstart' in window;
+
+        if (isTouchSupported) {
+            //If touch device
+            $('.xzoom, .xzoom2, .xzoom3, .xzoom4, .xzoom5').each(function(){
+                var xzoom = $(this).data('xzoom');
+                xzoom.eventunbind();
+            });
+            
+            $('.xzoom, .xzoom2, .xzoom3').each(function() {
+                var xzoom = $(this).data('xzoom');
+                $(this).hammer().on("tap", function(event) {
+                    event.pageX = event.gesture.center.pageX;
+                    event.pageY = event.gesture.center.pageY;
+                    var s = 1, ls;
     
-</body> 
+                    xzoom.eventmove = function(element) {
+                        element.hammer().on('drag', function(event) {
+                            event.pageX = event.gesture.center.pageX;
+                            event.pageY = event.gesture.center.pageY;
+                            xzoom.movezoom(event);
+                            event.gesture.preventDefault();
+                        });
+                    }
+    
+                    xzoom.eventleave = function(element) {
+                        element.hammer().on('tap', function(event) {
+                            xzoom.closezoom();
+                        });
+                    }
+                    xzoom.openzoom(event);
+                });
+            });
+
+        $('.xzoom4').each(function() {
+            var xzoom = $(this).data('xzoom');
+            $(this).hammer().on("tap", function(event) {
+                event.pageX = event.gesture.center.pageX;
+                event.pageY = event.gesture.center.pageY;
+                var s = 1, ls;
+
+                xzoom.eventmove = function(element) {
+                    element.hammer().on('drag', function(event) {
+                        event.pageX = event.gesture.center.pageX;
+                        event.pageY = event.gesture.center.pageY;
+                        xzoom.movezoom(event);
+                        event.gesture.preventDefault();
+                    });
+                }
+
+                var counter = 0;
+                xzoom.eventclick = function(element) {
+                    element.hammer().on('tap', function() {
+                        counter++;
+                        if (counter == 1) setTimeout(openfancy,300);
+                        event.gesture.preventDefault();
+                    });
+                }
+
+                function openfancy() {
+                    if (counter == 2) {
+                        xzoom.closezoom();
+                        $.fancybox.open(xzoom.gallery().cgallery);
+                    } else {
+                        xzoom.closezoom();
+                    }
+                    counter = 0;
+                }
+            xzoom.openzoom(event);
+            });
+        });
+        
+        $('.xzoom5').each(function() {
+            var xzoom = $(this).data('xzoom');
+            $(this).hammer().on("tap", function(event) {
+                event.pageX = event.gesture.center.pageX;
+                event.pageY = event.gesture.center.pageY;
+                var s = 1, ls;
+
+                xzoom.eventmove = function(element) {
+                    element.hammer().on('drag', function(event) {
+                        event.pageX = event.gesture.center.pageX;
+                        event.pageY = event.gesture.center.pageY;
+                        xzoom.movezoom(event);
+                        event.gesture.preventDefault();
+                    });
+                }
+
+                var counter = 0;
+                xzoom.eventclick = function(element) {
+                    element.hammer().on('tap', function() {
+                        counter++;
+                        if (counter == 1) setTimeout(openmagnific,300);
+                        event.gesture.preventDefault();
+                    });
+                }
+
+                function openmagnific() {
+                    if (counter == 2) {
+                        xzoom.closezoom();
+                        var gallery = xzoom.gallery().cgallery;
+                        var i, images = new Array();
+                        for (i in gallery) {
+                            images[i] = {src: gallery[i]};
+                        }
+                        $.magnificPopup.open({items: images, type:'image', gallery: {enabled: true}});
+                    } else {
+                        xzoom.closezoom();
+                    }
+                    counter = 0;
+                }
+                xzoom.openzoom(event);
+            });
+        });
+
+        } else {
+            //If not touch device
+
+            //Integration with fancybox plugin
+            $('#xzoom-fancy').bind('click', function(event) {
+                var xzoom = $(this).data('xzoom');
+                xzoom.closezoom();
+                $.fancybox.open(xzoom.gallery().cgallery, {padding: 0, helpers: {overlay: {locked: false}}});
+                event.preventDefault();
+            });
+           
+            //Integration with magnific popup plugin
+            $('#xzoom-magnific').bind('click', function(event) {
+                var xzoom = $(this).data('xzoom');
+                xzoom.closezoom();
+                var gallery = xzoom.gallery().cgallery;
+                var i, images = new Array();
+                for (i in gallery) {
+                    images[i] = {src: gallery[i]};
+                }
+                $.magnificPopup.open({items: images, type:'image', gallery: {enabled: true}});
+                event.preventDefault();
+            });
+        }
+    });
+})(jQuery);
+</script>
+
 </html>

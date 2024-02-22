@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orderDetails</title>
+    <link rel="stylesheet" href="/static/productdetail.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header-->
+   <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-info">
+          
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only"></span></a>
+                </li>
+               
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/aboutus">My profile</a>
+                    <a class="dropdown-item" href="/">Wish List</a>
+                    <a class="dropdown-item" href="/">contact</a>
+                    <a class="dropdown-item" href="/">wallet</a>
+                    <a class="dropdown-item" href="/logout">logout</a>          
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled text-white" href="">Contact Us</a>
+                </li>
+              </ul>
+            </div>  
+          </nav>
+          <form class="d-flex">
+            <button class="btn btn-outline-dark text-white" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3 text-white" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                  </svg>
+                  <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a> 
+            </button>
+        </form>
+                     
+        </div> 
+    </div>
+</nav>
+<!-- Header-->
+
+
+    <section class="vh-100 gradient-custom-2 pt-5">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+              <div class="card card-stepper" style="border-radius: 16px;">
+                <div class="card-header p-4">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <!-- <p class="text-muted mb-2"> Order ID <span class="fw-bold text-body">1222528743</span></p>
+                      <p class="text-muted mb-0"> Place On <span class="fw-bold text-body">12,March 2019</span> </p> -->
+                    </div>
+                    <div>
+                      <h6 class="mb-0"> <a href="#">View Details</a> </h6>
+                    </div>
+                  </div>
+                </div>
+                <div id="selectedDiv">
+                <div class="card-body p-4">
+                  <div class="d-flex flex-row mb-4 pb-2">
+                    <div class="flex-fill">
+                        <h6><strong>Date</strong></h6>
+                        <h6 class="bold" id="formattedDate"><%= orderpage.createdAt.toDateString()%></h6>
+                        <h3 class="bold"><%=order.product_id.productname%></h3>
+                        <h4 class="text-muted"> Qty :<%=order.qty%> </h4>
+                        <h4 class="text-muted">Price :<%='₹'+order.product_id.productprice%> </h4><br>
+                        <h3 class="mb-3">Order Status <h4 id="OrderStatus"  style="color:red;" ><%= order.status%> </h3> <span class="small text-muted"> </span></h4><br>
+                        <h4 class="text-black">TotalPrice :<%='₹'+order.totalPrice%> </h4>
+                              <br>
+                             
+                    </div>
+                    <div>
+                        <img class="align-self-center img-fluid" src="<%= order.product_id && order.product_id.images && order.product_id.images[1] ? '/productImages/' + order.product_id.images[1] : '/path/to/default/image.jpg' %>" width="250">
+<!-- 
+                      <img class="align-self-center img-fluid"
+                        src="/productImages/<%=order?.product_id?.images[1]%>" width="250"> -->
+                        <br>
+                        <br>
+                        <h3>Return Order</h3>
+                        <br>
+
+             
+
+
+
+                        <div class="pl-3">
+                        <%if(order.status=="returnApproved"){
+                            %>
+                            <button   type="button" disabled class="btn btn-primary" style="background-color: #17a2b8;color: #fff;border-radius: 8px; width:80px;height: 40px;" id="returnID" ><a aria-disabled="true" style="text-decoration: none; color: #fff;">return</a></button>
+  
+                            <%
+                           }else{%>
+                            <button type="button" class="btn btn-primary" style="background-color: #17a2b8;color: #fff;border-radius: 8px; width:80px;height: 40px;" id="returnID"  ><a style="text-decoration: none; color: #fff;" >return</a></button>
+                           <%}%>
+                        </div>
+
+                    </div>
+                  </div>
+                  <h3 class="mb-3">Payment status <h4 style="color:green" ><%= order.paymentMethod%> </h3> <span class="small text-muted"> </span></h4><br>
+                  <a href="/aboutus">Go back</a>
+                 
+                </div>
+                </div>
+                <!-- <div class="card-footer p-4">
+                  <div class="d-flex justify-content-between">
+                    <h5 class="fw-normal mb-0"><a href="#!">Track</a></h5>
+                    <div class="border-start h-100"></div>
+                    <h5 class="fw-normal mb-0"><a href="#!">Cancel</a></h5>
+                    <div class="border-start h-100"></div>
+                    <h5 class="fw-normal mb-0"><a href="#!">Pre-pay</a></h5>
+                    <div class="border-start h-100"></div>
+                    <h5 class="fw-normal mb-0"><a href="#!" class="text-muted"><i class="fas fa-ellipsis-v"></i></a>
+                    </h5>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <script>
+var ORDERID = "<%=orderpage._id%>";
+var PRODUCTID = "<%=order.product_id._id%>";
+
+document.getElementById("returnID").addEventListener("click", async (event) => {
+  event.preventDefault();
+
+  try {
+    const res = await fetch("/returnorderproduct", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId: ORDERID, productId: PRODUCTID })
+    });
+
+    const response = await res.json();
+
+    if (res.ok) {
+      // Check for success in the response
+      if (response.status==true) {
+     
+        showAlertpage()
+  
+        
+      } else {
+        alert("Request failed: " + response.message);
+      }
+    } else {
+      // Handle non-successful status codes
+      alert("Request failed with status: " + res.status);
+    }
+  } catch (error) {
+    // Handle network or other errors
+    console.error("Error:", error);
+  }
+});
+
+// function showAlertpage() {
+// Swal.fire({
+//   icon: "warning",
+//   text: "Are you sure to conform the return request",
+//   showCancelButton: true,
+//   confirmButtonColor: '#3085d6',
+//   cancelButtonColor: '#d33',
+//   confirmButtonText: 'Go back',
+  
+
+// }).then((result) => {
+//   if (result.isConfirmed) {
+//   $('#selectedDiv').load("/returnorderproduct #selectedDiv")
+  
+//   } else {
+//     // If "Go Back" is clicked, handle as needed
+//     console.log('User clicked Go Back');
+//   }
+// });
+// }
+
+function showAlertpage() {
+Swal.fire({
+  icon: "success",
+  text: "Are you sure to conform the return request",
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Go Back',
+
+}).then((result) => {
+    if (result.isConfirmed) {
+    //   // If "Go to Cart" is clicked, disable the button and reload the content
+    //   const returnButton = document.getElementById("returnID");
+
+    //   window.location.reload = '/detailview';
+       location.reload()
+    } else { 
+      // If "Go Back" is clicked, handle as needed
+      console.log('User clicked Go Back');
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <%- include("../layout/navbarbottom.ejs")%>
+</body>
+</html>
