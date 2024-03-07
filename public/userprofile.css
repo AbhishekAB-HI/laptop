@@ -15,7 +15,7 @@ body {
 }
 
 .profile-nav .user-heading {
-    background:rgb(64, 197, 224);
+    background:rgb(133 174 183);
     color: #fff;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -31,8 +31,8 @@ body {
 }
 
 .profile-nav .user-heading a img {
-    width: 112px;
-    height: 112px;
+    width: 96px;
+    height: 93px;
     border-radius: 50%;
     -webkit-border-radius: 50%;
 }
@@ -109,7 +109,7 @@ body {
 }
 
 .bio-graph-heading {
-    background:rgb(64, 197, 224);
+    background:rgb(133 174 183);
     color: #fff;
     text-align: center;
     font-style: italic;

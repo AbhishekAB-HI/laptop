@@ -1,6 +1,8 @@
 
 const catagory = require("../model/products");
 const categoryproduct = require("../model/category")
+const  offer = require("../model/offer");
+const products =require("../model/products")
 
 const Category = async (req, res) => {
   try {
@@ -39,7 +41,8 @@ const Categoryproduct = async (req, res) => {
   try {
     
     const cataproduct = await categoryproduct.find()
-    res.render("categoryList", { category: cataproduct })
+    const offers = await  offer.find()
+    res.render("categoryList", { category: cataproduct,offers })
   } catch (error) {
     console.log(error.message)
   }
@@ -54,8 +57,6 @@ const editCategory = async (req, res) => {
     if (exist) {
       return res.render("EditNewCata", { message: "This name is already exist",category:categoryData })
     }
-
-
     if (categoryData) {
       res.render("EditNewcata", { category: categoryData })
     } else {
@@ -90,11 +91,76 @@ const updateCategory = async (req, res) => {
   }
 }
 
+ const updateListCategory =async(req,res)=>{
+  try {
+
+     const cataId= req.query.id;
+     console.log(cataId,"cataid");
+
+     await categoryproduct.findById({ _id:cataId })
+
+
+
+    res.render("listunlistcata")
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+ }
+
+const addoffers= async (req,res)=>{
+  try {
+    const cataid =req.body.cataId;
+    const offerID=req.body.offerId;
+    const percentage =req.body.Percentage;
+    console.log(cataid,"cataid");
+    console.log(offerID,"offerid");
+    console.log(percentage,"percentage");
+
+    const cataId = await products.find({category:cataid})
+    
+    cataId.map(async(value,index)=>{
+      console.log(value.productprice,'hhhhhhhhhhh')
+      let productprice
+      if(value.discountAmount){
+         productprice =value.discountAmount;
+      }else{
+       productprice =value.productprice;
+      
+      }
+      const Dicountamount = productprice*(percentage/100);
+      console.log(productprice,"original price");
+      console.log(Dicountamount,"discount price");
+      const afterDicount =productprice - Dicountamount;
+      console.log(afterDicount,"after-discount amount");
+      await  products.findByIdAndUpdate({_id:value._id},{$set:{categoryAmount:afterDicount,categoryPercentage:percentage}});
+  
+    })
+      
+   
+    
+
+
+
+    
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
+
+
+
+
+
+
 
 module.exports = {
   Category,
   addCategory,
   Categoryproduct,
   editCategory,
-  updateCategory
+  updateCategory,
+  addoffers,
+  updateListCategory
 }

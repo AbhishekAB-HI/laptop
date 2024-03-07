@@ -58,6 +58,31 @@ const productSchema = new mongoose.Schema({
     is_list: {
         type: Boolean,
         default: false
+    },
+    offer:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'offer',
+        default:null
+    },
+    discountAmount:{
+        type:Number,
+        required:false,
+        default:null
+    },
+    dicountPercentage:{
+        type:Number,
+        required:false,
+        default:null
+    },
+    categoryAmount:{
+        type:Number,
+        required:false,
+        default:null
+    },
+    categoryPercentage:{
+        type:Number,
+        required:false,
+        default:null
     }
 
 

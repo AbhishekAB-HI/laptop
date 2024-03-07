@@ -21,10 +21,27 @@
 //--------------------------------------------------------------------------------
 
 
+
+
 // admin route-----------------------------------------------------------------------
  admin_route.get("/",adminAuth.isLogout,adminController.loadAdminLogin)
  admin_route.post("/",adminController.verifyLogin)
  admin_route.get("/home",adminAuth.isLogin,adminController.LoadDashboard)
+ admin_route.get("/weekly",adminAuth.isLogin,adminController.filterWeekly)
+
+
+ //dashboard Filter controllers -------------------------------------------------------------------------------------
+
+
+admin_route.get("/monthy",adminAuth.isLogin,adminController.monthly)
+
+//dashboard Filter controllers ----------------------------------------------------------------------
+
+
+
+
+
+
  admin_route.get("/logout",adminAuth.isLogin,adminController.adminLogout)
  admin_route.get("/dashboard",adminAuth.isLogin,adminController.adminDashboard)
  admin_route.get("/edit-user",adminAuth.isLogin,adminController.editUserLoad)
@@ -32,6 +49,11 @@
  admin_route.get("/delete-user",adminAuth.isLogin,adminController.deleteUser)
  admin_route.get("/delete-category",adminAuth.isLogin,adminController.deleteCategory)
  admin_route.get("/orderlist",adminAuth.isLogin,adminController.Orderdetails);
+ admin_route.get("/orderDeatils",adminAuth.isLogin,adminController.viewOrderdetails);
+
+ 
+
+
  admin_route.get("/deleteEditimage",adminAuth.isLogin,adminController.deleteImage);
 
  admin_route.get("/game",adminAuth.isLogin,adminController.gameSearch);
@@ -61,6 +83,18 @@
  admin_route.get("/categoryproduct",adminAuth.isLogin,categoryController.Categoryproduct)
  admin_route.get("/edit-category",adminAuth.isLogin,categoryController.editCategory)
  admin_route.post("/edit-category",adminAuth.isLogin,categoryController.updateCategory)
+ admin_route.get("/cataListUnlist",adminAuth.isLogin,categoryController.updateListCategory)
+
+
+// category offer------------------------------------------------------------------------
+
+admin_route.post("/cataOffer",adminAuth.isLogin,categoryController.addoffers)
+
+
+// category offer------------------------------------------------------------------------
+
+
+
 
 // category route-----------------------------------------------------------------------
 // Addcoupon-----------------------------------------------------------------------
@@ -69,16 +103,26 @@ admin_route.get("/addCoupont",adminAuth.isLogin,adminController.Addcoupon );
 admin_route.post("/addCoupont",adminAuth.isLogin,adminController.UpdateAddcoupon ); 
 admin_route.get("/listCoupon",adminAuth.isLogin,adminController.ListCoupon );
 admin_route.get("/delete-coupon",adminAuth.isLogin,adminController.deleteCoupon );
+admin_route.get("/Edit-coupon",adminAuth.isLogin,adminController.EditCoupon )
+admin_route.post("/Edit-coupon",adminAuth.isLogin,adminController.UpdateEditCoupon )
 
 // Salesreport------------------------------------------------------------------------
 
 admin_route.get("/sales",adminAuth.isLogin,adminController.Salesreport);
 admin_route.get("/monthreport",adminAuth.isLogin,adminController.adminMonthReport);
+admin_route.post("/filterdate",adminAuth.isLogin,adminController.updateMonthReport);
 
 
+// offer--------------------------------------------------------------------------------
 
-
-
+admin_route.get("/offer",adminAuth.isLogin,adminController.productOffer);
+admin_route.post("/offer",adminAuth.isLogin,adminController.updateProductOffer);
+admin_route.get("/listoffer",adminAuth.isLogin,adminController.listProductOffer);
+admin_route.get("/delete-offer",adminAuth.isLogin,adminController.deleteProductOffer);
+admin_route.get("/edit-offer",adminAuth.isLogin,adminController.editProductOffer);
+admin_route.post("/edit-offer",adminAuth.isLogin,adminController.updateEditProductOffer);
+admin_route.post("/apply-offer",adminAuth.isLogin,adminController.applyProductOffer);
+admin_route.post("/remove-Offer",adminAuth.isLogin,adminController.removeProductOffer);
 
 
 // product route-----------------------------------------------------------------------
@@ -124,6 +168,26 @@ admin_route.use("/js",express.static(path.join(__dirname,"../js")))
  admin_route.post("/list-product",adminAuth.isLogin,productController.updatelistProduct);
 
  admin_route.post("/admin/imagepreview",adminAuth.isLogin,productController.imagePreviewing);
+
+
+//  banners-------------------------------------------------------------------
+
+admin_route.get("/banner",adminAuth.isLogin,adminController.addBanners);
+admin_route.post("/banner",adminAuth.isLogin,upload.array("images",4),adminController.uploadaddBanners);
+admin_route.get("/listbanner",adminAuth.isLogin,adminController.listBanners);
+admin_route.get("/edit-banner",adminAuth.isLogin,adminController.editBanners);
+admin_route.post("/edit-banner",adminAuth.isLogin,upload.array("images",4),adminController.updateBanners);
+
+
+admin_route.get("/delete-banner",adminAuth.isLogin,adminController.deleteBanners);
+
+
+
+
+
+
+
+
  
  
 // product route-----------------------------------------------------------------------

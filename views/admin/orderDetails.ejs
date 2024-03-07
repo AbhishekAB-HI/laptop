@@ -19,8 +19,181 @@
 </head>
 
 <body>
+
+  <!-- Admin side bar -------------------------------------------------------------------------->
+
+  <aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            <!-- <img src="assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard"> -->
+            <h3 style="color: #17a2b8;" >TrendHub</h3>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+                
+            </li> -->
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products Page</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/productpage" class="active">Products </a>
+                    <a href="/admin/addproduct" class="active">Add product </a>
+                   
+                </div>
+            </li>
+          
+            <li class="menu-item active ">
+                <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/categoryproduct"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Category</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/categoryproduct" class="active">Catagory </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a>
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Addcoupon</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/addCoupont" class="active">Addcoupon</a>
+                    <a href="/admin/listCoupon" class="active">Listcoupon</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-bar_chart"></i>
+                    <span class="text">SalesReport</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/monthreport" class="active">sales</a>
+                    <!-- <a href="/admin/listCoupon" class="active">Listcoupon</a> -->
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Offers</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/offer" class="active">Add-Offer</a>
+                    <a href="/admin/listoffer" class="active">List-Offer</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Banners</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/banner" class="active">Add-banner</a>
+                    <a href="/admin/listbanner" class="active">List-banner</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+
+
+
+
+          
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-store"></i>
+                    <span class="text">User Management</span>
+                </a>
+               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-add_box"></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Transactions</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-transactions-1.html">Transaction 1</a>
+                    <a href="page-transactions-2.html">Transaction 2</a>
+                    <a href="page-transactions-details.html">Transaction Details</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Account</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-account-login.html">User login</a>
+                    <a href="page-account-register.html">User registration</a>
+                    <a href="page-error-404.html">Error 404</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item">
+                <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brands</span> </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Statistics</span>
+                </a>
+            </li> -->
+        </ul>
+        <hr>
+    
+        <br>
+        <br>
+    </nav>
+</aside>
+
+ <!-- Admin side bar -------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
     <div class="screen-overlay"></div>
-    <%- include("../layout/Adminbar.ejs")%>
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -63,7 +236,6 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                
                                   <th scope="col">ProductsImages</th>
                                   <th scope="col">Products</th>
                                   <th scope="col">Price</th>
@@ -73,10 +245,12 @@
                                   <th scope="col">Status</th>
                                   <th scope="col">Date</th>
                                   <th scope="col">change Status</th>
-                                  
+                                  <th scope="col">orderDetails</th>
                                 </tr>
                               </thead>
                               <tbody>
+                              
+                               
                                   
          <%
   
@@ -89,7 +263,7 @@
              <%item.products.forEach((value)=>{%>
               
          <tr>
-  
+            
           <td> <img src="/productImages/<%=value.product_id?.images[1]%>" width="50px" height="50px" alt="Blue Jeans Jacket" /></td>
           <td><%=value.product_id.productname%></td>
           <td><%=value.price%></td>
@@ -115,14 +289,15 @@
                 <button  style="color:white; background-color: black; border-radius: 5px;" >Change status</button>
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/admin/confirmed?id=<%=value._id %>&&orderid=<%=item._id%>">Confirmed</a></li>
-                <li><a class="dropdown-item" href="/admin/outdelivery?id=<%=value._id %>&&orderid=<%=item._id%>">out of delevery</a></li>
+                <li><a class="dropdown-item" href="/admin/confirmed?id=<%=value._id %>&&orderid=<%=item._id%>">Payment Failed</a></li>
+                <li><a class="dropdown-item" href="/admin/outdelivery?id=<%=value._id %>&&orderid=<%=item._id%>">canceled</a></li>
                 <li><a class="dropdown-item" href="/admin/returned?id=<%=value._id%>&&orderid=<%=item._id%>">returned</a></li>
                 <li><a class="dropdown-item" href="/admin/delivered?orderid=<%=item._id%>&&productid=<%=value._id%>">Delivered</a></li>
                 <li><a class="dropdown-item" href="/admin/shipped?orderid=<%=item._id%>&&productid=<%=value._id%>">Shipped</a></li>
                
               </ul>
             </ul></td>
+            <td><button  style="background-color: black;border-radius: 5px;"  ><a style="text-decoration: none;color: white;" href="/admin/orderDeatils?orderid=<%=item._id%>&&orderstatus=<%=value._id%>&&productId=<%=value.product_id%>">view</a></button></td>
         </tr>
   
   

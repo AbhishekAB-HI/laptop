@@ -157,10 +157,14 @@
             <input type="text" id="couponcodeInput" name="couponcode"
               style="width: 80px;padding-left: 5px;  height: 30px;margin-right: 4px;">
             <div>
-              <button type="button" id="couponcheck" class="ml-4"
-                style="align-items: center; background-color: black;color:white;border-radius: 5px;width: 100px;height: 50px;">
-                <h6>Apply Coupon</h6>
+              <button type="button" id="couponcheck" class="ml-4 mb-2"
+                style="align-items: center; background-color: black;color:white;border-radius: 5px;width: 100px;height: 25px;">
+                <h6 style="font-size: 13px;"  >Apply Coupon</h6>
               </button>
+              <button type="button" id="couponRemove" class="ml-4"
+              style="align-items: center; background-color: rgb(206, 18, 18);color:white;border-radius: 5px;width: 100px;height: 25px;">
+              <h6  style="font-size: 13px;" >Remove</h6>
+            </button>
             </div>
           </li>
         </div>
@@ -236,14 +240,30 @@
               <% } %>
             </tbody>
           </table>
+          <input id="cartitemsdetails" type="hidden" value="<%=userCart%>">
           <hr class="mb-4">
           <hr class="mb-4">
           <h4 class="mb-3">Payment</h4>
           <div class="d-block my-3">
             <div class="custom-control custom-radio">
-              <input id="credit" name="paymentMethod" value="cash on delivery" type="radio" class="custom-control-input"
-                checked required>
-              <label class="custom-control-label" for="credit">Cash on delivery</label>
+
+                    <%if(totalPrice>10000 ){%>
+
+                      <input id="credit" disabled name="paymentMethod" value="cash on delivery" type="radio" class="custom-control-input"
+                      checked required>
+                  
+                  
+                    <%}else{%>
+                      <input id="credit" name="paymentMethod" value="cash on delivery" type="radio" class="custom-control-input"
+                      checked required>
+                    <label class="custom-control-label" for="credit">Cash on delivery</label>
+
+                    <%}
+                    
+                    
+                    %>
+
+        
             </div>
             <div class="custom-control custom-radio">
               <input id="debit" name="paymentMethod" value="onlinePay" type="radio" class="custom-control-input"
@@ -291,16 +311,22 @@
       // checkout selection----------------------------------------------------------------------------------
       // ----------------------------------------------------------------------------------------------------------------------------------------------------
       document.getElementById("isValue").addEventListener("click", (event) => {
+
+
         event.preventDefault();
         let selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
         if (selectedRadio.value == "onlinePay") {
-          Rayzopaycall()
+          const values = document.getElementById("cartitemsdetails").value
+         
+          Rayzopaycall(values)
         } else {
           if (selectedRadio.value == "cash on delivery") {
-            cashOnDelivery()
+            const values = document.getElementById("cartitemsdetails").value
+            cashOnDelivery(values)
 
           } else {
-            walletcall()
+            const values = document.getElementById("cartitemsdetails").value
+            walletcall(values)
 
           }
         }
@@ -315,13 +341,16 @@
           const coupondata = document.getElementById("couponcodeInput").value
           const discountValue = document.getElementById("DiscountAmount").textContent;
           const selectedAddress = document.querySelector('input[name="address"]:checked')
+          const totalprice = document.getElementById("totalValueIs").textContent
           const res = await fetch("/onlinepayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ address: selectedAddress.value, discount: discountValue, coupon: coupondata })
           })
           const result = await res.json();
-          window.location.href = `/rayzopay?orderid=${result.orderid}`
+          const dats = result.orders;
+
+          window.location.href = `/rayzopay?orderid=${result.orderid}&&data=${JSON.stringify(dats)}&&Totalamount=${totalprice}`
 
         } catch (error) {
           console.log(error);
@@ -351,7 +380,8 @@
             }).then((result) => {
               // Check if the user clicked "OK"
               if (result.isConfirmed) {
-                // Redirect to another page
+
+
                 window.location.href = "/dashboard";
               }
             });
@@ -366,12 +396,13 @@
       // wallet function------------------------------------------------------------------
 
       // cashondeliveryfunction---------------------------------------------------------------------------------
-      async function cashOnDelivery() {
+      async function cashOnDelivery(data) {
+        const datavalue = data;
         const coupondata = document.getElementById("couponcodeInput").value
         const discountValue = document.getElementById("DiscountAmount").textContent;
         const selectedAddress = document.querySelector('input[name="address"]:checked')
         const totalprice = document.getElementById("totalValueIs").textContent
-         const responcewallet = await fetch("/cashowndelivery", {
+        const responcewallet = await fetch("/cashowndelivery", {
           method: "post",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ totalprice, address: selectedAddress.value, discount: discountValue, coupon: coupondata })
@@ -380,13 +411,15 @@
           const responce = await responcewallet.json();
           if (responce.status == true) {
             Swal.fire({
-              title: "Order Success",
-              text: "Thank you. Continue shopping",
+              title: "Order Successfull.continue Shopping",
+              text: "Thank you.",
               icon: "success"
             }).then((result) => {
               // Check if the user clicked "OK"
               if (result.isConfirmed) {
                 // Redirect to another page
+
+
                 window.location.href = "/dashboard";
               }
             });
@@ -419,8 +452,6 @@
           const inputvalue = document.getElementById("couponcodeInput").value;
           const inputData = inputvalue.trim()
           const totalvalue = document.getElementById("Totalamounte").textContent;
-          console.log(inputData.length, "prasad");
-          console.log(totalvalue, 'ededdaa');
           if (inputData.length != 0) {
             passingCouponvalue(inputData, totalvalue)
           }
@@ -456,13 +487,18 @@
         }
       }
 
+      // clear coupon --------------------------------------------------------------------------
+
+      document.getElementById("couponRemove").addEventListener("click",(event)=>{
+              const totalvalue = '<%=totalPrice%>' 
+
+        event.preventDefault();
+        document.getElementById("DiscountAmount").textContent = 0
+        document.getElementById("totalValueIs").textContent =totalvalue
+        document.getElementById("couponcodeInput").value = "";
+      })
+
       // couponfunction-------------------------------------------------------------------------- 
-
-
-
-
-
-
 
 
       // Alert swal----------------------------------------------------------------------------------------------------

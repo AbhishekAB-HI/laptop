@@ -15,12 +15,178 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
     <!-- Template CSS -->
     <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+   
     
 </head>
 
 <body>
+      <!-- Admin side bar -------------------------------------------------------------------------->
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            <!-- <img src="assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard"> -->
+            <h3 style="color: #17a2b8;" >TrendHub</h3>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+                
+            </li> -->
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products Page</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/productpage" class="active">Products </a>
+                    <a href="/admin/addproduct" class="active">Add product </a>
+                   
+                </div>
+            </li>
+          
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+              
+            </li>
+            <li class="menu-item has-submenu active ">
+                <a class="menu-link" href="/admin/categoryproduct"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Category</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/categoryproduct" class="active">Catagory </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a>
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Addcoupon</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/addCoupont" class="active">Addcoupon</a>
+                    <a href="/admin/listCoupon" class="active">Listcoupon</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-bar_chart"></i>
+                    <span class="text">SalesReport</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/monthreport" class="active">sales</a>
+                    <!-- <a href="/admin/listCoupon" class="active">Listcoupon</a> -->
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Offers</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/offer" class="active">Add-Offer</a>
+                    <a href="/admin/listoffer" class="active">List-Offer</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Banners</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/banner" class="active">Add-banner</a>
+                    <a href="/admin/listbanner" class="active">List-banner</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+
+
+
+
+          
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-store"></i>
+                    <span class="text">User Management</span>
+                </a>
+               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-add_box"></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Transactions</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-transactions-1.html">Transaction 1</a>
+                    <a href="page-transactions-2.html">Transaction 2</a>
+                    <a href="page-transactions-details.html">Transaction Details</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Account</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-account-login.html">User login</a>
+                    <a href="page-account-register.html">User registration</a>
+                    <a href="page-error-404.html">Error 404</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item">
+                <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brands</span> </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Statistics</span>
+                </a>
+            </li> -->
+        </ul>
+        <hr>
+    
+        <br>
+        <br>
+    </nav>
+</aside>
+
+ <!-- Admin side bar -------------------------------------------------------------------------->
+
+
     <div class="screen-overlay"></div>
-    <%- include("../layout/Adminbar.ejs")%>
     <main class="main-wrap">
         <header class="main-header navbar">
             <div class="col-search">
@@ -28,18 +194,13 @@
             </div>
             <div class="col-nav">
                 <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i class="material-icons md-apps"></i> </button>
-               
-
-
             </div>
         </header>
         <section class="content-main">
             <div class="content-header">
                 <div>
                     <h2 class="content-title card-title">Category List</h2>
-                 
                 </div>
-              
             </div>
             <div class="card mb-4">
                 <header class="card-header">
@@ -66,7 +227,9 @@
                                 <th scope="col">Category No</th>
                                 <th scope="col">Category Name</th>
                                 <th scope="col">Category description</th>
+                                <!-- <th scope="col">Actions</th> -->
                                 <th scope="col">Delete Category</th>
+                                
                                 <th scope="col">Edit Category</th>
                                 
                                 
@@ -89,8 +252,13 @@
                                             <th scope="row"><%=i+1%></th>
                                             <td><%=cat.name%></td>
                                             <td><%=cat.description%></td>
-                                            <td><a href="/admin/delete-category?id=<%=cat._id%>">Delete</a></td>
-                                            <td><a href="/admin/edit-category?id=<%=cat._id%>">Edit</a></td>
+                                            <!-- <td><button type="button"  onclick="ApplyOffer('<%=cat._id%>')" class="btn btn-primary">
+                                                 ApplyOffer
+                                              </button>
+                                              </td> -->
+                                             
+                                            <td><button style="background-color: black;border-radius: 5px;" ><a  class="text-white" style="text-decoration: none;" href="/admin/delete-category?id=<%=cat._id%>">Delete</a></button></td>
+                                            <td><button style="background-color: black;border-radius: 5px;" ><a   class="text-white" style="text-decoration: none;" href="/admin/edit-category?id=<%=cat._id%>">Edit</a></button></td>
                                            
                                         </tr>
                                         <%
@@ -112,11 +280,52 @@
                     </div> <!-- table-responsive //end -->
                 </div> <!-- card-body end// -->
             </div> <!-- card end// -->
+            <!-- Button trigger modal -->
+
+  <!-- Modal -->
+
+  <div class="modal fade" id="ModalId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Special-Offers</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+            <%offers.forEach((off,i)=>{%>
+                
+            <div class="card" style="width: 10rem; height: 15rem; ">
+                <img class="card-img-top pt-0" style="width: 9em;height: 8em;" src="https://img.freepik.com/free-vector/special-offer-creative-sale-banner-design_1017-16284.jpg?1" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: blue;"><%=off.offername%></h5>
+                    <h6 class="card-text pb-2" style="color: red; "><%=off.percentage%>%</h6>
+                    <button onclick="offerCata('<%=off._id%>','<%=off.percentage%>')" style="width: 8rem; height: 2rem; background-color: green; color: white; border-radius: 5px;">Apply</button>
+                  <input id="valuedata" type="hidden">
+                </div>
+              </div>
+          
+
+            <%})%>
+          
+        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"><a style="text-decoration: none; color: white;" href="/admin/categoryproduct">close</a></button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
             
     
           
         </section> <!-- content-main end// -->
+   
+
+
         <footer class="main-footer font-xs">
             <div class="row pb-30 pt-15">
                 <div class="col-sm-6">
@@ -132,6 +341,48 @@
             </div>
         </footer>
     </main>
+    
+    <script>
+
+
+   function ApplyOffer(data) {
+        const cataID = data;
+        const modalElement = $('#ModalId');
+        modalElement.modal('show');
+        modalElement.find('#valuedata').text(cataID);
+      
+    }
+
+    async function offerCata(offid,percentage){
+
+        const Percentage =percentage;
+        const offerId =offid
+        const cataId = document.getElementById('valuedata').textContent
+
+        const res=  await fetch("/admin/cataOffer",{
+            method:"post",
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({Percentage,offerId,cataId})
+        })
+  
+
+     
+     
+
+    }
+
+
+
+    //    async function getOffer(cataID){
+    //         const cataId=cataID;
+    //         console.log(cataId,"catagoryId");
+              
+    //         fetch("")
+
+    //     }
+    </script>
+     
+     
     <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
     <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendors/select2.min.js"></script>

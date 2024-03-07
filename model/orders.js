@@ -6,6 +6,9 @@ const orderShema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
     },
+    data:{
+        type:String,
+    },
     products: [{
         product_id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -25,7 +28,7 @@ const orderShema = new mongoose.Schema({
         },
         status: {
             type: String,
-            enum: ["pending", "confirmed", "shipped" ,"returnrequest","out for deliver", "canceled", "returnApproved", "delivered"],
+            enum: ["pending", "Order placed", "shipped" ,"returnrequest","Payment Failed", "canceled", "returnApproved", "delivered"],
             default: "pending"
         },
         address: {
@@ -36,6 +39,10 @@ const orderShema = new mongoose.Schema({
             type: String,
             required: true 
         },
+        couponDiscount:{
+            type:Number,
+            default:0
+        }
      
 
     }],
@@ -73,6 +80,10 @@ const orderShema = new mongoose.Schema({
     rayzorpayId:{
         type:String,
         required:false
+    },
+    subtotal:{
+        type:Number,
+        
     }
 
 

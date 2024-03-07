@@ -1,6 +1,7 @@
 
 const products = require("../model/products");
-const category = require("../model/category")
+const category = require("../model/category");
+
 
 const loadProduct = async (req, res) => {
   try {
@@ -50,9 +51,10 @@ const loadProduct = async (req, res) => {
 
 const sharp= require("sharp")
 const path= require("path");
-const { log } = require("console");
-
 const fs = require('fs').promises;
+
+const { log } = require("console");
+const offer = require("../model/offer");
 
 const insertProduct = async (req, res) => {
   const filenames = [];
@@ -65,7 +67,6 @@ const insertProduct = async (req, res) => {
       `${pathdata}`
     );
 
-    // Read the file buffer using fs.promises.readFile
     const fileBuffer = await fs.readFile(item.path);
 
     await sharp(fileBuffer)
@@ -75,8 +76,7 @@ const insertProduct = async (req, res) => {
     filenames.push(pathdata);
   }
 
-  // Rest of your code...
-
+  
 
   
  
@@ -122,12 +122,14 @@ const ProductPage = async (req, res) => {
     ).populate("category").countDocuments()
     const productData = await products.find(
       { productname: { $regex: ".*" + search + ".*", $options: "i" } },
-    ).populate("category").limit(limit * 1)
+    ).populate("category").populate("offer").limit(limit * 1)
     .skip((page - 1) * limit)
     .exec()
+      const offers =  await offer.find({})
+      console.log(productData,"offers");
     // res.render("productpage", { products: productData });
     res.render("productlistpage",{ products: productData ,   totalpages: Math.ceil(count / limit),
-    currentpages: page,});
+    currentpages: page,offerlist:offers});
   } catch (error) {
     console.log(error.message)
   }
@@ -159,7 +161,7 @@ const updateProduct = async (req, res) => {
     console.log(files,'filess...');
 
   const existingData=await  products.findById( req.body.id)
-
+  
   const img = [
     files?.[0]?.filename || existingData.images[0],
     files?.[1]?.filename || existingData.images[1],

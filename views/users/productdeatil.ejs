@@ -137,12 +137,18 @@
 
 
             </h4>
-
-            <h4 class="title text-dark">
-
-              <%= '\u20B9' + product.productprice%>
-
-            </h4>
+     
+            <%if(product.discountAmount){%>
+             
+                
+              <h5 class="title text-dark"><del>₹<%=product.productprice%></del></h5>
+              <h4 class="title text-dark">₹<%=product.discountAmount%></h4>
+             
+            
+            <%}else{%>
+              <h4 class="title text-dark">₹<%=product.productprice%></h4>
+            <%}%>
+  
 
 
 
@@ -201,7 +207,7 @@
                 <input type="hidden" name="id" value="<%=product._id%>">
               </div>
             </div>
-            <a href="" class="btn btn-warning shadow-0">Buy now</a>
+            <!-- <a href="" class="btn btn-warning shadow-0">Buy now</a> -->
 
 
             <% if(product.productquantity==0){ %>
@@ -589,8 +595,6 @@
           })
           }
         })
-
-
         .catch(error => {
           console.error('Fetch error:', error);
         });

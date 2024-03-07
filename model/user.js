@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema({
                 // Password should be at least 8 characters long and contain at least one special character
                 return value.length >= 8;
             },
-            message: "This is not a valid password. It should be at least 8 characters long and contain at least one special character",
+            message: "This is not a valid password. It should be at least 8 characters long and contain at least one special character @$%^&*!",
         },
 
 
@@ -50,6 +50,10 @@ const userSchema = new mongoose.Schema({
         minlength: [10, "Number must be 10 digit"],
         required: true,
 
+    }, 
+   referalId:{
+        type:String,
+        required:false
     },
 
     is_admin: {
@@ -77,6 +81,7 @@ const userSchema = new mongoose.Schema({
     wallet:{
         type:Number,
         default:0,
+        
     },
     walletHistory:[{
         amount:{
@@ -85,7 +90,21 @@ const userSchema = new mongoose.Schema({
         },
         direction:{
             type:String
-        }
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now()
+          },
+        status:{
+            type:String,
+        },
+        paymentMethod:{
+            type:String
+        },
+        description:{
+            type:String
+        }  
+
     }],
 
     cart: {
@@ -111,6 +130,7 @@ const userSchema = new mongoose.Schema({
                 enum: ["pending", "shipped", "canceled", "returned", "delivered"],
                 default: "pending"
             },
+        
 
         }
         ],
@@ -171,11 +191,7 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        email: {
-            type: String,
-            required: true,
-            lowercase: true,
-        },
+     
         address: {
             type: String,
             required: true
@@ -227,6 +243,7 @@ const userSchema = new mongoose.Schema({
             enum: ["pending", "shipped", "canceled", "returned", "delivered"],
             default: "pending"
         },
+      
     }]
 })
 

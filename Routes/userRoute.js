@@ -47,14 +47,24 @@ const upload = multer({ storage: storage })
  user_route.get("/logout",userAuth.isLogin,blockchecking,userController.userLogout)
  user_route.get("/aboutus",userAuth.isLogin,blockchecking,userController.AboutUs)
  user_route.get("/detailview",userAuth.isLogin,userController.detailpage);
+ user_route.get("/detailInvoice",userAuth.isLogin,userController.Invoice);
+
+
+ 
  user_route.get("/gamming",userAuth.isLogin,blockchecking,userController.gammingpart)
  user_route.get("/office",userAuth.isLogin,blockchecking,userController.officepart)
  user_route.get("/tablet",userAuth.isLogin,blockchecking,userController.tabletpart) 
  user_route.get("/productdetail",userAuth.isLogin,blockchecking,userController.productpage)
   
  user_route.post("/cartpage",userAuth.isLogin,userController.cartpage) 
+ user_route.post("/cartpagelogin",userAuth.isLogin,userController.Logincartpage) 
+
+
 //  user_route.post("/cartpage",userController.updatecartpage) 
 user_route.post("/wishcart",userAuth.isLogin,userController.wishcartpage) 
+user_route.post("/changeCancel",userAuth.isLogin,userController.cancelStatus) 
+
+
 
 
 
@@ -89,10 +99,24 @@ user_route.post("/wishcart",userAuth.isLogin,userController.wishcartpage)
  user_route.post("/changepassword",userAuth.isLogin,userController.updatechangepassword); 
  user_route.get("/deleteaddress",userAuth.isLogin,userController.deleteaddress); 
 
+//  payment Method----------------------------------------------------------------------------
+
  user_route.post("/onlinepayment",userController.rayzopayIntitial); 
+ user_route.post("/paymentContinue",userController.rayzopayPaymentContinue);
+ user_route.post("/PaymentSuccess",userController.rayzopayPaymentSuccess); 
+ user_route.post("/PaymentFailed",userController.rayzopayPaymentFailed);
+
+//  user_route.get("/rayzopayContinue",userController.rayzopayContinue); 
  user_route.get("/rayzopay",userController.rayzopayCompletion); 
+ user_route.get("/rayzopaycheck",userController.rayzopayChecking); 
+
+
+ 
  user_route.post("/walletcheck",userController.Walletcheck);
  user_route.post("/cashowndelivery",userController.cashowndelivery); 
+
+
+ //  payment Method----------------------------------------------------------------------------
 
 
 
@@ -119,9 +143,12 @@ user_route.get("/showCoupons",userController.showAllCoupons);
 
 user_route.get("/wishlist",userAuth.isLogin,blockchecking,userController.wishlistpage) 
 user_route.get("/addTocart",userController.addToCart);
-user_route.get("/addwish",userController.addWish);
+user_route.post("/addwish",userController.addWish);
 user_route.get("/deleteWish",userController.deleteWish);
 user_route.get("/wallets",userController.Wallets);
+
+
+
 
 
 

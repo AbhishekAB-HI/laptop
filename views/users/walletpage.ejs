@@ -54,43 +54,69 @@
         </div>
     </nav>
     <!-- Header-->
-    <section class="vh-100" style="background-color: #f4f5f7;">
-        <div class="container py-5 h-100 ">
+    <section class="vh-100 " style="background-color: #f4f5f7;">
+      <div class="container-fluid py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-lg-6 mb-4 mb-lg-0">
-              <div class="card  mb-3" style="border-radius: .5rem;height: 400px;width: 600px;">
-                <div class="row g-0">
-                  <div class="col-md-4 bg-info gradient-custom text-center text-white"
-                    style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;height: 400px;">
-                    <h3 class="pt-5" >Wallets</h3>
-                    <p>Total Amount</p>
-                    <h4 class="pt-5 pb-5">₹<%=total%></h4>
-                    <i class="fas fa-wallet mb-5"></i>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body p-4">
-                    <div class="pb-3"   >
-                      <h6>Wallet History</h6>
-                    </div>
-                     <% walet.walletHistory.forEach((walet,i)=>{%>
-                         <div class="pb-1"  >
-                         <h5>₹<%=walet.amount%></h5>
+              <div class="col col-lg-6 mb-4 mb-lg-0">
+                  <div class="card mb-2 " style="border-radius: .5rem; height: 80%; width: 1000px">
+                      <div class="row g-0">
+                          <div class="col-md-3 bg-info gradient-custom text-center text-white"
+                              style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; height: 400px;">
+                              <h3 class="pt-5">Wallets</h3>
+                              <p>Total Amount</p>
+                              <h4 class="pt-5 pb-5">₹<%= total %></h4>
+                              <i class="fas fa-wallet mb-5"></i>
                           </div>
-                     <%})%>
+                          <div class="col-md-9" style="background-color: aliceblue;">
+                              <div class="card-body ">
+                                  <table class="table table-striped" style="background-color: aliceblue;">
+                                      <thead>
+                                          <tr style="color: rgb(28, 180, 207);">
+                                              <th scope="col">No</th>
+                                              <th scope="col">Wallet History</th>
+                                              <th scope="col">Payment</th>
+                                              <th scope="col">Date</th>
+                                              <th scope="col">Description</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+
+                                       
+
+                                       
+                                          <%if(walet.walletHistory.length > 0){%>
+                                       
+                                         <% walet.walletHistory.forEach((walet, i) => { %>
+                                              <tr>
+                                                  <td scope="row"><%= i + 1 %></td>
+                                                  <% if (walet.direction == '-') { %>
+                                                      <td style="color: red;"><h6>₹<%= walet.amount %><%= walet.direction %></h6></td> 
+                                                      <td>Wallet</td>
+                                                  <% } else { %>
+
+  
+                                                      <td style="color: green;"><h6>₹<%= walet.amount %><%= walet.direction %></h6></td>
+                                                       <td><%= walet.paymentMethod %></td>
+                                                  <% } %>
+                                                 
+                                                  <td><%= walet.createdAt.toLocaleDateString() %></td>
+                                                  <td style="color: green; max-width: 80%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 20px;">
+                                                      <%= walet.description %></td>
+                                              </tr>
+                                          <% })}else{%>
+                                            <td style="color: red;"><h4>No wallet history</h4></td>
+                                            <%}%>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
                       </div>
-                      <div class="d-flex justify-content-start">
-                        <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                        <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                        <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
-                      </div>
-                    </div>
                   </div>
-                </div>
               </div>
-            </div>
           </div>
-        </div>
-      </section>
+      </div>
+  </section>
+  
 
 
 

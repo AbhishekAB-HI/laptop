@@ -32,11 +32,13 @@ a
     text-decoration: none;
 }
 .product-card {
-    width: 380px;
+    width: 250px;
+    height: 400px;
     position: relative;
     box-shadow: 0 2px 7px #dfdfdf;
     margin: 50px auto;
     background: #fafafa;
+    margin-left: 10px;
 }
 
 .badge {
@@ -51,11 +53,24 @@ a
     padding: 3px 10px;
 }
 
+.badgeoff {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 500;
+  background: green;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
 .product-tumb {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    height: 181px;
     padding: 50px;
     background: #f0f0f0;
 }
@@ -66,16 +81,23 @@ a
 }
 
 .product-details {
-    padding: 30px;
+    padding: 15px;
+}
+
+.product-catagory,
+h4 {
+    margin-bottom: 5px; /* Add margin-bottom to create space between elements */
 }
 
 .product-catagory {
+
+  
     display: block;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
     color: #ccc;
-    margin-bottom: 18px;
+    margin-bottom: 8px;
 }
 
 .product-details h4 a {
@@ -102,7 +124,7 @@ a
 .product-bottom-details {
     overflow: hidden;
     border-top: 1px solid #eee;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 .product-bottom-details div {
@@ -111,7 +133,7 @@ a
 }
 
 .product-price {
-    font-size: 18px;
+    font-size: 15px;
     color: #fbb72c;
     font-weight: 600;
 }
@@ -163,13 +185,15 @@ a
 
 
 .purchasebutton{
-    height: 6vh;
-    width: 35%;
-    border-radius: 9px;
-    border: none;
-    transition: all 0.5s ;
-    background-color:#17a2b8;
-    color: #fff;
+  height: 4vh;
+  width: 61%;
+  border-radius: 9px;
+  border: none;
+  transition: all 0.5s;
+  background-color: #17a2b8;
+  color: #fff;
+  font-size: 12px;
+  margin-left: 23px;
 }
 .purchasebutton:hover{
     background-color: #0062cc;
@@ -206,7 +230,7 @@ a {
                           Navbar
   ======================================================*/
 #navbar {
-  background: white;
+  background:  white;
   color: rgb(13, 26, 38);
   position: fixed;
   top: 0;
