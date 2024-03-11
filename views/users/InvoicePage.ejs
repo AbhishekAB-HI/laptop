@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>invoice page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <div class="container mb-5 mt-3">
+                <div class="row d-flex align-items-baseline">
+                    <div class="col-xl-9">
+                        <h2 style="color: #5d9fc5;">Trend Hub</h2>
+                        
+                        <strong><%=user.user.address%></strong>
+                        <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID: <%=String(order._id).slice(0,
+                                    8)%></strong></p>
+                    </div>
+                    <div class="col-xl-3 float-end">
+                        <a id="printButton" class="btn btn-light text-capitalize border-0"
+                            data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i>DownloadInvoice</a>
+                       
+                    </div>
+                    <hr>
+                </div>
+
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <i class="fab fa-mdb fa-4x ms-0" style="color:#5d9fc5 ;"></i>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <ul class="list-unstyled">
+                                <li class="text-muted">To: <span style="color:#5d9fc5 ;">
+                                        <%=user.user.username%>
+                                    </span></li>
+                                    <br>
+                                    <li class="text-muted">Address: <br> <span style="color:#5d9fc5 ;">
+                                        <%=product.address%>
+                                    </span></li>
+                                    <li class="text-muted">Phone: <br> <span style="color:#5d9fc5 ;">
+                                        <%=user.user.number%>
+                                    </span></li>
+                               
+
+
+                            </ul>
+                        </div>
+                        <div class="col-xl-4">
+                            <p class="text-muted">Invoice</p>
+                            <ul class="list-unstyled">
+                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                        class="fw-bold">ID:</span>
+                                    <%=String(order._id).slice(0, 8)%>
+                                </li>
+                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                        class="fw-bold">Creation Date: </span>
+                                    <%=order.createdAt.toDateString()%>
+                                </li>
+                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                        class="me-1 fw-bold">Status:</span><span
+                                        class="badge bg-warning text-black fw-bold">
+                                        <%=product.status%>
+                                    </span></li>
+                                <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span
+                                        class="me-1 fw-bold">Payment Method:</span><span
+                                        class="badge bg-warning text-black fw-bold">
+                                        <%=product.paymentMethod%>
+                                    </span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row my-2 mx-1 justify-content-center">
+                        <table class="table table-striped table-borderless">
+                            <thead style="background-color:#84B0CA ;" class="text-white">
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">CouponDiscount</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>
+                                        <%=product.product_id.productname%>
+                                    </td>
+                                    <td>
+                                        <%=product.qty%>
+                                    </td>
+                                    <td>₹<%=product.couponDiscount%>
+                                    </td>
+                                    <td>₹<%=product.price%>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <p class="ms-3">Add additional notes and payment information here</p>
+
+                        </div>
+                        <div class="col-xl-3">
+                            <ul class="list-unstyled">
+                                <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>₹
+                                    <%=product.price%>
+                                </li>
+
+                            </ul>
+                            <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
+                                    style="font-size: 25px;">₹<%=product.totalPrice%></span></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <p>Thank you for your purchase</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById("printButton").addEventListener("click", () => {
+        window.print();
+    })
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</html>

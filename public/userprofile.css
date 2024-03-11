@@ -15,7 +15,7 @@ body {
 }
 
 .profile-nav .user-heading {
-    background:rgb(133 174 183);
+    background:rgb(93, 95, 96);
     color: #fff;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -90,6 +90,23 @@ body {
     font-size: 12px;
 }
 
+.profileMenu{
+    background-color: rgb(78, 74, 74);
+}
+
+.table {
+    width: 90%; /* Adjust the overall width of the table */
+    margin: 10px auto; /* Center the table on the page */
+}
+
+.table th,
+.table td {
+    white-space: nowrap; /* Prevent text wrapping in cells */
+    max-width: 200px; /* Set a maximum width for cells to avoid excessive width */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Show ellipsis (...) for overflowed content */
+}
+
 
 .p-text-area, .p-text-area:focus {
     border: none;
@@ -109,7 +126,7 @@ body {
 }
 
 .bio-graph-heading {
-    background:rgb(133 174 183);
+    background:rgb(93, 95, 96);
     color: #fff;
     text-align: center;
     font-style: italic;

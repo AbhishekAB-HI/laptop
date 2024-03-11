@@ -1,0 +1,19 @@
+.logo {
+    /* Adjust the font size */
+    font-weight: bold;
+    color: #333;
+    background-color: #ffd700;
+    padding: 6px 12px; /* Adjust the padding */
+    border-radius: 6px; /* Adjust the border-radius */
+    display: inline-block;
+    letter-spacing: 1px; /* Adjust the letter spacing */
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .logo:hover{
+    background-color: rgb(191, 191, 99);
+    
+    cursor: pointer;
+  
+  } 
+  

@@ -7,6 +7,11 @@
 .icon-hover:hover i {
     color: #3b71ca !important;
 }
+
+.dropdown-item:hover{
+background-color: #363636;
+color: white;
+}
 /* .card{
     box-shadow: 0 1px 9px;
     border-radius: 9px;
@@ -52,6 +57,98 @@ a
     color: #fff;
     padding: 3px 10px;
 }
+
+.carousel-control-prev-icon{
+    width: 20%;
+    height: 15%;
+    background-color: #495057;
+    border-radius: 10%;
+  
+}
+.carousel-control-prev{
+  right: 20px; 
+}
+
+.carousel-control-next-icon{
+  width: 20%;
+  height: 15%;
+  background-color: #495057;
+  border-radius: 10%;
+
+
+}
+
+.btnsearch{
+  background-color: #495057;
+  color: #fff;
+  width: 23%;
+  height: 34%;
+  padding: 9px;
+  border-radius: 5px;
+}
+.btnsearch:hover{
+  background-color: #363636;
+  color: white;
+  cursor: pointer;
+}
+
+
+.logo {
+  /* Adjust the font size */
+  font-weight: bold;
+  color: #333;
+  background-color: #ffd700;
+  padding: 6px 12px; /* Adjust the padding */
+  border-radius: 6px; /* Adjust the border-radius */
+  display: inline-block;
+  letter-spacing: 1px; /* Adjust the letter spacing */
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.logo:hover{
+  background-color: rgb(191, 191, 99);
+  
+  cursor: pointer;
+
+} 
+.imgSample {
+  background-image: url("https://image.slidesdocs.com/responsive-images/background/devices-displaying-responsive-website-on-screen-viewed-from-above-on-wooden-desktop-in-3d-powerpoint-background_073689d322__960_540.jpg");
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+  width: 100vw; /* Set the width to fill the viewport width */
+  height: 80vh; /* Set the height to fill the viewport height */
+  padding-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .badgeoff {
   position: absolute;
@@ -110,8 +207,13 @@ h4 {
     transition: 0.3s;
 }
 
+ 
+
 .product-details h4 a:hover {
     color: #fbb72c;
+}
+.btn{
+  background-color:#565a5d;;
 }
 
 .product-details p {
@@ -131,6 +233,28 @@ h4 {
     float: left;
     width: 50%;
 }
+
+.navbar-brand {
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  font-family: 'YourLogoFont', sans-serif; /* Replace 'YourLogoFont' with the desired font */
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold; /* Make the text bold for a logo-like appearance */
+  text-decoration: none; /* Remove underline from the link */
+  color: #ffffff; /* Set the text color to white */
+ /* Set the background color */
+  border-radius: 5px; /* Add some border-radius for rounded corners */
+}
+
+.navbar-brand:hover {
+  color: #555; 
+  background-color:rgb(62, 59, 59);
+
+}
+
+
+
+
 
 .product-price {
     font-size: 15px;
@@ -178,7 +302,7 @@ h4 {
   border-radius: 5px;
   border: none;
   transition: all 0.5s ;
-  background-color:#17a2b8;
+  background-color:rgb(65 62 62);
   color: #fff;
 
 }
@@ -190,17 +314,17 @@ h4 {
   border-radius: 9px;
   border: none;
   transition: all 0.5s;
-  background-color: #17a2b8;
+  background-color: rgb(65 62 62);
   color: #fff;
   font-size: 12px;
   margin-left: 23px;
 }
 .purchasebutton:hover{
-    background-color: #0062cc;
+    background-color: rgb(40, 39, 39);
 }
 
 .product-price{
-    color:#17a2b8 !important; 
+    color:rgb(65 62 62)!important; 
 
 }
 

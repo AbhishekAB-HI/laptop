@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>admin Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+      <!-- Admin side bar -------------------------------------------------------------------------->
+
+<aside class="navbar-aside" id="offcanvas_aside">
+    <div class="aside-top">
+        <a href="/admin/home" class="brand-wrap">
+            <!-- <img src="assets/imgs/theme/logo.svg" class="logo" alt="Evara Dashboard"> -->
+            <h3 style="color: #17a2b8;" >TrendHub</h3>
+        </a>
+        <div>
+            <button class="btn btn-icon btn-aside-minimize"> <i class="text-muted material-icons md-menu_open"></i> </button>
+        </div>
+    </div>
+    <nav>
+        <ul class="menu-aside">
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/home"> <i class="icon material-icons md-home"></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products</span>
+                </a>
+                
+            </li> -->
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/productpage"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Products Page</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/productpage" class="active">Products </a>
+                    <a href="/admin/addproduct" class="active">Add product </a>
+                   
+                </div>
+            </li>
+          
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/orderlist"> <i class="icon material-icons md-shopping_cart"></i>
+                    <span class="text">Orders</span>
+                </a>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/categoryproduct"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Category</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/categoryproduct" class="active">Catagory </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a>
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-shopping_bag"></i>
+                    <span class="text">Addcoupon</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/addCoupont" class="active">Addcoupon</a>
+                    <a href="/admin/listCoupon" class="active">Listcoupon</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu active">
+                <a class="menu-link" href="/admin/addCoupont"> <i class="icon material-icons md-bar_chart"></i>
+                    <span class="text">SalesReport</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/monthreport" class="active">sales</a>
+                    <!-- <a href="/admin/listCoupon" class="active">Listcoupon</a> -->
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="/admin/addCoupont">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Offers</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/offer" class="active">Add-Offer</a>
+                    <a href="/admin/listoffer" class="active">List-Offer</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+            <li class="menu-item has-submenu ">
+                <a class="menu-link" href="">   <i class="icon material-icons md-local_offer"></i>
+
+                    <span class="text">Banners</span>
+                </a>
+                <div class="submenu">
+                    <a href="/admin/banner" class="active">Add-banner</a>
+                    <a href="/admin/listbanner" class="active">List-banner</a>
+                    <!-- <a href="/admin/addproduct" class="active">Add product </a>
+                    <a href="/admin/addcategory" class="active">Add Catagory </a> -->
+                </div>
+              
+            </li>
+
+
+
+
+
+          
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/dashboard"> <i class="icon material-icons md-store"></i>
+                    <span class="text">User Management</span>
+                </a>
+               
+            </li>
+            <li class="menu-item ">
+                <a class="menu-link" href="/admin/logout"> <i class="icon material-icons md-add_box"></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="page-transactions-1.html"> <i class="icon material-icons md-monetization_on"></i>
+                    <span class="text">Transactions</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-transactions-1.html">Transaction 1</a>
+                    <a href="page-transactions-2.html">Transaction 2</a>
+                    <a href="page-transactions-details.html">Transaction Details</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item has-submenu">
+                <a class="menu-link" href="#"> <i class="icon material-icons md-person"></i>
+                    <span class="text">Account</span>
+                </a>
+                <div class="submenu">
+                    <a href="page-account-login.html">User login</a>
+                    <a href="page-account-register.html">User registration</a>
+                    <a href="page-error-404.html">Error 404</a>
+                </div>
+            </li> -->
+            <!-- <li class="menu-item">
+                <a class="menu-link" href="page-reviews.html"> <i class="icon material-icons md-comment"></i>
+                    <span class="text">Reviews</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="page-brands.html"> <i class="icon material-icons md-stars"></i>
+                    <span class="text">Brands</span> </a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" disabled href="#"> <i class="icon material-icons md-pie_chart"></i>
+                    <span class="text">Statistics</span>
+                </a>
+            </li> -->
+        </ul>
+        <hr>
+    
+        <br>
+        <br>
+    </nav>
+</aside>
+
+ <!-- Admin side bar -------------------------------------------------------------------------->
+
+
+
+ 
+        <main class="main-wrap mt-0">
+            <header class="main-header navbar">
+                <div class="col-search">
+
+                </div>
+                <div class="col-nav">
+                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                            class="material-icons md-apps"></i> </button>
+                </div>
+            </header>
+            <section class="content-main">
+             
+                <div class="content-header">
+                   
+                    <div>
+
+                        <!-- <h2 style="padding: 10px; background-color: #f0f0f0;">Sales Report</h2>
+                        <h3 style="padding: 10px; font-size: 1.5em; background-color: #d9edf7;"
+                            class="content-title card-title">Total Sales Count: <%= counts %>
+                        </h3>
+                        <h3 style="padding: 10px; font-size: 1.5em; background-color: #aadbde;"
+                            class="content-title card-title">Coupon discount: <%= couponDiscounts %>
+                        </h3>
+                        <h3 style="padding: 10px; font-size: 1.5em; background-color: #53c4f1;"
+                            class="content-title card-title">Total Amount: <%= totalPrices %>
+                        </h3> -->
+
+                        <!-- <div class="text-center ">
+                            
+                            <button class="btn btn-primary"><a href="/admin/monthreport"
+                                    style="text-decoration:none;color:white;">Year Report</a></button>
+                            <button class="btn btn-secondary ml-5">Month Report</button>
+                        </div> -->
+
+                        <input id="dateFrom" style="width: 30%;height: 30%;" class="m-3" type="date">
+                        <input type="date" id="dateTo">
+
+                        <button onclick="filterByDate()"
+                            style="background-color: black;color: white;border-radius: 5px;"
+                            class="p-1 ml-5">Filter</button>
+                    </div>
+
+                    <div> <button id="excelButton" onclick="dowloadDoc(this.value)" value="excel"
+                            class="btn btn-danger">DOWNLOAD EXCEL</button>
+                        <button id="pdfButton" onclick="dowloadDoc(this.value)" value="pdf"
+                            class="btn btn-info ml-5">DOWNLOAD PDF</button>
+
+                    </div>
+
+                </div>
+                <div class="card mb-">
+                    <!-- card-header end// -->
+
+                  
+                        <div class="table-responsive">
+                            <table id="salestable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th colspan="6" style="background-color: #f0f0f0; text-align: center;">
+                                            <h2>Sales Report</h2>
+                                            <h3 style="padding: 10px; font-size: 1.5em; background-color: #d9edf7;" class="content-title card-title">
+                                                Total Sales Count: <%= counts %>
+                                            </h3>
+                                            <h3 style="padding: 10px; font-size: 1.5em; background-color: #aadbde;" class="content-title card-title">
+                                                Coupon discount: <%= couponDiscounts %>
+                                            </h3>
+                                            <h3 style="padding: 10px; font-size: 1.5em; background-color: #53c4f1;" class="content-title card-title">
+                                                Total Amount: <%= totalPrices %>
+                                            </h3>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Details</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Payment Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <% if(orders.length > 0) {
+                                        orders.forEach((order, i) => { %>
+                                            <% order.products.forEach((product, j) => { %>
+                                                <tr>
+                                                    <td><%= i + 1 + j %></td>
+                                                    <td>
+                                                        <img src="/productImages/<%= product.product_id?.images[1] %>" width="50px" height="50px" alt="Product Image" />
+                                                        <p><%= product.product_id.productname %></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><strong>Price:</strong> <%= product.price %></p>
+                                                        <p><strong>Quantity:</strong> <%= product.qty %></p>
+                                                        <p><strong>Coupon-discount:</strong> <%= product.couponDiscount %></p>
+                                                        <p><strong>Sub-Total:</strong> <%= product.totalPrice %></p>
+                                                        <p><strong>Address:</strong> <%= product.address %></p>
+                                                    </td>
+                                                    <td style="color: green;"><%= product.status %></td>
+                                                    <td><%= order.createdAt.toLocaleDateString() %></td>
+                                                    <td style="color: green;"><%= product.paymentMethod %></td>
+                                                </tr>
+                                            <% }); %>
+                                        <% }); 
+                                    } else { %>
+                                        <tr>
+                                            <td colspan="6">
+                                                <h3 style="color: red; text-align: center;">No orders</h3>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            
+
+                        </div> <!-- table-responsive //end -->
+                   <!-- card-body end// -->
+                </div> <!-- card end// -->
+                <div class="text-center">
+     
+                    <%
+                 for(let j=1;j<=totalpages;j++){
+                    %>
+                    
+                    <a class="text-black" style="text-decoration: none;" href="?page=<%=j%>"><button class="btn btn-light"> <%= j %></button></a>
+                    <%
+                 }
+                %>
+            
+            
+                </div>
+
+            </section> <!-- content-main end// -->
+            <footer class="main-footer font-xs">
+                <div class="row pb-30 pt-15">
+                    <div class="col-sm-6">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> ©, Evara - HTML Ecommerce Template .
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end">
+                            All rights reserved
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <script>
+
+                //  table filtering-------------------------------------------------------------------------------------
+                async function filterByDate() {
+                    const dateFrom = document.getElementById('dateFrom').value;
+                    const dateTo = document.getElementById('dateTo').value;
+                    console.log(dateFrom, "datefrom");
+                    console.log(dateTo, "dateTo");
+
+                    if (dateFrom > dateTo) {
+                        Swal.fire("Date Incorrect");
+                    } else {
+                        // Convert the input date string to a Date object
+
+
+                        const response = await fetch("/admin/filterdate", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ dateFrom: dateFrom, dateTo: dateTo }),
+                        })
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        console.log(data, "datacome");
+                        console.log(Array.isArray(data.data), "check");
+                        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+                          
+                            const tableBody = document.getElementById('tableBody');
+                            tableBody.innerHTML = data.data.map(order => {
+                                return order.products.map(product => `
+               
+                    <tr>
+                        <td>
+                            <p>${product.product_id.productname}</p>
+                            <img src="/productImages/${product.product_id.images[1]}" width="50px" height="50px" alt="Product Image" />
+                        </td>
+                     
+                        <td>
+                            <p><strong>Price:</strong> ${product.price}</p>
+                            <p><strong>Quantity:</strong> ${product.qty}</p>
+                            <p><strong>Sub-Total:</strong> ${product.totalPrice}</p>
+                            <p><strong>Address:</strong> ${product.address}</p>
+                        </td>
+                        <td style="color: green;">${product.status}</td>
+                        <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+                        <td style="color: green;">${product.paymentMethod}</td>
+                    </tr>
+                `).join('');
+                            }).join('');
+                            console.log(tableBody, "table body");
+                        }
+                        else {
+                            const resultContainer = document.getElementById('tableBody');
+                            resultContainer.innerHTML = '<h6 style="color:red;" >No data available.</h6>';
+                            // Filter the orderdetails based on the targetDate
+                        }
+
+                    }
+                }
+
+                //  table filtering-------------------------------------------------------------------------------------
+
+                //  download pdf and exel-----------------------------------------------------------------------------------------------
+
+                function dowloadDoc(buttonValue) {
+                    var salestable = document.getElementById('salestable');
+
+                    if (buttonValue === 'pdf') {
+                        // Call function to print PDF
+                        downloadPDF(salestable);
+                    } else if (buttonValue === 'excel') {
+                        // Call function to print Excel
+                        downloadExcel(salestable);
+                    }
+
+                }
+
+                function downloadPDF(table) {
+                    const printContents = table.outerHTML;
+                    const originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    window.print();
+                    document.body.innerHTML = originalContents;
+                }
+
+                function downloadExcel(table) {
+                    const ws = XLSX.utils.table_to_sheet(table);
+                    const wb = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(wb, ws, "Sales Report");
+                    XLSX.writeFile(wb, "sales_report.xlsx");
+                }
+
+
+                //  download pdf and exel-----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </script>
+            <!-- script for download excel -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+            <!-- script for download excel -->
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </main>
+        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/vendors/select2.min.js"></script>
+        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+        <!-- Main Script -->
+        <script src="assets/js/main.js" type="text/javascript"></script>
+</body>
+
+</html>

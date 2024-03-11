@@ -20,9 +20,9 @@
 <body>
 
   <!-- Header top trendhub-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
+  <nav style="background-color: rgb(65 62 62);" class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container px-4 px-lg-5">
-      <a class="navbar-brand text-white" href="/home">Trend Hub</a>
+      <div ><p class="logo" style="font-size: 24px;" >TrendHub</p> </div>
       <nav class="navbar navbar-expand-lg navbar-light ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link text-white" href="/home">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
@@ -48,7 +48,7 @@
             </li>
             <li class="nav-item">
 
-            
+              <a class="nav-link  text-white" href="/wishlist">Whishlist</a>
             </li>
           </ul>
         </div>
@@ -60,39 +60,81 @@
             <path
               d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
           </svg>
-          <a class="text-white" style="text-decoration: none; " href="/login">My cart</a>
+          <a class="text-white" style="text-decoration: none;border-width: 5px; " href="/getProduct">My cart</a>
         </button>
       </form>
     </div>
     </div>
   </nav>
+
+   <!-- Header top trendhub-->
+
+
+
+
   <!-- middle part -->
   <header class="bg-light py-1 imageselect mt-5">
-    <div class="container px-4 px-lg-5 my-5">
+    <!-- <div class="container px-4 px-lg-5 my-5">
       <div class="text-center text-black">
 
-        <!-- <img class=" pt-5"  src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wc3xlbnwwfHwwfHx8MA%3D%3D" alt=""> -->
-        <h1 style="color: white;" class="display-4 fw-bolder"><strong>Trend Hub</strong></h1>
-        <p style="color: white;" class="lead fw-normal text-white-50 mb-0">With the new laptop collections</p>
+      
+
+        <img class=" pt-5"  src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wc3xlbnwwfHwwfHx8MA%3D%3D" alt=""> -->
+        <!-- <h1 style="color: white;" class="display-4 fw-bolder"><strong>Trend Hub</strong></h1>
+        <p style="color: white;" class="lead fw-normal text-white-50 mb-5">With the new laptop collections</p> -->
       </div>
     </div>
+
+    
+    <% baners.forEach((baner, i) => { %>
+      <div id="carouselExampleControls<%= i %>" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% baner.images.forEach((image, j) => { %>
+            <div class="carousel-item<%= j === 0 ? ' active' : '' %>">
+              <img style="width: 100%; max-height: 600px;" class="d-block " src="/productImages/<%= image %>" alt="Slide <%= j + 1 %>">
+            </div>
+          <% }) %>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls<%= i %>" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls<%= i %>" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    <% }) %>
+    
+    
+  
+
+
+
+    
+
+   
+    
+   
+     
+    
   </header>
 
   <!-- middle part -->
 
   <!-- filter part nav -->
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-info  pb-5 ">
+  <nav style="background-color: rgb(65 62 62);" class="navbar navbar-expand-lg navbar-light   pb-5 ">
     <ul class="nav-item dropdown ">
       <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         Category
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a id="gameId" class="dropdown-item" href="/game">Gamming</a>
-        <a class="dropdown-item" href="/officetype">office</a>
-        <a class="dropdown-item" href="/tablettype">Tablets</a>
-        <a class="dropdown-item" href="/home">All models</a>
+        <a id="gameId" class="dropdown-item" href="/gamming">Gamming</a>
+        <a class="dropdown-item" href="/office">office</a>
+        <a class="dropdown-item" href="/tablet">Tablets</a>
+        <a class="dropdown-item" href="/dashboard">All models</a>
     </ul>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -100,7 +142,8 @@
       </ul>
       <form class="form-inline my-2 my-lg-0 ml-5">
         <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search">
-        <button class="btn bg-light btn-outline-success  my-2 my-sm-0" type="submit">Search</button>
+ 
+        <button class="btnsearch my-2 my-sm-0" type="submit">Search</button>
       </form>
       <ul class="nav-item dropdown mr-5">
         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -108,16 +151,38 @@
           Sort By
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/lowprice">High to lowprice</a>
-          <a class="dropdown-item" href="/highprice">Low to highprice</a>
-          <a class="dropdown-item" href="/home">All type</a>
+          <a class="dropdown-item" href="/highprice">High to lowprice</a>
+          <a class="dropdown-item" href="/lowprice">Low to highprice</a>
+          <a class="dropdown-item" href="/dashboard">All type</a>
       </ul>
     </div>
   </nav>
 
+  <!-- filter part nav -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <!-- middle part -->
+
+
+
+
   <div class="text-center bg-light">
     <% if(typeof message !=="undefined" ){ %>
-      <h3 style="color: #17a2b8;;" class="display-4 fw-bolder pt-5 pb-5">
+      <h3 style="color: rgb(65 62 62);" class="display-4 fw-bolder pt-5 pb-5">
         <%= message %>
       </h3>
 
@@ -153,7 +218,7 @@
               </a>
               <div class="product-details">
                 <span class="product-catagory">Laptops</span>
-                <button class="mb-3" style="background-color: #17a2b8;width: 23px;height: 23px;border-radius: 5px;" id="wishButton" onclick="wishAdd('<%=product._id%>')">
+                <button class="mb-3" style="background-color: rgb(65 62 62);;width: 23px;height: 23px;border-radius: 5px;" id="wishButton" onclick="wishAdd('<%=product._id%>')">
                   <i style="color: white;" class="fa fa-heart"></i>
                 </button> 
                 <h6><a href=""></a><%= product.productname %></h6>
@@ -189,7 +254,7 @@
   <div class="text-center">
     <% for(let j=1;j<=totalpages;j++){ %>
 
-      <a class="text-black" style="text-decoration: none;" href="?page=<%=j%>"><button class="btn btn-light">
+      <a class="text-black" style="text-decoration: none;" href="?page=<%=j%>"><button style="color: white;" class="btn btn-light">
           <%= j %>
         </button></a>
       <% } %>
@@ -198,10 +263,21 @@
   <br>
 
   <!-- pagination -->
+  <div style="background-color: rgb(69, 68, 68);">
+    <h1 class="text-center text-white p-5">TrendHub</h1>
+
+  </div>
+
+
+  <div  class="imgSample">
+    
+  </div>
 
 
   <!-- Footer-->
   <%- include("../layout/navbarbottom.ejs")%>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
     <!-- Footer-->
     <!-- Bootstrap core JS-->

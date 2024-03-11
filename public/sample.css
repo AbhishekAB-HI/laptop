@@ -17,11 +17,21 @@
         width: 10em;
         height: 3em;
         font-size: medium;
-        background-color: #17a2b8;
+        background-color: #575959;
         border-radius: 15px;
         color: #fff;
     }
     
+    .backbtn{
+        width: 5em;
+        height: 2em;
+        font-size: medium;
+        background-color: #575959;
+        border-radius: 4px;
+        color: #fff;
+        text-decoration: none;
+
+    }
     
 
    

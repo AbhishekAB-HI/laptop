@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Trend Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="screen-overlay"></div>
+    <%- include("../layout/Adminbar.ejs")%>
+        <main class="main-wrap">
+            <header class="main-header navbar">
+                <div class="col-search">
+
+                </div>
+                <div class="col-nav">
+                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"> <i
+                            class="material-icons md-apps"></i> </button>
+
+                </div>
+            </header>
+            <section class="content-main">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="content-header">
+                            <h2 class="content-title">Edit coupon</h2>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h4>Basic</h4>
+                            </div>
+                            <div class="card-body">
+                                <form method="post" action="/admin/Edit-coupon">
+                                    <div class="form-outline">
+                                        <% if(typeof message !=="undefined" ){ %>
+                                            <h5 style="color:red;">
+                                                <%= message %>
+                                            </h5>
+                                            <% } %>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Coupon code</label>
+                                        <input type="text" name="couponcode" value="<%=coupons.couponcode%>"
+                                            placeholder="Type here" class="form-control" id="product_name" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Percentage</label>
+                                        <input type="number" name="percentage" value="<%=coupons.percentage%>"
+                                            placeholder="Type here" class="form-control" id="product_name" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Expire-Date</label>
+                                        <input type="date" name="date" value="<%=coupons.date%>" class="form-control"
+                                            id="product_name" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Usage Limit</label>
+                                        <input type="text" name="usagelimit" value="<%=coupons.usagelimit%>"
+                                            placeholder="Type here" class="form-control" id="product_name" required>
+                                    </div>
+                                    <input type="hidden"  name="id" value="<%=coupons._id%>">
+
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-4">
+                                                <label class="form-label">Min Purchase Amount</label>
+                                                <div class="row gx-2">
+                                                    <input placeholder="$" value="<%=coupons.minamount%>"
+                                                        name="minamount" min="0" type="text" class="form-control"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-4">
+                                                <label class="form-label">Max Purchase Amount</label>
+                                                <div class="row gx-2">
+                                                    <input placeholder="$" value="<%=coupons.maxamount%>"
+                                                        name="maxamount" min="0" type="text" class="form-control"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+
+
+                            </div>
+                        </div> <!-- card end// -->
+
+                    </div>
+
+                    <!-- <div class="card-body">
+                            <div class="input-upload">
+                                <img src="assets/imgs/theme/upload.svg" id="file-preview"  alt="">
+                                <input type="file" multiple name="images" id="file-upload" required />
+                            </div>
+                        </div> -->
+                </div> <!-- card end// -->
+                <!-- 
+                    <div class="mt-4 pt-2">
+                       
+                        <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                      </div> -->
+
+
+                </form>
+
+
+
+
+                </div>
+            </section> <!-- content-main end// -->
+            <footer class="main-footer font-xs">
+                <div class="row pb-30 pt-15">
+                    <div class="col-sm-6">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> ©, Evara - HTML Ecommerce Template .
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end">
+                            All rights reserved
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <script>
+
+            const input = document.getElementById("file-upload");
+
+            input.addEventListener('change', previewPhoto);
+
+            const previewPhoto = () => {
+                const file = input.files;
+                console.log(file, "string........");
+                if (file) {
+                    const fileReader = new FileReader();
+                    const preview = document.getElementById('file-preview');
+                    fileReader.onload = event => {
+                        preview.setAttribute('src', event.target.result);
+                    }
+                    fileReader.readAsDataURL(file[0]);
+                }
+
+                const input = document.getElementById('file-input');
+                const previewPhoto = () => {
+                    const file = input.files;
+                    if (file) {
+                        const fileReader = new FileReader();
+                        const preview = document.getElementById('file-preview');
+                        fileReader.onload = function (event) {
+                            preview.setAttribute('src', event.target.result);
+                        }
+                        fileReader.readAsDataURL(file[0]);
+                    }
+                }
+                input.addEventListener("change", previewPhoto);
+            }
+
+
+        </script>
+
+
+
+
+
+
+        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/vendors/select2.min.js"></script>
+        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+        <!-- Main Script -->
+        <script src="assets/js/main.js" type="text/javascript"></script>
+</body>
+
+</html>

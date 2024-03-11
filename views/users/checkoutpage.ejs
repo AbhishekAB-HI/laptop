@@ -18,6 +18,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <link rel="stylesheet" href="/static/checkout.css">
+  <link rel="stylesheet" href="/static/stylenav.css">
 
   <style>
     .bd-placeholder-img {
@@ -38,24 +39,19 @@
   <!-- Custom styles for this template -->
   <link href="form-validation.css" rel="stylesheet">
 </head>
-<!-- Header-->
-<nav class="navbar navbar-expand-lg  bg-info ">
+<!-- Header top trendhub-->
+<nav style="background-color: rgb(65 62 62);" class="navbar navbar-expand-lg navbar-light ">
   <div class="container px-4 px-lg-5">
-    <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-        class="navbar-toggler-icon"></span></button>
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-
+    <div ><p class="logo" style="font-size: 24px;" >TrendHub</p> </div>
+    <nav class="navbar navbar-expand-lg navbar-light ">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link text-white" href="/dashboard">Home<span class="sr-only"></span></a>
+            <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
@@ -67,16 +63,16 @@
               <a class="dropdown-item" href="/logout">logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled text-white" href="">Contact Us</a>
+            <a class="nav-link  text-white" href="/showCoupons">Coupons</a>
 
           </li>
           <li class="nav-item">
-            <a class="nav-link  text-white" href="/showCoupons"> Coupons</a>
+
+            <a class="nav-link  text-white" href="/wishlist">Whishlist</a>
           </li>
         </ul>
       </div>
     </nav>
-
     <form class="d-flex">
       <button class="btn btn-outline-dark text-white" type="submit">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -84,19 +80,14 @@
           <path
             d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
         </svg>
-        <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a>
+        <a class="text-white" style="text-decoration: none;border-width: 5px; " href="/getProduct">My cart</a>
       </button>
     </form>
-
   </div>
   </div>
 </nav>
 
-
-
-
-
-<!-- Header-->
+ <!-- Header top trendhub-->
 
 <body class="bg-light">
   <div class="container mt-5 mb-5">
@@ -145,10 +136,17 @@
               </div>
               <span id="DiscountAmount" class="text-muted">0</span>
             </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Delivery Charge (fixed)</h6>
+
+              </div>
+              <span id="deliveryCharge" class="text-muted">100</span>
+            </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
               <strong>₹</strong><strong id="totalValueIs">
-                <%=totalPrice%>
+                <%=totalPrice+100%>
               </strong>
             </li>
           </ul>
@@ -189,7 +187,7 @@
             </label>
           </div>
           <br>
-          <h4 class="mb-4"><a href="/checkadress">Add address</a></h4>
+          <button class="mb-5" style="background-color: rgb(82, 78, 78);color: white;border-radius: 5px"  ><a style="text-decoration: none;color: white;" href="/checkadress">Add address</a></button>
 
           <table class="table">
             <thead>
@@ -270,7 +268,7 @@
                 required>
               <label class="custom-control-label" for="debit">Online Payment</label>
             </div>
-            <%if(totalPrice> check.wallet){%>
+            <%if(totalPrice > check.wallet){%>
               <div class="custom-control custom-radio">
                 <input id="paypal" name="paymentMethod" value="Wallet" disabled type="radio"
                   class="custom-control-input" required>
@@ -285,7 +283,7 @@
                 <%}%>
           </div>
           <hr class="mb-4">
-          <button type="button" id="isValue" class="btn btn-primary btn-lg btn-block">Place order</button>
+          <button style="background-color: rgb(99, 98, 98);" type="button" id="isValue" class="btn btn-primary btn-lg btn-block">Place order</button>
     </form>
   </div>
   </div>
@@ -341,7 +339,8 @@
           const coupondata = document.getElementById("couponcodeInput").value
           const discountValue = document.getElementById("DiscountAmount").textContent;
           const selectedAddress = document.querySelector('input[name="address"]:checked')
-          const totalprice = document.getElementById("totalValueIs").textContent
+          const totalprice = document.getElementById("totalValueIs").textContent;
+   
           const res = await fetch("/onlinepayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -402,6 +401,8 @@
         const discountValue = document.getElementById("DiscountAmount").textContent;
         const selectedAddress = document.querySelector('input[name="address"]:checked')
         const totalprice = document.getElementById("totalValueIs").textContent
+        const Deliverycharge=document.getElementById("deliveryCharge").textContent
+    
         const responcewallet = await fetch("/cashowndelivery", {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -451,7 +452,9 @@
           event.preventDefault();
           const inputvalue = document.getElementById("couponcodeInput").value;
           const inputData = inputvalue.trim()
-          const totalvalue = document.getElementById("Totalamounte").textContent;
+          const  totalvalue = document.getElementById("totalValueIs").textContent ;
+
+    
           if (inputData.length != 0) {
             passingCouponvalue(inputData, totalvalue)
           }
@@ -465,6 +468,8 @@
       async function passingCouponvalue(name, total) {
         try {
 
+     
+
           const getcoupon = await fetch("/passingCopon", {
             method: "post",
             headers: { "Content-Type": "application/json" },
@@ -477,6 +482,9 @@
             if (responce.message) {
               showPurchaseCoupon(responce.message)
             } else {
+
+
+             
               document.getElementById("DiscountAmount").textContent = responce.totalDiscount
               document.getElementById("totalValueIs").textContent = (total - responce.totalDiscount)
             }

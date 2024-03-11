@@ -172,6 +172,9 @@ const filterWeekly = async (req, res) => {
   console.log(weeklyGraphValue,"weekly");
 
 
+
+
+
     res.render('weeklychart', { revenue, onlinePay, cashondelivery, Wallet, FindBestSellingProducts, uniqueCategories, cataSize, brandNamearray, brandCount, orderDetails, totalproducts, totalorders, BestSellingProductsCount,weeklyGraphValue });
 
 
@@ -191,6 +194,8 @@ const filterWeekly = async (req, res) => {
 
 const LoadDashboard = async (req, res) => {
   try {
+
+    
 
     // finding total orders and products--------------------------------------------------------
 
@@ -219,7 +224,11 @@ const LoadDashboard = async (req, res) => {
 
     const currentMonth = new Date();
     const startOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
-    const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+    const endOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 10, 0);
+
+    console.log(startOfMonth,"start");
+    console.log(endOfMonth,"end");
+
 
     const monthlyrevenue = await order.aggregate([
 
@@ -240,7 +249,37 @@ const LoadDashboard = async (req, res) => {
       }
     ])
 
+  // weekly chart-------------------------------------------------------------------------------------------
 
+const currentDate = new Date();
+const startOfWeek = new Date(currentDate);
+startOfWeek.setDate(currentDate.getDate() - currentDate.getDay()); // Start of the current week
+
+const endOfWeek = new Date(currentDate);
+endOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 6); // End of the current week
+
+console.log(startOfWeek, "startOfWeek");
+console.log(endOfWeek, "endOfWeek");
+
+// const weeklyRevenue = await order.aggregate([
+//   {
+//     $match: {
+//       createdAt: {
+//         $gte: startOfWeek,
+//         $lte: endOfWeek,
+//       },
+//     },
+//   },
+//   {
+//     $group: {
+//       _id: { $week: "$createdAt" },
+//       weeklyRevenue: { $sum: "$subtotal" },
+//     },
+//   },
+// ]);
+
+
+    // weekly chart-------------------------------------------------------------------------------------------
     const graphValue = Array(12).fill(0);
 
     monthlyrevenue.forEach(entry => {
@@ -286,9 +325,14 @@ const LoadDashboard = async (req, res) => {
     // Yearly revenue----------------------------------------------------------------------
 
     const currentYear = new Date().getFullYear();
+    console.log(currentYear,"current year");
 
     const startOfYear = new Date(currentYear, 0, 1);
+
+    console.log(startOfYear,"statt yeaee");
     const endOfYear = new Date(currentYear, 11, 31);
+
+    console.log(endOfYear,"end yeaeerr");
 
     const Yearlyrevenue = await order.aggregate([
       {
@@ -309,12 +353,18 @@ const LoadDashboard = async (req, res) => {
 
 
 
-
+     var yearArray=[]
 
     const yearlyTotal = Yearlyrevenue.length > 0 ? Yearlyrevenue[0].yearrevenue : 0;
+    if(yearlyTotal){
+      yearArray.push(0,0,0,0,yearlyTotal)
+    }
 
-    // Assuming monthlyrevenue is an array of objects representing monthly revenue
-    const YearlyValue = Array(2).fill(yearlyTotal);
+    console.log(yearArray,'oooooooooooooooo');
+
+    
+
+    const YearlyValue = Array(1).fill(yearlyTotal);
     console.log("Yearly Values:", YearlyValue);
 
     // Yearly revenue----------------------------------------------------------------------
@@ -352,11 +402,13 @@ const LoadDashboard = async (req, res) => {
     FindBestSellingProducts.forEach(product => {
       const categoryName = product.category.name.toString()
 
-      // Assuming Cname is a property in pcategory
+   
       if (!uniqueCategories.includes(categoryName) && uniqueCategories.length < 5) {
         uniqueCategories.push(categoryName);
       }
     });
+
+     // best selling caegory-----------------------
 
     // Category count--------------------------------------------------------------
 
@@ -381,10 +433,19 @@ const LoadDashboard = async (req, res) => {
     const brandCount = brandNamearray.length
 
     //  ledger book details-----------------------------------------------------
+    var page = 1;
+    if (req.query.page) {
+      var page = req.query.page
+    }
+    const limit = 5;
 
-    const orderDetails = await order.find({})
+    const orderDetails = await order.find({}).limit(limit * 1)
+    .skip((page - 1) * limit).sort({ _id: -1 })
+    .exec()
 
-    res.render('adminHome', { orderDetails, monthlyOrder, uniqueCategories, monthlyrevenue, YearlyValue, revenue, totalproducts, totalorders, graphValue, onlinePay, cashondelivery, Wallet, FindBestSellingProducts, BestSellingProductsCount, cataSize, brandNamearray, brandCount });
+    const count = await order.find({}).countDocuments()
+
+    res.render('adminHome', { orderDetails ,totalpages: Math.ceil(count / limit)   ,currentpages: page,monthlyOrder, uniqueCategories, monthlyrevenue, yearArray,YearlyValue, revenue, totalproducts, totalorders, graphValue, onlinePay, cashondelivery, Wallet, FindBestSellingProducts, BestSellingProductsCount, cataSize, brandNamearray, brandCount });
 
 
 

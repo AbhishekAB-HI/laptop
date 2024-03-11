@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderDetails</title>
+    <link rel="stylesheet" href="/static/invoice.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+                            <!-- BEGIN INVOICE -->
+                            <div class="col-xs-12">
+                                <div class="grid invoice">
+                                    <div class="grid-body">
+                                        <div class="invoice-title">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <img src="http://vergo-kertas.herokuapp.com/assets/img/logo.png" alt="" height="35">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h2>invoice</h2><br>
+                                                    <span class="small">order Id: <%= orderData._id.toString().slice(-6) %></span></h2><br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <address>
+                                                    <strong>Billed To:</strong><br>
+                                                    <h4><%=orderData.user.username%></h4>
+                                                    <h4><%=orderData.user.address%></h4>
+                                                    <abbr title="Phone">Phone No:<%=orderData.user.number%></abbr>  
+                                                </address>
+                                                <br>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <address>
+                                                    <strong>Shipped To:</strong><br>
+                                                    <h4><%=orderedData.address%></h4>
+                                                    <!-- <abbr title="Phone">Phone NO: </abbr>  -->
+                                                </address>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <address>
+                                                    <strong>Payment Method:</strong><br>
+                                                    <h4><%=orderedData.paymentMethod%></h4>
+                                                </address>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <address>
+                                                    <strong>Order Date:</strong><br>
+                                                    <h4><%=orderData.createdAt.toLocaleDateString()%></h4>
+                                                </address>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h3>ORDER SUMMARY</h3>
+                                                <div >
+
+                                                <table style="width: 80%;"  class="table table-striped">
+                                                    <thead >
+                                                        <tr class="line ">
+                                                            <!-- <td><strong>ID</strong></td> -->
+                                                            <td><strong>Product Name</strong></td>
+                                                            <td><strong>Product Price</strong></td>
+                                                            <td><strong>Quantity</strong></td>
+                                                           
+                                                        </tr>
+                                                    </thead>
+                                                  
+                                                    <tbody>
+                                                        <% orderStatus.products.forEach((item, i) => { %>
+   
+                                                        <tr style="margin-bottom: 10px;">
+                                                            <td class="text-center"><%= item.product_id.productname %> </td>
+                                                            <td class="text-center"><%= item.price%> </td>
+                                                            <td class="text-center"><%= item.qty%></td>
+                                                            
+                                                        </tr>
+
+                                                        <% }); %>
+                                                        
+                                                        <!-- Add margin to the second row as well -->
+                                                        <tr style="margin-bottom: 10px;">
+                                                            <!-- Your data here -->
+                                                        </tr>
+                                                        
+                                                     
+                                                    </tbody>
+                                                </div>
+                                                </table>
+                                                
+
+
+
+
+
+
+
+
+
+
+                                                
+                                            </div>									
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-right identity">
+                                                <p>Total Price<br><strong><%= orderedData.totalPrice %></strong></p>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-12 text-right identity">
+                                                <p>Designer identity<br><br><strong>Abhishek-D</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END INVOICE -->
+                        </div>
+        </div>
+</body>
+</html>

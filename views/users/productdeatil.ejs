@@ -13,80 +13,13 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/productpage.css">
 
 </head>
 
 <body>
-  <header>
-    <!-- Header-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
-      <div class="container px-4 px-lg-5">
-        <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-            class="navbar-toggler-icon"></span></button>
-        <nav class="navbar navbar-expand-lg navbar-light bg-info">
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse " id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only"></span></a>
-              </li>
-
-              <li class="nav-item dropdown">
-
-
-
-                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Account
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="/aboutus">My profile</a>
-                  <a class="dropdown-item" href="/">Wish List</a>
-                  <a class="dropdown-item" href="/">contact</a>
-                  <a class="dropdown-item" href="/">wallet</a>
-                  <a class="dropdown-item" href="/logout">logout</a>
-
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled text-white" href="">Contact Us</a>
-              </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" name="search" placeholder="Searchhere"
-                aria-label="Search">
-              <input class="btn bg-light btn-outline-success my-2 my-sm-0" type="submit" value="search"
-                aria-label="Search">
-
-            </form>
-          </div>
-
-        </nav>
-        <form class="d-flex">
-          <button class="btn btn-outline-dark text-white" type="submit">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-              class="bi bi-cart3 text-white" viewBox="0 0 16 16">
-              <path
-                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-            </svg>
-            <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a>
-          </button>
-        </form>
-
-      </div>
-      </div>
-    </nav>
-    <!-- Header-->
-
-
-
-  </header>
+  <%-include('../layout/navbarhome')-%>
+  
 
   <!-- content -->
   <section class="py-5">
@@ -217,7 +150,7 @@
               <% }else{ %>
                 <!-- <button type="button" id="addToCart" class="btn btn-primary"><a style="color: #fff;text-decoration: none;"
                     href="/cartpage?id=<%=product._id%>">Add to cart</a></button> -->
-                <button type="button" id="addToCart" class="btn btn-primary">Add to cart</button>
+                <button type="button" id="addToCart" class="btn text-white">Add to cart</button>
 
                 <% } %>
 
@@ -420,153 +353,7 @@
 
 
 
-  <!-- Footer -->
-  <footer class="text-center text-lg-start text-muted bg-info mt-3">
-    <!-- Section: Links  -->
-    <section class="">
-      <div class="container text-center text-md-start pt-4 pb-4">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-12 col-lg-3 col-sm-12 mb-2">
-            <!-- Content -->
-            <a href="#" target="_blank" class="text-white h2">
-              TREND HUB
-            </a>
-            <p class="mt-1 text-white">
-              © 2023 Copyright
-            </p>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-6 col-sm-4 col-lg-2">
-            <!-- Links -->
-            <h6 class="text-uppercase text-white fw-bold mb-2">
-              Store
-            </h6>
-            <ul class="list-unstyled mb-4">
-              <li><a class="text-white-50" href="/aboutus">About us</a></li>
-              <li><a class="text-white-50" href="#">Categories</a></li>
-              <li><a class="text-white-50" href="#">Blogs</a></li>
-            </ul>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-6 col-sm-4 col-lg-2">
-            <!-- Links -->
-            <h6 class="text-uppercase text-white fw-bold mb-2">
-              Information
-            </h6>
-            <ul class="list-unstyled mb-4">
-              <li><a class="text-white-50" href="#">Help center</a></li>
-              <li><a class="text-white-50" href="#">Money refund</a></li>
-              <li><a class="text-white-50" href="#">Shipping info</a></li>
-
-            </ul>
-          </div>
-          <!-- Grid column -->
-
-          <!-- Grid column -->
-          <div class="col-6 col-sm-4 col-lg-2">
-            <!-- Links -->
-            <h6 class="text-uppercase text-white fw-bold mb-2">
-              Support
-            </h6>
-            <ul class="list-unstyled mb-4">
-
-              <li><a class="text-white-50" href="#">My orders</a></li>
-            </ul>
-          </div>
-          <!-- Grid column -->
-
-          <!-- social meadias column -->
-
-          <div class="col-6 col-sm-4 col-lg-2">
-            <!-- Links -->
-            <h6 class="text-uppercase text-center text-white fw-bold mb-4">
-              Keep in touch
-            </h6>
-
-            <ul class="list-unstyled mb-4  text-center">
-              <a href=""><i class="fab fa-facebook-f fa-2x ml-4" style="color: #3b5998;"></i></a>
-              <!-- Instagram -->
-              <a href=""><i class="fab fa-instagram fa-2x ml-4" style="color: #ac2bac;"></i></a>
-              <!-- Linkedin -->
-              <a href=""><i class="fab fa-linkedin-in fa-2x ml-4" style="color: #0082ca;"></i></a>
-
-            </ul>
-          </div>
-
-
-
-
-          <!-- social medias column -->
-        </div>
-        <!-- Grid row -->
-      </div>
-    </section>
-    <!-- Section: Links  -->
-
-    <div class="">
-      <div class="container">
-        <div class="d-flex justify-content-between py-4 border-top">
-          <!--- payment --->
-          <div>
-
-            <i class="fab fa-lg fa-cc-visa text-white"></i>
-            <i class="fab fa-lg fa-cc-amex text-white"></i>
-            <i class="fab fa-lg fa-cc-mastercard text-white"></i>
-            <i class="fab fa-lg fa-cc-paypal text-white"></i>
-          </div>
-          <!--- payment --->
-
-          <!--- language selector --->
-          <div class="dropdown dropup">
-            <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown"
-              aria-expanded="false"> <i class="flag-united-kingdom flag m-0 me-1"></i>English </a>
-
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i
-                    class="fa fa-check text-success ms-2"></i></a>
-              </li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
-              </li>
-            </ul>
-          </div>
-          <!--- language selector --->
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- Footer -->
+  <%- include("../layout/navbarbottom.ejs")%>
 
 
 

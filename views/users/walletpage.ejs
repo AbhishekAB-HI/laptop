@@ -8,70 +8,53 @@
     <link rel="stylesheet" href="/static/wallet.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-xrBf+Q6MO33stUOWns4xd1PdO9lO6N9fMEkppeyXg/BPyA/3/uhq2A1YY8Ai+NM2WYbJpAeQaARc8nu3R8Zf7g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
-
+    <link rel="stylesheet" href="/static/productpage.css">
 </head>
 <body>
-      <!-- Header-->
-      <nav class="navbar navbar-expand-lg navbar-light bg-info fixed-top">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand text-white" href="/dashboard">Trend Hub</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <nav class="navbar navbar-expand-lg navbar-light bg-info">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                  <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                      <a class="nav-link text-white" href="/dashboard">Home <span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Account
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/aboutus">My profile</a>
-                        <a class="dropdown-item" href="/">Wish List</a>
-                        <a class="dropdown-item" href="/">contact</a>
-                        <a class="dropdown-item" href="/">wallet</a>
-                        <a class="dropdown-item" href="/logout">logout</a> 
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link disabled text-white" href="">Contact Us</a>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
-              <form class="d-flex">
-                <button class="btn btn-outline-dark text-white" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3 text-white" viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                      </svg>
-                      <a class="text-white" style="text-decoration: none; " href="/getProduct">My cart</a> 
-                </button>
-            </form>         
-            </div> 
-        </div>
-    </nav>
-    <!-- Header-->
+      <%-include('../layout/navbarhome')-%>
+
+      <style>
+        /* Additional CSS styles for better layout */
+        .card {
+            overflow: hidden; /* Ensure the card does not overflow its container */
+        }
+
+        table {
+            width: 100%; /* Make the table take the full width of its container */
+            background-color: aliceblue;
+        }
+
+        th, td {
+            text-align: center; /* Center align the text in header and cells */
+        }
+
+        td {
+            max-width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 20px;
+        }
+    </style>
     <section class="vh-100 " style="background-color: #f4f5f7;">
       <div class="container-fluid py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
               <div class="col col-lg-6 mb-4 mb-lg-0">
-                  <div class="card mb-2 " style="border-radius: .5rem; height: 80%; width: 1000px">
+                  <div class="card mb-2 " style="border-radius: .5rem; height: 80%; width: 1000px ;background-color: rgb(83, 80, 80); ">
                       <div class="row g-0">
-                          <div class="col-md-3 bg-info gradient-custom text-center text-white"
+                          <div  class="col-md-3  gradient-custom text-center text-white"
                               style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem; height: 400px;">
                               <h3 class="pt-5">Wallets</h3>
                               <p>Total Amount</p>
                               <h4 class="pt-5 pb-5">₹<%= total %></h4>
                               <i class="fas fa-wallet mb-5"></i>
+                              <button class="p-1" style="background-color: rgb(215, 205, 205); border-radius:3px"><a style="text-decoration: none;color: rgb(44, 41, 41);" href="/aboutus">Back</a></button>
                           </div>
                           <div class="col-md-9" style="background-color: aliceblue;">
                               <div class="card-body ">
                                   <table class="table table-striped" style="background-color: aliceblue;">
                                       <thead>
-                                          <tr style="color: rgb(28, 180, 207);">
+                                          <tr style="color: rgb(93, 98, 99);">
                                               <th scope="col">No</th>
                                               <th scope="col">Wallet History</th>
                                               <th scope="col">Payment</th>
@@ -108,6 +91,7 @@
                                             <%}%>
                                       </tbody>
                                   </table>
+                                  
                               </div>
                           </div>
                       </div>
@@ -116,6 +100,9 @@
           </div>
       </div>
   </section>
+
+        
+   
   
 
 
