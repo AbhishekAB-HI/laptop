@@ -36,8 +36,14 @@ const upload = multer({ storage: storage })
 
  user_route.get("/register",userAuth.isLogout,userController.loadRegister);
  user_route.get("/login",userAuth.isLogout,userController.loadLogin)
+ user_route.get("/",userAuth.isLogout,userController.loadLoginHome)
 
- user_route.get("/",userAuth.isLogout,userController.loadLogin)
+//  user_route.post("/",userController.Logintrue);
+ user_route.post("/login",userController.verifyLogin);
+
+
+
+
  user_route.get("/home",userAuth.isLogout,userController.loadHome);
  user_route.get("/dashboard",userAuth.isLogin,userController.HomeLogined)
  user_route.get("/verification",userController.verificationLoad)
@@ -129,8 +135,7 @@ user_route.post("/changeCancel",userAuth.isLogin,userController.cancelStatus)
  
   
  
- user_route.post("/",userController.verifyLogin);
- user_route.post("/login",userController.verifyLogin);
+
  user_route.post("/register",userController.insertuser);
 
 //  coupon ----------------------------------

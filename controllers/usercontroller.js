@@ -220,6 +220,75 @@ const loadHome = async (req, res) => {
 }
 
 
+const loadLoginHome = async (req, res) => {
+  try {
+
+    var search = '';
+    if (req.query.search) {
+      search = req.query.search
+    }
+
+    var page = 1;
+    if (req.query.page) {
+      page = req.query.page
+    }
+    
+    const baners = await banner.find()
+
+    const limit = 8;
+    const productData = await product.find({
+
+      $and: [
+        { productname: { $regex: ".*" + search + ".*", $options: "i" } },
+        { is_list: false }
+      ]
+    })
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+
+
+    const count = await product.find({
+      $or: [
+        { productname: { $regex: ".*" + search + ".*", $options: "i" } },
+
+      ]
+    }).countDocuments()
+ console.log(productData,"dataaaaa");
+    if (count === 0) {
+      res.render("nodatahome")
+    } else
+      res.render("home", {
+        product: productData,
+        totalpages: Math.ceil(count / limit),
+        currentpages: page,
+        baners
+      }
+      )
+  } catch (error) {
+    console.log(error)
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const loadLogin = async (req, res) => {
   try {
     res.render("login")
@@ -254,6 +323,33 @@ const verifyLogin = async (req, res) => {
     console.log(error.message)
   }
 }
+
+
+const Logintrue = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const password = req.body.password
+    const userData = await User.findOne({ email: email });
+    if (userData) {
+      const passwordMatch = await bcrypt.compare(password, userData.password);
+      if (passwordMatch) {
+        if (userData.is_Blocked === true) {
+          res.render("login", { message: "You are blocked" })
+        } else {
+          req.session.user_id = userData._id;
+          res.redirect("/dashboard")
+        }
+      } else {
+        res.render("login", { message: "Email and Password is incorrect" })
+      }
+    } else {
+      res.render("login", { message: "Email and Password is incorrect" })
+    }
+  } catch (error) {
+    console.log(error.message)
+  }
+}
+
 
 
 
@@ -2597,7 +2693,9 @@ module.exports = {
   Invoice,
   rayzopayPaymentFailed,
   rayzopayPaymentContinue,
-  rayzopayChecking
+  rayzopayChecking,
+  Logintrue,
+  loadLoginHome
 
 
 }
