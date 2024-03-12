@@ -254,7 +254,6 @@ const loadLoginHome = async (req, res) => {
 
       ]
     }).countDocuments()
- console.log(productData,"dataaaaa");
     if (count === 0) {
       res.render("nodatahome")
     } else
