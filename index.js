@@ -5,7 +5,7 @@ mongoose.connect(process.env.MONGO_URI);
 
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 3000;
 
 app.use('/path/to', express.static('public'));
 
