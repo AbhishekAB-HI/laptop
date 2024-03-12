@@ -129,7 +129,7 @@ user_route.post("/changeCancel",userAuth.isLogin,userController.cancelStatus)
  
   
  
-
+ user_route.post("/",userController.verifyLogin);
  user_route.post("/login",userController.verifyLogin);
  user_route.post("/register",userController.insertuser);
 
