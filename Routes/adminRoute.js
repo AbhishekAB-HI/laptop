@@ -10,7 +10,7 @@
  const adminAuth=require("../middleware/adminAuth") 
 // main part 
 //--------------------------------------------------------------------------------
- admin_route.use(session({secret:configure.sessionSecreatkey}))
+ admin_route.use(session({resave:true,saveUninitialized:true,secret:configure.sessionSecreatkey}))
  admin_route.use(express.json())
  admin_route.use(express.urlencoded({extended:true}))
 //--------------------------------------------------------------------------------

@@ -7,7 +7,7 @@ const session=require("express-session");
 const config=require("../config/config");
 
 const userAuth=require("../middleware/userAuth")
-user_route.use(session({secret:config.sessionSecreat}))
+user_route.use(session({secret:config.sessionSecreat,resave:true,saveUninitialized:true}))
 const blockchecking=require("../middleware/blockUser")
 
 user_route.use(express.json())
