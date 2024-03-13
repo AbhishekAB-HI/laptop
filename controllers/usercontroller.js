@@ -107,9 +107,8 @@ const insertuser = async (req, res) => {
         const passwordMatch = await bcrypt.compare(conformpassword, user.password);
         if (passwordMatch) {
           const Userdata = await user.save();
-          req.session.user_id = Userdata._id;
           sendVerfyMail(req.body.username, req.body.email, req);
-          res.render("verification")
+          res.redirect(`/verification/${Userdata._id}`)
         } else {
           res.render("signup", { message: "Entered password is incorrect" })
         }
@@ -367,7 +366,8 @@ const forgotpage = async (req, res) => {
 
 const verificationLoad = async (req, res) => {
   try {
-    res.render("verification")
+    const {id}=req.params
+    res.render("verification",{id})
   } catch (error) {
     console.log(error.message)
   }
@@ -378,11 +378,33 @@ const verificationLoad = async (req, res) => {
 
 const sendverificationLink = async (req, res) => {
   try {
+
+    const{userId}=req.body
+    const userData=await User.findOne({_id:userId})
+   
     const OTP = req.body.otp
     const { createdOtp } = req.session
     console.log(OTP)
     console.log(createdOtp)
     if (OTP === createdOtp) {
+      if(userData)
+      { 
+        const updateVerification=await User.updateOne({_id:userId},{$set:{
+          is_verified:1
+        }})
+        if(updateVerification)
+        {
+           req.session.user_id=userId 
+        }
+        else 
+        {
+          console.log("updation failed");
+        }
+      }
+      else
+      {
+        console.log("user not found");
+      }
 
 
       if (req.session.code) {

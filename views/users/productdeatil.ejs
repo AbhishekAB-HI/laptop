@@ -25,31 +25,23 @@
   <section class="py-5">
     <div class="container">
       <div class="row gx-5">
-
         <aside class="col-lg-6">
           <div class="border rounded-4 mb-3 d-flex justify-content-center">
-
-              <img class="xzoom" id="xzoom-default"  src="/productImages/<%=product.images[1]%>"   xoriginal="/productImages/<%=product.images[1]%>" width="80%" />
-            
+              <img class="xzoom" id="xzoom-default" src="/productImages/<%=product.images[1]%>" xoriginal="/productImages/<%=product.images[1]%>" width="80%" />
           </div>
           <div class="d-flex justify-content-center mb-3">
-            <div class="xzoom-thumbs">
+              <div class="xzoom-thumbs">
+                  <a href="/productImages/<%= product.images[1]%>"><img class="xzoom-gallery" width="80" src="/productImages/<%= product.images[1]%>" title="The description goes here"></a>
+                  <a href="/productImages/<%= product.images[0]%>"><img class="xzoom-gallery" width="80" src="/productImages/<%= product.images[0]%>" title="The description goes here"></a>
+                  <a href="/productImages/<%= product.images[2]%>"><img class="xzoom-gallery" width="80" src="/productImages/<%= product.images[2]%>" title="The description goes here"></a>
+              </div>
+          </div>
+      </aside>
 
-              <a href="/productImages/<%= product.images[1]%>"><img class="xzoom-gallery"   width="80" src="/productImages/<%= product.images[1]%>"   title="The description goes here"></a>
-  
-              <a href="/productImages/<%= product.images[0]%>"><img class="xzoom-gallery"  width="80" src="/productImages/<%= product.images[0]%>"   title="The description goes here"></a>
-           
-           
-              <a href="/productImages/<%= product.images[2]%>"><img class="xzoom-gallery" width="80" src="/productImages/<%= product.images[2]%>"   title="The description goes here"></a>
-          
-          </div>
-            
-          
-          </div>
-       
-          <!-- thumbs-wrap.// -->
+
+
+             <!-- thumbs-wrap.// -->
           <!-- gallery-wrap .end// -->
-        </aside>
 
 
 
@@ -434,7 +426,7 @@
 <script>
   (function ($) {
     $(document).ready(function() {
-        $('.xzoom, .xzoom-gallery').xzoom({zoomWidth: 300,zoomheight:300, title: true, tint: '#333', Xoffset: 15});
+      $('.xzoom, .xzoom-gallery').xzoom({ zoomWidth: 300, zoomHeight: 300, title: true, tint: '#333', Xoffset: 15 });
         $('.xzoom2, .xzoom-gallery2').xzoom({position: '#xzoom2-id', tint: '#ffa200'});
         $('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
         $('.xzoom4, .xzoom-gallery4').xzoom({tint: '#006699', Xoffset: 15});

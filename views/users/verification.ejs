@@ -18,6 +18,7 @@
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form3Example3cg">Enter the otp send in your mail</label>
                   <input type="number" id="form3Example3cg" name="otp" class="form-control form-control-lg" required />
+                   <input type="hidden" value="<%=locals.id%>" name="userId">
                 </div>
                 <div class="text-center">
                   <button id="resend" style="display: none;"><a href="/verify">Click</a></button>

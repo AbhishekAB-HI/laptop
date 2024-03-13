@@ -116,9 +116,10 @@ a
   background-size: cover; /* Cover the entire container */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Do not repeat the background image */
-  width: 100vw; /* Set the width to fill the viewport width */
+  width: 98vw; /* Set the width to fill the viewport width */
   height: 80vh; /* Set the height to fill the viewport height */
-  padding-top: 10px;
+  padding-top: 0px;
+  
 }
 
 

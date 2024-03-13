@@ -46,7 +46,7 @@ const upload = multer({ storage: storage })
 
  user_route.get("/home",userAuth.isLogout,userController.loadHome);
  user_route.get("/dashboard",userAuth.isLogin,userController.HomeLogined)
- user_route.get("/verification",userController.verificationLoad)
+ user_route.get("/verification/:id",userController.verificationLoad)
     
  user_route.post("/verification",userController.sendverificationLink)
  user_route.get("/verify",userController.verify)
