@@ -16,7 +16,7 @@ const orderid = require('order-id')('key');
 const wishlist = require("../model/wishlist")
 
 const coupon = require("../model/coupon");
-const banner =require("../model/banner")
+const banner = require("../model/banner")
 
 
 const createOtp = () => {
@@ -180,7 +180,7 @@ const loadHome = async (req, res) => {
     if (req.query.page) {
       page = req.query.page
     }
-    
+
     const baners = await banner.find()
 
     const limit = 8;
@@ -232,7 +232,7 @@ const loadLoginHome = async (req, res) => {
     if (req.query.page) {
       page = req.query.page
     }
-    
+
     const baners = await banner.find()
 
     const limit = 8;
@@ -384,15 +384,15 @@ const sendverificationLink = async (req, res) => {
     console.log(createdOtp)
     if (OTP === createdOtp) {
 
-      
+
       if (req.session.code) {
-        await User.findOneAndUpdate({referalId: req.session.code }, {
+        await User.findOneAndUpdate({ referalId: req.session.code }, {
           $inc: { wallet: 100 }, $push: {
             walletHistory: {
               amount: 100,
               createdAt: new Date(),
               direction: '+',
-              description:"Referal bonus"
+              description: "Referal bonus"
             }
           }
         })
@@ -403,8 +403,8 @@ const sendverificationLink = async (req, res) => {
               amount: 50,
               createdAt: new Date(),
               direction: '+',
-              description:"Welcome bonus"
-         
+              description: "Welcome bonus"
+
             }
           }
         })
@@ -520,7 +520,7 @@ const HomeLogined = async (req, res) => {
       res.render("nodata")
     } else
 
-   
+
 
 
       res.render("homelogin", {
@@ -560,7 +560,7 @@ const gammingpart = async (req, res) => {
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .exec()
-      const baners = await banner.find()
+    const baners = await banner.find()
     const count = await product.find({
       $and: [
         { productname: { $regex: ".*" + search + ".*", $options: "i" }, category: { _id: "65dc2b1cf67d8e9f3bc10154" } }
@@ -571,7 +571,7 @@ const gammingpart = async (req, res) => {
       res.render("nodata")
     } else
       // res.json({product:productData,  totalpages: Math.ceil(count / limit),message: "Gaming"})
-     
+
       res.render("homelogin", {
         product: productData,
         totalpages: Math.ceil(count / limit),
@@ -1575,7 +1575,7 @@ const deleteOrderList = async (req, res) => {
             walletHistory: {
               amount: totalPriceSum,
               direction: "+",
-              description:"The amount is credited in your walletaccount",
+              description: "The amount is credited in your walletaccount",
               status: orderStatus.products[orderstatus].status,
               paymentMethod: orderStatus.products[orderstatus].paymentMethod
             }
@@ -1796,13 +1796,13 @@ const detailpage = async (req, res) => {
     const userid = req.session.user_id;
     const orderid = req.query.orderid;
     const productid = req.query.productid;
-    const product_id =req.query.deleteproductid
+    const product_id = req.query.deleteproductid
     const payment = req.query.payment;
     const orderdeatil = await order.findById({ _id: orderid }).populate("products.product_id");
     console.log(orderdeatil, 'stuuuuu');
     const currentindex = orderdeatil.products.findIndex(item => item._id.toString() == productid)
     const value = orderdeatil.products[currentindex];
-    if(value.status == "returnApproved"){
+    if (value.status == "returnApproved") {
       const orderId = await order.findById({ _id: orderid });
       const totalPriceSum = orderId.products.reduce((accu, curr) => {
         return accu + curr.totalPrice;
@@ -1827,7 +1827,7 @@ const detailpage = async (req, res) => {
       res.render("orderDETAILS", { order: value, orderpage: orderdeatil })
 
 
-    }else{
+    } else {
       res.render("orderDETAILS", { order: value, orderpage: orderdeatil })
     }
 
@@ -1907,7 +1907,7 @@ const rayzopayIntitial = async (req, res) => {
       return accu + curr.totalPrice;
     }, 0);
 
-    const shippingCharge =100;
+    const shippingCharge = 100;
 
     let afterDiscount;
     if (dicountAmount) {
@@ -1938,16 +1938,16 @@ const rayzopayIntitial = async (req, res) => {
         product_id: item.product_id,
         qty: item.qty,
         price: item.price,
-        totalPrice: ((((item.price)*item.qty) + shippingCharge) -dicountAmount) ,
+        totalPrice: ((((item.price) * item.qty) + shippingCharge) - dicountAmount),
         status: "Order placed",
         address: req.body.address,
         paymentMethod: "onlinePay",
         couponDiscount: dicountAmount,
-       
+
       };
       neworder.products.push(product);
     }
-    neworder.subtotal=afterDiscount
+    neworder.subtotal = afterDiscount
     neworder.rayzorpayId = orderdetails.id;
 
 
@@ -2164,7 +2164,7 @@ const cashowndelivery = async (req, res) => {
       afterDiscount = totalamount
     }
 
-    var shippingCharge=100;
+    var shippingCharge = 100;
 
     const neworder = new order({
       user: userid,
@@ -2179,17 +2179,17 @@ const cashowndelivery = async (req, res) => {
         product_id: item.product_id,
         qty: item.qty,
         price: item.price,
-        totalPrice:((((item.price)*item.qty) + shippingCharge) -dicountAmount),
+        totalPrice: ((((item.price) * item.qty) + shippingCharge) - dicountAmount),
         status: "Order placed",
         address: req.body.address,
         paymentMethod: "cash on delivery",
         couponDiscount: dicountAmount,
-       
+
 
       }
       neworder.products.push(product)
 
-      neworder.subtotal=afterDiscount
+      neworder.subtotal = afterDiscount
 
       console.log(neworder, "new order details getttttttttttttttttt");
 
@@ -2338,7 +2338,7 @@ const rayzopayCompletion = async (req, res) => {
     console.log(datas, 'datagether');
     const TotalAmount = req.query.Totalamount;
 
-    console.log(TotalAmount,"totalsssssssssssssssssssssssssssssss");
+    console.log(TotalAmount, "totalsssssssssssssssssssssssssssssss");
     const productdata = JSON.parse(datas);
     console.log(productdata, 'ooooooooooooooo');
     res.render("RayzopayCheckOut", { orderid: orderId, total: TotalAmount, productdata })
@@ -2487,17 +2487,17 @@ const Wallets = async (req, res) => {
     const limit = 5;
 
     const userid = req.session.user_id;
-    const userlatest = await User.findById(userid).sort({ "walletHistory._id": -1 }) 
-   
-    
+    const userlatest = await User.findById(userid).sort({ "walletHistory._id": -1 })
+
+
     const userdetails = await User.findById({ _id: userid })
-    const count = await User.findById({ _id: userid }).sort({ "walletHistory.createdAt": 1  }).countDocuments()
+    const count = await User.findById({ _id: userid }).sort({ "walletHistory.createdAt": 1 }).countDocuments()
 
     console.log(userlatest, "popopo");
     const walet = await User.findById({ _id: userid })
     const totalprice = walet.wallet
     console.log(totalprice, "price came");
-    res.render("walletpage", { user: userdetails, walet: userlatest, total: totalprice,    })
+    res.render("walletpage", { user: userdetails, walet: userlatest, total: totalprice, })
   } catch (error) {
     console.log(error.message)
   }
@@ -2511,11 +2511,11 @@ const Walletcheck = async (req, res) => {
     const cartitems = await User.findById({ _id: userid }).select("cart.items")
     const totalamount = cartitems.cart.items.reduce((accu, curr) => {
       return accu + curr.totalPrice
-    }, 0);  
+    }, 0);
 
-    const shippingCharge =100;
+    const shippingCharge = 100;
 
-   
+
 
     let afterDiscount
     if (dicountAmount) {
@@ -2540,7 +2540,7 @@ const Walletcheck = async (req, res) => {
             walletHistory: {
               amount: totalprice,
               direction: "-",
-            description:"The Amount debited from your wallent account"
+              description: "The Amount debited from your wallent account"
 
             }
           }
@@ -2563,18 +2563,18 @@ const Walletcheck = async (req, res) => {
           product_id: item.product_id,
           qty: item.qty,
           price: item.price,
-          totalPrice: ((((item.price)*item.qty) + shippingCharge) -dicountAmount),
+          totalPrice: ((((item.price) * item.qty) + shippingCharge) - dicountAmount),
           status: 'Order placed',
           address: req.body.address,
           paymentMethod: "Wallet",
           couponDiscount: dicountAmount,
-          subtotal:afterDiscount
+          subtotal: afterDiscount
 
         }
         neworder.products.push(product)
       }
 
-      neworder.subtotal=afterDiscount
+      neworder.subtotal = afterDiscount
       await neworder.save();
 
       console.log(neworder, "poippoiedepoiepod");

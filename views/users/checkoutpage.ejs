@@ -498,11 +498,12 @@
       // clear coupon --------------------------------------------------------------------------
 
       document.getElementById("couponRemove").addEventListener("click",(event)=>{
-              const totalvalue = '<%=totalPrice%>' 
+              const totalvalue = '<%=totalPrice +100 %>' 
 
         event.preventDefault();
         document.getElementById("DiscountAmount").textContent = 0
-        document.getElementById("totalValueIs").textContent =totalvalue
+        
+        document.getElementById("totalValueIs").textContent = totalvalue 
         document.getElementById("couponcodeInput").value = "";
       })
 

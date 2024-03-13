@@ -29,17 +29,15 @@ const loadProduct = async (req, res) => {
 //      filename.push(pathdata)
 //   }
 
-           const   Addcatagory  =async(req,res)=>{
-            try {
+const Addcatagory = async (req, res) => {
+  try {
 
-                res.render("AddNewCata")
-              
-            } catch (error) {
-              console.log(error.message) 
-            }
-           }
+    res.render("AddNewCata")
 
-
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 
 
@@ -49,8 +47,10 @@ const loadProduct = async (req, res) => {
 
 
 
-const sharp= require("sharp")
-const path= require("path");
+
+
+const sharp = require("sharp")
+const path = require("path");
 const fs = require('fs').promises;
 
 const { log } = require("console");
@@ -76,10 +76,10 @@ const insertProduct = async (req, res) => {
     filenames.push(pathdata);
   }
 
-  
 
-  
- 
+
+
+
   // const images =await  req.files.map(file => file.filename)
   try {
     const product = new products({
@@ -111,36 +111,38 @@ const ProductPage = async (req, res) => {
     var search = '';
     if (req.query.search) {
       search = req.query.search
-    } 
+    }
     var page = 1;
     if (req.query.page) {
       page = req.query.page
     }
-    const limit=4;
+    const limit = 4;
     const count = await products.find(
       { productname: { $regex: ".*" + search + ".*", $options: "i" } },
     ).populate("category").countDocuments()
     const productData = await products.find(
       { productname: { $regex: ".*" + search + ".*", $options: "i" } },
     ).populate("category").populate("offer").limit(limit * 1)
-    .skip((page - 1) * limit)
-    .exec()
-      const offers =  await offer.find({})
-      console.log(productData,"offers");
+      .skip((page - 1) * limit)
+      .exec()
+    const offers = await offer.find({})
+    console.log(productData, "offers");
     // res.render("productpage", { products: productData });
-    res.render("productlistpage",{ products: productData ,   totalpages: Math.ceil(count / limit),
-    currentpages: page,offerlist:offers});
+    res.render("productlistpage", {
+      products: productData, totalpages: Math.ceil(count / limit),
+      currentpages: page, offerlist: offers
+    });
   } catch (error) {
     console.log(error.message)
   }
 }
 
 const editProduct = async (req, res) => {
-  try { 
-    const id = req.query.id; 
-    const cataid = req.query.cataid;  
+  try {
+    const id = req.query.id;
+    const cataid = req.query.cataid;
     const productData = await products.findById({ _id: id }).populate("category");
-    console.log(productData,"lolo");
+    console.log(productData, "lolo");
     if (productData) {
       res.render("productsidepageedit", { product: productData })
     } else {
@@ -157,40 +159,40 @@ const editProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   try {
     const filenames = [];
-    const files= req.files
-    console.log(files,'filess...');
+    const files = req.files
+    console.log(files, 'filess...');
 
-  const existingData=await  products.findById( req.body.id)
-  
-  const img = [
-    files?.[0]?.filename || existingData.images[0],
-    files?.[1]?.filename || existingData.images[1],
-    files?.[2]?.filename || existingData.images[2],
-  ].filter(img => img !== undefined);
+    const existingData = await products.findById(req.body.id)
 
-  for (let item of req.files) {
-    const pathdata = Date.now() + '-' + item.originalname;
-    const imagePath = path.join(
-      __dirname,
-      '../public/productImages',
-      `${pathdata}`
-    );
+    const img = [
+      files?.[0]?.filename || existingData.images[0],
+      files?.[1]?.filename || existingData.images[1],
+      files?.[2]?.filename || existingData.images[2],
+    ].filter(img => img !== undefined);
 
-    // Read the file buffer using fs.promises.readFile
-    const fileBuffer = await fs.readFile(item.path);
+    for (let item of req.files) {
+      const pathdata = Date.now() + '-' + item.originalname;
+      const imagePath = path.join(
+        __dirname,
+        '../public/productImages',
+        `${pathdata}`
+      );
 
-    await sharp(fileBuffer)
-      .resize(1200, 1000, { fit: 'fill' })
-      .toFile(imagePath);
+      // Read the file buffer using fs.promises.readFile
+      const fileBuffer = await fs.readFile(item.path);
 
-    filenames.push(pathdata);
-  }
-   // const images = req.files.map(file => file.filename)
+      await sharp(fileBuffer)
+        .resize(1200, 1000, { fit: 'fill' })
+        .toFile(imagePath);
+
+      filenames.push(pathdata);
+    }
+    // const images = req.files.map(file => file.filename)
     // console.log(images,"images");
     const productData = await products.findByIdAndUpdate({ _id: req.body.id },
-      { $set: { productname: req.body.productname, productprice: req.body.productprice, productsize: req.body.productsize, category: req.body.category, productquantity: req.body.productquantity ,images: img  } },
+      { $set: { productname: req.body.productname, productprice: req.body.productprice, productsize: req.body.productsize, category: req.body.category, productquantity: req.body.productquantity, images: img } },
       { new: true, runValidators: true }).populate("category");
-      console.log( productData ,"lllllll");
+    console.log(productData, "lllllll");
     res.redirect("/admin/productpage")
 
   } catch (error) {
@@ -224,7 +226,7 @@ const updatelistProduct = async (req, res) => {
   }
 }
 
-const   imagePreviewing  =async (req,res)=>{
+const imagePreviewing = async (req, res) => {
   try {
     console.log("rechedhere",);
   } catch (error) {

@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
             message: 'Field cannot contain only symbol'
         }]
     },
-    images: {   
+    images: {
         type: Array,
         required: true
     },
@@ -50,10 +50,10 @@ const userSchema = new mongoose.Schema({
         minlength: [10, "Number must be 10 digit"],
         required: true,
 
-    }, 
-   referalId:{
-        type:String,
-        required:false
+    },
+    referalId: {
+        type: String,
+        required: false
     },
 
     is_admin: {
@@ -78,32 +78,32 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: false,
     },
-    wallet:{
-        type:Number,
-        default:0,
-        
+    wallet: {
+        type: Number,
+        default: 0,
+
     },
-    walletHistory:[{
-        amount:{
-            type:Number,
-            default:0
+    walletHistory: [{
+        amount: {
+            type: Number,
+            default: 0
         },
-        direction:{
-            type:String
+        direction: {
+            type: String
         },
         createdAt: {
             type: Date,
             default: Date.now()
-          },
-        status:{
-            type:String,
         },
-        paymentMethod:{
-            type:String
+        status: {
+            type: String,
         },
-        description:{
-            type:String
-        }  
+        paymentMethod: {
+            type: String
+        },
+        description: {
+            type: String
+        }
 
     }],
 
@@ -130,7 +130,7 @@ const userSchema = new mongoose.Schema({
                 enum: ["pending", "shipped", "canceled", "returned", "delivered"],
                 default: "pending"
             },
-        
+
 
         }
         ],
@@ -191,7 +191,7 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-     
+
         address: {
             type: String,
             required: true
@@ -210,7 +210,7 @@ const userSchema = new mongoose.Schema({
         },
         paymentMethod: {
             type: String,
-            required: false 
+            required: false
         },
         status: {
             type: String,
@@ -243,7 +243,7 @@ const userSchema = new mongoose.Schema({
             enum: ["pending", "shipped", "canceled", "returned", "delivered"],
             default: "pending"
         },
-      
+
     }]
 })
 
