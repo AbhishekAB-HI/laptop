@@ -952,8 +952,11 @@ const cartpage = async (req, res) => {
     const items = { product_id: productid }
     const productdatas = await product.findById({ _id: productid });
     const userone = await User.findOne({ _id: userid })
+
+
     const exisitingid = userone.cart.items.findIndex(item => item.product_id == productid);
     if (exisitingid !== -1) {
+
       if (userone.cart.items[exisitingid].qty + 1 >= productdatas.productquantity) {
         console.log("reached to stock")
         return res.status(200).json({ success: false, error: "Out of stock" })
@@ -1816,12 +1819,13 @@ const detailpage = async (req, res) => {
   try {
 
     const userid = req.session.user_id;
+    console.log(userid,'odsaaaa');
     const orderid = req.query.orderid;
+    console.log(orderid,"ordersssssss");
     const productid = req.query.productid;
     const product_id = req.query.deleteproductid
     const payment = req.query.payment;
     const orderdeatil = await order.findById({ _id: orderid }).populate("products.product_id");
-    console.log(orderdeatil, 'stuuuuu');
     const currentindex = orderdeatil.products.findIndex(item => item._id.toString() == productid)
     const value = orderdeatil.products[currentindex];
     if (value.status == "returnApproved") {
@@ -1863,7 +1867,7 @@ const Invoice = async (req, res) => {
 
     const orderid = req.query.orderid;
     const productid = req.query.productid;
-    const payment = req.query.payment;
+    
     const orderdeatil = await order.findById({ _id: orderid }).populate("products.product_id");
     console.log(orderdeatil, 'stuuuuu');
     const userData = await order.findById({ _id: orderid }).populate("user")
@@ -1900,6 +1904,26 @@ const deleteaddress = async (req, res) => {
   }
 }
 
+
+
+
+const deletecheckaddress = async (req, res) => {
+  try {
+    const userid = req.session.user_id;
+    const addressid = req.query.id;
+    const userdetails = await User.findById({ _id: userid });
+    const userone = userdetails.address1.findIndex(item => item._id.toString() == addressid)
+    const address = userdetails.address1[userone]._id;
+    console.log(address, "popopop");
+    const value = await User.findByIdAndUpdate({ _id: userid }, { $pull: { address1: { _id: address } } });
+
+    res.redirect("/checkout")
+
+
+  } catch (error) {
+    console.log(error.message)
+  }
+}
 
 
 
@@ -2716,7 +2740,8 @@ module.exports = {
   rayzopayPaymentContinue,
   rayzopayChecking,
   Logintrue,
-  loadLoginHome
+  loadLoginHome,
+  deletecheckaddress
 
 
 }

@@ -232,7 +232,7 @@
 
         <td> <img src="/productImages/<%=value.product_id?.images[1]%>" width="50px" height="50px" alt="Blue Jeans Jacket" /></td>
         <td><%=value.product_id.productname%></td>
-        <td><%=value.price%></td>
+        <td><%=value.price%></td> 
         <td><%=value.qty%></td>
         <td><%=value.totalPrice%></td>
          <input type="hidden" value="<%=item._id%>" >
@@ -255,14 +255,18 @@
             }%> -->
      
             <td> <strong  style="color: rgb(4, 75, 197);" ><h5><%=value.status%></h5></strong></td>
+            <input type="hidden" value="<%=item._id%>" name="orderid" >
+            <input type="hidden" value="<%=value._id%>" name="productid" >
+            <input type="hidden" value="<%=user.payment%>" name="payment">
+            <input type="hidden" value="<%=value.product_id._id%>" name="deleteproductid">
         
-        <td><button style="background-color: green;border-radius: 5px;" ><a style="text-decoration: none;color: white;" href="/detailview?orderid=<%=item._id%>&&productid=<%=value._id%>&&payment=<%=user.payment%>&&deleteproductid=<%=value.product_id._id%>">Viewpage</a></button></td>
+        <td><button style="background-color: green;border-radius: 5px;" ><a style="text-decoration: none;color: white;" href="/detailview?orderid=<%=item._id%>&&productid=<%=value._id%>">Viewpage</a></button></td>
 
 
         <% if(value.status === 'delivered') { %>
           <td>
             <button style="background-color: rgb(27, 155, 214); border-radius: 5px;">
-              <a style="text-decoration: none; color: white;" href="/detailInvoice?orderid=<%=item._id%>&&productid=<%=value._id%>&&payment=<%=user.payment%>&&deleteproductid=<%=value.product_id._id%>">
+              <a style="text-decoration: none; color: white;" href="/detailInvoice?orderid=<%=item._id%>&&productid=<%=value._id%>">
                 View Invoice
               </a>
             </button>

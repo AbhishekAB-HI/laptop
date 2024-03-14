@@ -99,6 +99,8 @@
       
                       <!-- Price -->
                       <p  class="text-start text-md-center">
+
+                       
                         <strong  class="totalprice">₹<%=`${Number.parseInt(userCart[i].totalPrice)||userCart[i].price}`%></strong>
                         <!-- <strong  class="totalprice"> <%=userCart[i].price%> </strong> -->
                       </p>
@@ -203,7 +205,7 @@
                       </div>
    
 
-                      <span  id="cartsum"><strong ><span>₹</span><%=`${ totalPrice || total ||0 }`%></strong></span>
+                      <span  id="cartsum"><strong ><span>₹</span><%=`${ totalPrice || total || 0 }`%></strong></span>
                     </li>
                   </ul>
 
@@ -251,7 +253,7 @@
               console.log(btn.closest(".d-flex").querySelector("#form1"));
             const inputQuantity= btn.closest(".d-flex").querySelector("#form1");
             let currentQuantity=Number.parseInt(inputQuantity.value)
-            console.log( currentQuantity,"lolo");
+            
                 //  currentQuantity++;
                 let prev=currentQuantity
             console.log(currentQuantity,'this is current quantity')

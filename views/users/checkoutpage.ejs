@@ -42,7 +42,9 @@
 <!-- Header top trendhub-->
 <nav style="background-color: rgb(65 62 62);" class="navbar navbar-expand-lg navbar-light ">
   <div class="container px-4 px-lg-5">
-    <div ><p class="logo" style="font-size: 24px;" >TrendHub</p> </div>
+    <div>
+      <p class="logo" style="font-size: 24px;">TrendHub</p>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-light ">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +89,7 @@
   </div>
 </nav>
 
- <!-- Header top trendhub-->
+<!-- Header top trendhub-->
 
 <body class="bg-light">
   <div class="container mt-5 mb-5">
@@ -157,12 +159,12 @@
             <div>
               <button type="button" id="couponcheck" class="ml-4 mb-2"
                 style="align-items: center; background-color: black;color:white;border-radius: 5px;width: 100px;height: 25px;">
-                <h6 style="font-size: 13px;"  >Apply Coupon</h6>
+                <h6 style="font-size: 13px;">Apply Coupon</h6>
               </button>
               <button type="button" id="couponRemove" class="ml-4"
-              style="align-items: center; background-color: rgb(206, 18, 18);color:white;border-radius: 5px;width: 100px;height: 25px;">
-              <h6  style="font-size: 13px;" >Remove</h6>
-            </button>
+                style="align-items: center; background-color: rgb(206, 18, 18);color:white;border-radius: 5px;width: 100px;height: 25px;">
+                <h6 style="font-size: 13px;">Remove</h6>
+              </button>
             </div>
           </li>
         </div>
@@ -174,10 +176,10 @@
         </style>
         <!-- payment side -->
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Billing address</h4>
+          <!-- <h4 class="mb-3">Billing address</h4>
           <h4>Your current address :</h4>
-          <br>
-          <div class="form-check">
+          <br> -->
+          <!-- <div class="form-check">
             <input class="form-check-input" type="radio" name="address" id="exampleRadios1" value="<%=address%>"
               checked>
             <label class="form-check-label" for="exampleRadios1">
@@ -185,9 +187,10 @@
                 <%=address%>
               </h6>
             </label>
-          </div>
+          </div> -->
           <br>
-          <button class="mb-5" style="background-color: rgb(82, 78, 78);color: white;border-radius: 5px"  ><a style="text-decoration: none;color: white;" href="/checkadress">Add address</a></button>
+          <button class="mb-5 p-3" style="background-color: rgb(82, 78, 78);color: white;border-radius: 5px"><a
+              style="text-decoration: none;color: white;font-size: large;" href="/checkadress">Add address</a></button>
 
           <table class="table">
             <thead>
@@ -200,6 +203,7 @@
                 <th scope="col">Address</th>
                 <th scope="col">State</th>
                 <th scope="col">Select address</th>
+                <th scope="col">Remove Address</th>
               </tr>
             </thead>
             <tbody>
@@ -230,6 +234,9 @@
                       <%=item.state%>
                     </td>
                     <td><input type="radio" name="address" value="<%=item.address%>"></td>
+                    <td><button style="background-color: black;border-radius: 2em;"><a class="p-1"
+                          style="text-decoration: none; color: white;"
+                          href="/deletecheckaddress?id=<%=item._id%>">remove</a></button></td>
                   </tr>
                   <% }) }else{ %>
               <td>
@@ -245,45 +252,43 @@
           <div class="d-block my-3">
             <div class="custom-control custom-radio">
 
-                    <%if(totalPrice>10000 ){%>
+              <%if(totalPrice>10000 ){%>
 
-                      <input id="credit" disabled name="paymentMethod" value="cash on delivery" type="radio" class="custom-control-input"
-                      checked required>
-                  
-                  
-                    <%}else{%>
-                      <input id="credit" name="paymentMethod" value="cash on delivery" type="radio" class="custom-control-input"
-                      checked required>
-                    <label class="custom-control-label" for="credit">Cash on delivery</label>
+                <input id="credit" disabled name="paymentMethod" value="cash on delivery" type="radio"
+                  class="custom-control-input" >
 
-                    <%}
-                    
-                    
-                    %>
 
-        
+                <%}else{%>
+                  <input id="credit" name="paymentMethod" value="cash on delivery" type="radio"
+                    class="custom-control-input">
+                  <label class="custom-control-label" for="credit">Cash on delivery</label>
+
+                  <%} %>
+
+
             </div>
             <div class="custom-control custom-radio">
               <input id="debit" name="paymentMethod" value="onlinePay" type="radio" class="custom-control-input"
-                required>
+                >
               <label class="custom-control-label" for="debit">Online Payment</label>
             </div>
-            <%if(totalPrice > check.wallet){%>
+            <%if(totalPrice> check.wallet){%>
               <div class="custom-control custom-radio">
                 <input id="paypal" name="paymentMethod" value="Wallet" disabled type="radio"
-                  class="custom-control-input" required>
+                  class="custom-control-input" >
                 <label class="custom-control-label" for="paypal">Wallet</label>
               </div>
               <%}else{%>
                 <div class="custom-control custom-radio">
                   <input id="paypal" name="paymentMethod" value="Wallet" type="radio" class="custom-control-input"
-                    required>
+                  >
                   <label class="custom-control-label" for="paypal">Wallet</label>
                 </div>
                 <%}%>
           </div>
           <hr class="mb-4">
-          <button style="background-color: rgb(99, 98, 98);" type="button" id="isValue" class="btn btn-primary btn-lg btn-block">Place order</button>
+          <button style="background-color: rgb(99, 98, 98);" type="button" id="isValue"
+            class="btn btn-primary btn-lg btn-block">Place order</button>
     </form>
   </div>
   </div>
@@ -309,13 +314,35 @@
       // checkout selection----------------------------------------------------------------------------------
       // ----------------------------------------------------------------------------------------------------------------------------------------------------
       document.getElementById("isValue").addEventListener("click", (event) => {
+        let selectedRadioaddress = document.querySelector('input[name="address"]:checked');
+        console.log(selectedRadioaddress,"oooooooo");
+        let selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
+        console.log(selectedRadio,"select addres");
+
+        if (selectedRadioaddress === null  || selectedRadio === null ) {
+          Swal.fire({
+          icon: "error",
+          text: "Please Select both Feild",
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+        })
+        
+        }
+          else{
+
+          
+
+
+
+        // Proceed with further actions
+
 
 
         event.preventDefault();
-        let selectedRadio = document.querySelector('input[name="paymentMethod"]:checked');
+
         if (selectedRadio.value == "onlinePay") {
           const values = document.getElementById("cartitemsdetails").value
-         
+
           Rayzopaycall(values)
         } else {
           if (selectedRadio.value == "cash on delivery") {
@@ -328,6 +355,7 @@
 
           }
         }
+      }
       })
 
 
@@ -340,7 +368,7 @@
           const discountValue = document.getElementById("DiscountAmount").textContent;
           const selectedAddress = document.querySelector('input[name="address"]:checked')
           const totalprice = document.getElementById("totalValueIs").textContent;
-   
+
           const res = await fetch("/onlinepayment", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -401,8 +429,8 @@
         const discountValue = document.getElementById("DiscountAmount").textContent;
         const selectedAddress = document.querySelector('input[name="address"]:checked')
         const totalprice = document.getElementById("totalValueIs").textContent
-        const Deliverycharge=document.getElementById("deliveryCharge").textContent
-    
+        const Deliverycharge = document.getElementById("deliveryCharge").textContent
+
         const responcewallet = await fetch("/cashowndelivery", {
           method: "post",
           headers: { "Content-Type": "application/json" },
@@ -452,9 +480,9 @@
           event.preventDefault();
           const inputvalue = document.getElementById("couponcodeInput").value;
           const inputData = inputvalue.trim()
-          const  totalvalue = document.getElementById("totalValueIs").textContent ;
+          const totalvalue = document.getElementById("totalValueIs").textContent;
 
-    
+
           if (inputData.length != 0) {
             passingCouponvalue(inputData, totalvalue)
           }
@@ -468,7 +496,7 @@
       async function passingCouponvalue(name, total) {
         try {
 
-     
+
 
           const getcoupon = await fetch("/passingCopon", {
             method: "post",
@@ -484,7 +512,7 @@
             } else {
 
 
-             
+
               document.getElementById("DiscountAmount").textContent = responce.totalDiscount
               document.getElementById("totalValueIs").textContent = (total - responce.totalDiscount)
             }
@@ -497,13 +525,13 @@
 
       // clear coupon --------------------------------------------------------------------------
 
-      document.getElementById("couponRemove").addEventListener("click",(event)=>{
-              const totalvalue = '<%=totalPrice +100 %>' 
+      document.getElementById("couponRemove").addEventListener("click", (event) => {
+        const totalvalue = '<%=totalPrice +100 %>'
 
         event.preventDefault();
         document.getElementById("DiscountAmount").textContent = 0
-        
-        document.getElementById("totalValueIs").textContent = totalvalue 
+
+        document.getElementById("totalValueIs").textContent = totalvalue
         document.getElementById("couponcodeInput").value = "";
       })
 

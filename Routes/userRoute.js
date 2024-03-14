@@ -61,7 +61,6 @@ const upload = multer({ storage: storage })
  user_route.get("/office",userAuth.isLogin,blockchecking,userController.officepart)
  user_route.get("/tablet",userAuth.isLogin,blockchecking,userController.tabletpart) 
  user_route.get("/productdetail",userAuth.isLogin,blockchecking,userController.productpage)
-  
  user_route.post("/cartpage",userAuth.isLogin,userController.cartpage) 
  user_route.post("/cartpagelogin",userAuth.isLogin,userController.Logincartpage) 
 
@@ -104,6 +103,9 @@ user_route.post("/changeCancel",userAuth.isLogin,userController.cancelStatus)
  user_route.get("/changepassword",userAuth.isLogin,userController.changepassword);       
  user_route.post("/changepassword",userAuth.isLogin,userController.updatechangepassword); 
  user_route.get("/deleteaddress",userAuth.isLogin,userController.deleteaddress); 
+ user_route.get("/deletecheckaddress",userAuth.isLogin,userController.deletecheckaddress);
+
+
 
 //  payment Method----------------------------------------------------------------------------
 
@@ -151,23 +153,6 @@ user_route.get("/addTocart",userController.addToCart);
 user_route.post("/addwish",userController.addWish);
 user_route.get("/deleteWish",userController.deleteWish);
 user_route.get("/wallets",userController.Wallets);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
